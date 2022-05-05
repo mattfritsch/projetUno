@@ -9,5 +9,6 @@ public class CartePlus4 extends CarteJoker {
 		changerCouleur(Couleur.BLEU);
 		// +4
 		// passer le tour
+		// a faire
 	}
 }
