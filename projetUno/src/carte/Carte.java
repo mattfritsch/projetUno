@@ -1,5 +1,11 @@
 package carte;
 
-public class Carte {
-
+public abstract class Carte {
+	/* Champs et constantes */
+	public enum Couleur {
+		VERT,
+		JAUNE,
+		BLEU,
+		ROUGE
+	}
 }
