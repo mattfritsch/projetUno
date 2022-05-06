@@ -1,5 +1,5 @@
 package expert;
 
-public class ExpertEffetSimple {
+public class ExpertEffetSimple extends Expert {
 
 }

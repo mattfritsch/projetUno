@@ -14,6 +14,7 @@ public class Fichier {
 		if(nomFichier == null) {
 			throw new FichierException("Le nom du fichier ne peut pas être null");
 		}
+		
 		File fichier = new File(nomFichier);
 		
 		if(!fichier.isFile()) {
