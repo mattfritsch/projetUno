@@ -1,5 +1,8 @@
 package parser;
 
+import carte.CarteJoker;
+import carte.Carte.Couleur;
+
 public class ParserJoker extends Parser{
 	public ParserJoker(Parser suivant) {
 		super(suivant);
@@ -8,7 +11,9 @@ public class ParserJoker extends Parser{
 	@Override
 	public void parser(String ligne) throws Exception{
 		String tab[] = ligne.split(";");
+		CarteJoker carteJoker = new CarteJoker();
 		
+		System.out.println("Carte changement :[ " +carteJoker + " ]\n");
 	}
 	
 	@Override
