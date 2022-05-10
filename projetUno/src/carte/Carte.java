@@ -8,4 +8,10 @@ public abstract class Carte {
 		BLEU,
 		ROUGE
 	}
+	
+	
+	/* Constructeur par defaut */
+	public Carte() {
+		
+	}
 }

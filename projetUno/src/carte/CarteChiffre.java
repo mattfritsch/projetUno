@@ -2,6 +2,8 @@ package carte;
 
 import java.util.Objects;
 
+import exception.CarteException;
+
 public class CarteChiffre extends Carte {
 	/* Champs */
 	private int valeur;
@@ -10,9 +12,18 @@ public class CarteChiffre extends Carte {
 	
 	
 	/* Constructeurs */
-	public CarteChiffre(int valeur, Couleur couleur) {
+	public CarteChiffre(int valeur, Couleur couleur) throws CarteException {
 		super();
+		
+		// Classe immuable donc pas de setter
+		if (valeur < 0 || valeur > 9) 
+			throw new CarteException("Une CarteChiffre doit avoir une valeur entre 0 et 9");
+		
 		this.valeur = valeur;
+		
+		if (couleur == null)
+			throw new CarteException("Une CarteChiffre doit avoir une couleur valide");
+		
 		this.couleur = couleur;
 	}
 	
@@ -29,21 +40,10 @@ public class CarteChiffre extends Carte {
 	
 	
 	
-	/* Setters */
-	private void setValeur(int valeur) {
-		this.valeur = valeur;
-	}
-	
-	private void setCouleur(Carte.Couleur couleur) {
-		this.couleur = couleur;
-	}
-	
-	
-	
 	/* Affichage */
 	@Override
 	public String toString() {
-		return "CarteChiffre [valeur=" + valeur + ", couleur=" + couleur + "]";
+		return "CarteChiffre [valeur= " + valeur + ", couleur= " + couleur + "]";
 	}
 	
 	@Override

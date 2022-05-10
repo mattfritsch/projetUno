@@ -57,7 +57,7 @@ public class Partie {
 	}
 	
 	/* Methode metier */
-	private Joueur joueurSuivant() {
+	private Joueur getJoueurSuivant() {
 		if (joueurCourant == joueurs.get(joueurs.size()-1)) {
 			return joueurs.get(0);
 		}

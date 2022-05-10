@@ -1,11 +1,14 @@
 package carte;
 
+import partie.Partie;
+
 public class CarteJoker extends CarteEvenement {
+	
 	public CarteJoker() {
-		this.effet = Effet.CHANGEMENTCOULEUR;
+		super();
 	}
 	
-	public void changerCouleur(Carte.Couleur couleur) {
-		// a faire
+	public void appliquerEffet(Partie laPartie) {
+		// changer la couleur courante
 	}
 }
