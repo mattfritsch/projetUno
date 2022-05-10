@@ -7,7 +7,7 @@ import exception.CarteException;
 public class CarteChiffre extends Carte {
 	/* Champs */
 	private int valeur;
-	private Carte.Couleur couleur;
+	private Couleur couleur;
 	
 	
 	
@@ -34,7 +34,7 @@ public class CarteChiffre extends Carte {
 		return valeur;
 	}
 	
-	public Carte.Couleur getCouleur() {
+	public Couleur getCouleur() {
 		return couleur;
 	}
 	

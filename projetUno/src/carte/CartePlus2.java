@@ -1,14 +1,15 @@
 package carte;
 
+import carte.Carte.Couleur;
 import exception.CarteException;
 import partie.Partie;
 
 public class CartePlus2 {
 	/* Champs */
-	private Carte.Couleur couleur;
+	private Couleur couleur;
 	
 	/* Constructeur */
-	public CartePlus2(Carte.Couleur couleur) throws CarteException {
+	public CartePlus2(Couleur couleur) throws CarteException {
 		super();
 		
 		// Classe immuable donc pas de setter

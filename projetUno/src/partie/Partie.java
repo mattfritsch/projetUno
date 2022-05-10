@@ -3,7 +3,6 @@ package partie;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import carte.Carte;
 import carte.Carte.Couleur;
 import joueur.Joueur;
 import pioche.Pioche;
@@ -14,7 +13,7 @@ public class Partie {
 	private Tas tas;
 	private Pioche pioche;
 	private Joueur joueurCourant;
-	private Carte.Couleur couleurCourante;
+	private Couleur couleurCourante;
 	private int sens;
 	
 	
@@ -30,7 +29,7 @@ public class Partie {
 	public Joueur getJoueurCourant() {
 		return joueurCourant;
 	}
-	public Carte.Couleur getCouleurCourante() {
+	public Couleur getCouleurCourante() {
 		return couleurCourante;
 	}
 	public int getSens() {
@@ -51,7 +50,7 @@ public class Partie {
 	private void setJoueurCourant(Joueur joueurCourant) {
 		this.joueurCourant = joueurCourant;
 	}
-	public void setCouleurCourante(Carte.Couleur couleurCourante) {
+	public void setCouleurCourante(Couleur couleurCourante) {
 		this.couleurCourante = couleurCourante;
 	}
 	private void setSens(int sens) {
@@ -79,7 +78,7 @@ public class Partie {
 		return joueurs.get((joueurs.indexOf(this.joueurCourant) + 1));
 	}
 	
-	public Carte.Couleur demanderCouleur() {
+	public Couleur demanderCouleur() {
 		Scanner sc= new Scanner(System.in);
 		System.out.println("Entrer une couleur parmi : Vert | Jaune | Bleu | Rouge");
 		String couleur= sc.nextLine();

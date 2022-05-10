@@ -1,6 +1,6 @@
 package test;
 
-import carte.Carte;
+import carte.Carte.Couleur;
 import carte.CarteChiffre;
 import exception.CarteException;
 
@@ -9,11 +9,11 @@ public class TestCarteChiffre {
 		
 		try {
 			// 8 vert
-			CarteChiffre carte1 = new CarteChiffre(8,Carte.Couleur.VERT);
+			CarteChiffre carte1 = new CarteChiffre(8,Couleur.VERT);
 			System.out.println(carte1);
 			
 			// 10 jaune qui existe pas evidemment
-			CarteChiffre carte2 = new CarteChiffre(10,Carte.Couleur.JAUNE);
+			CarteChiffre carte2 = new CarteChiffre(10,Couleur.JAUNE);
 			System.out.println(carte2);	
 			
 		} catch (CarteException e) {
