@@ -14,4 +14,10 @@ public class CartePlus4 extends CarteJoker {
 		//+4
 		changerCouleurCourante(laPartie);
 	}
+
+	/* Affichage */
+	@Override
+	public String toString() {
+		return "CartePlus4 []";
+	}
 }

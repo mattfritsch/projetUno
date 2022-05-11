@@ -4,18 +4,25 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import carte.Carte.Couleur;
+import exception.PartieException;
 import joueur.Joueur;
 import pioche.Pioche;
 import tas.Tas;
 
 public class Partie {
 	private ArrayList<Joueur> joueurs;
-	private Tas tas;
-	private Pioche pioche;
+	private Tas tas = new Tas();
+	private Pioche pioche = new Pioche();
 	private Joueur joueurCourant;
 	private Couleur couleurCourante;
-	private int sens;
+	private int sens = 0;
 	
+	public Partie(ArrayList<Joueur> joueurs) throws PartieException {
+		if (joueurs == null || joueurs.size() < 2)
+			throw new PartieException("Le nombre de joueurs est invalide");
+		this.joueurs = joueurs;
+		this.joueurCourant = joueurs.get(0);
+	}
 	
 	public ArrayList<Joueur> getJoueurs() {
 		return joueurs;
@@ -58,7 +65,7 @@ public class Partie {
 	}
 	
 	/* Methode metier */
-	public Couleur convertStringToCouleur(String s) {
+	public static Couleur convertStringToCouleur(String s) {
 		if (s.equalsIgnoreCase("Bleu"))
 			return Couleur.BLEU;
 		else if (s.equalsIgnoreCase("Vert"))

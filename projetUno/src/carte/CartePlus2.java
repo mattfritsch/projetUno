@@ -19,6 +19,11 @@ public class CartePlus2 {
 		this.couleur = couleur;
 	}
 	
+	/* Getters */
+	public Couleur getCouleur() {
+		return couleur;
+	}
+
 	/* Methode metier */
 	public void appliquerEffet(Partie laPartie) {
 		//+2

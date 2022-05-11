@@ -1,5 +1,7 @@
 package carte;
 
+import java.util.Objects;
+
 import carte.Carte.Couleur;
 import exception.CarteException;
 import partie.Partie;
@@ -28,5 +30,22 @@ public class CarteChangement {
 	@Override
 	public String toString() {
 		return "CarteChangement [couleur= " + couleur + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(couleur);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CarteChangement other = (CarteChangement) obj;
+		return couleur == other.couleur;
 	}
 }

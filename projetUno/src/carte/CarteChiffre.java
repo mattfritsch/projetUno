@@ -46,12 +46,12 @@ public class CarteChiffre extends Carte {
 		return "CarteChiffre [numero= " + valeur + ", couleur= " + couleur + "]";
 	}
 	
+	/* Comparaison */
 	@Override
 	public int hashCode() {
 		return Objects.hash(couleur, valeur);
 	}
 	
-	/* Methode d'egalite */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

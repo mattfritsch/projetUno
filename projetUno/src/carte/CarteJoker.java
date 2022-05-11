@@ -19,4 +19,10 @@ public class CarteJoker extends CarteEvenement {
 	public void appliquerEffet(Partie laPartie) {
 		changerCouleurCourante(laPartie);
 	}
+
+	/* Affichage */
+	@Override
+	public String toString() {
+		return "CarteJoker";
+	}
 }
