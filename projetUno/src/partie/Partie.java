@@ -58,7 +58,7 @@ public class Partie {
 	}
 	
 	/* Methode metier */
-	public Couleur convertStringToCouleur(String s) {
+	public static Couleur convertStringToCouleur(String s) {
 		if (s.equalsIgnoreCase("Bleu"))
 			return Couleur.BLEU;
 		else if (s.equalsIgnoreCase("Vert"))

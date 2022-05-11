@@ -1,12 +1,9 @@
 package parser;
 
 import exception.ParserManquantException;
-import partie.Partie;
 
-public abstract class Parser {
+public abstract class Parser{
 	private Parser suivant = null;
-	
-	Partie partie = new Partie();
 	
 	public Parser(Parser suivant) {
 		this.suivant = suivant;

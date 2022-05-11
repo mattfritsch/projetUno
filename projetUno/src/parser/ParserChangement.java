@@ -12,7 +12,7 @@ public class ParserChangement extends Parser{
 	@Override
 	public void parser(String ligne) throws Exception{
 		String tab[] = ligne.split(";");
-		Couleur couleur = partie.convertStringToCouleur(tab[1]);
+		Couleur couleur = partie.Partie.convertStringToCouleur(tab[1]);
 		CarteChangement carteChangement = new CarteChangement(couleur);
 		
 		System.out.println(carteChangement);
