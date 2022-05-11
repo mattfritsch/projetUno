@@ -1,17 +1,17 @@
 package parser;
 
-import carte.CartePlus4;
+import carte.CartePlusQuatre;
 
-public class ParserCartePlus4 extends Parser{
+public class ParserCartePlusQuatre extends Parser{
 	Parser suivant;
-	public ParserCartePlus4(Parser suivant) {
+	public ParserCartePlusQuatre(Parser suivant) {
 		super(suivant);
 	}
 	
 	@Override
 	public void parser(String ligne) throws Exception{
 		String tab[] = ligne.split(";");
-		CartePlus4 cartePlusQuatre = new CartePlus4();
+		CartePlusQuatre cartePlusQuatre = new CartePlusQuatre();
 		System.out.println(cartePlusQuatre);
 		
 	}

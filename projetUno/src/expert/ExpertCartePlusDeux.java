@@ -1,20 +1,20 @@
 package expert;
 
 import carte.Carte;
-import carte.CarteChangement;
+import carte.CartePlusDeux;
 import exception.ExpertException;
 import joueur.Joueur;
 import partie.Partie;
 
-public class ExpertCarteChangement extends Expert{
+public class ExpertCartePlusDeux extends Expert{
 
-	public ExpertCarteChangement(Expert suivant) {
+	public ExpertCartePlusDeux(Expert suivant) {
 		super(suivant);
 	}
-
+	
 	@Override
-	public boolean examiner(Carte carte, Joueur joueur) throws Exception {
-		CarteChangement c = (CarteChangement) carte;
+	public boolean examiner(Carte carte, Joueur joueur) throws Exception{
+		CartePlusDeux c = (CartePlusDeux) carte;
 		
 		if(joueur == Partie.getJoueurCourant()) {
 			if(c.getCouleur() == Partie.getCouleurCourante()) {
@@ -22,16 +22,16 @@ public class ExpertCarteChangement extends Expert{
 			}
 		}
 		else {
-			throw new ExpertException("examiner : ExpertCarteChangement");
+			throw new ExpertException("examiner : ExpertCartePlusDeux");
 		}
 		return false;
 	}
 
 	@Override
 	public boolean saitExaminer(Carte carte) {
-		if(carte.getClass().getSimpleName().equals("CarteChangement"))
+		if(carte.getClass().getSimpleName().equals("CartePlusDeux")) {
 			return true;
+		}
 		return false;
 	}
-
 }

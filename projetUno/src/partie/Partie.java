@@ -7,14 +7,16 @@ import carte.Carte.Couleur;
 import exception.PartieException;
 import joueur.Joueur;
 import pioche.Pioche;
+import carte.CarteChiffre;
 import tas.Tas;
 
 public class Partie {
 	private ArrayList<Joueur> joueurs;
 	private Tas tas = new Tas();
 	private Pioche pioche = new Pioche();
-	private Joueur joueurCourant;
-	private Couleur couleurCourante;
+	private static Joueur joueurCourant;
+	private static Couleur couleurCourante;
+	private static int valeurCourante;
 	private int sens = 0;
 	
 	public Partie(ArrayList<Joueur> joueurs) throws PartieException {
@@ -33,11 +35,14 @@ public class Partie {
 	public Pioche getPioche() {
 		return pioche;
 	}
-	public Joueur getJoueurCourant() {
+	public static Joueur getJoueurCourant() {
 		return joueurCourant;
 	}
-	public Couleur getCouleurCourante() {
+	public static Couleur getCouleurCourante() {
 		return couleurCourante;
+	}
+	public static int getValeurCourante() {
+		return valeurCourante;
 	}
 	public int getSens() {
 		return sens;

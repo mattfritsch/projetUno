@@ -1,12 +1,14 @@
 package expert;
 
 import carte.Carte;
+import carte.CartePlusQuatre;
+import exception.ExpertException;
 import joueur.Joueur;
 import partie.Partie;
 
-public class ExpertCarteJoker extends Expert{
+public class ExpertCartePlusQuatre extends Expert{
 
-	public ExpertCarteJoker(Expert suivant) {
+	public ExpertCartePlusQuatre(Expert suivant) {
 		super(suivant);
 	}
 
@@ -15,12 +17,14 @@ public class ExpertCarteJoker extends Expert{
 		if(joueur == Partie.getJoueurCourant()) {
 			return true;
 		}
-		return false;
+		else {
+			throw new ExpertException("examiner : ExpertCartePlusQuatre");
+		}
 	}
 
 	@Override
 	public boolean saitExaminer(Carte carte) {
-		if(carte.getClass().getSimpleName().equals("CarteJoker"))
+		if(carte.getClass().getSimpleName().equals("CartePlusQuatre"))
 			return true;
 		return false;
 	}

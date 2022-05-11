@@ -6,8 +6,8 @@ import parser.ParserCarteSimple;
 import parser.ParserCarteChangement;
 import parser.ParserCarteJoker;
 import parser.ParserCartePasser;
-import parser.ParserCartePlus2;
-import parser.ParserCartePlus4;
+import parser.ParserCartePlusDeux;
+import parser.ParserCartePlusQuatre;
 import util.Fichier;
 
 public class testParser {
@@ -23,8 +23,8 @@ public class testParser {
 			Parser sixiemeParser = null;
 			
 			sixiemeParser = new ParserCarteJoker(null);
-			cinquiemeParser = new ParserCartePlus4(sixiemeParser);
-			quatriemeParser = new ParserCartePlus2(cinquiemeParser);
+			cinquiemeParser = new ParserCartePlusQuatre(sixiemeParser);
+			quatriemeParser = new ParserCartePlusDeux(cinquiemeParser);
 			troisiemeParser = new ParserCarteChangement(quatriemeParser);
 			deuxiemeParser = new ParserCartePasser(troisiemeParser);
 			premierParser = new ParserCarteSimple(deuxiemeParser);

@@ -1,10 +1,10 @@
 package parser;
 
-import carte.CartePlus2;
+import carte.CartePlusDeux;
 import carte.Carte.Couleur;
 
-public class ParserCartePlus2 extends Parser{
-	public ParserCartePlus2(Parser suivant) {
+public class ParserCartePlusDeux extends Parser{
+	public ParserCartePlusDeux(Parser suivant) {
 		super(suivant);
 	}
 	
@@ -12,7 +12,7 @@ public class ParserCartePlus2 extends Parser{
 	public void parser(String ligne) throws Exception{
 		String tab[] = ligne.split(";");
 		Couleur couleur = partie.Partie.convertStringToCouleur(tab[1]);
-		CartePlus2 cartePlusDeux = new CartePlus2(couleur);
+		CartePlusDeux cartePlusDeux = new CartePlusDeux(couleur);
 		
 		System.out.println(cartePlusDeux);
 	}

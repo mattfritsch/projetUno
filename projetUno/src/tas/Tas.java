@@ -48,7 +48,7 @@ public class Tas {
 		}
 	}
 
-	public Pioche melangerTas() {
+	/*public Pioche melangerTas() {
 		Carte derniereCarte = getTop();
 		// removeCarte(derniereCarte); -> fonctionne pas car tu passes une carte en paramètre et removeCarte prend un int
 		Collections.shuffle(tas);
@@ -56,7 +56,7 @@ public class Tas {
 		for (Carte carte : tas) {
 			//removeCarte(getTop()); -> pareil que pour la ligne 53
 		}
-		/* addCarte(derniereCarte) ne fonctionne pas*/tas.add(derniereCarte);
+		//addCarte(derniereCarte) ne fonctionne pas tas.add(derniereCarte);
 		//return pioche;
-	}
+	}*/
 }

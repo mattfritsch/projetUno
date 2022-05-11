@@ -2,11 +2,10 @@ package carte;
 
 import java.util.Objects;
 
-import carte.Carte.Couleur;
 import exception.CarteException;
 import partie.Partie;
 
-public class CartePasser {
+public class CartePasser extends CarteEvenement{
 	/* Champs */
 	private Couleur couleur;
 	

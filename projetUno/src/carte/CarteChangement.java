@@ -2,11 +2,10 @@ package carte;
 
 import java.util.Objects;
 
-import carte.Carte.Couleur;
 import exception.CarteException;
 import partie.Partie;
 
-public class CarteChangement {
+public class CarteChangement extends CarteEvenement {
 	/* Champs */
 	private Couleur couleur;
 	
@@ -19,6 +18,9 @@ public class CarteChangement {
 			throw new CarteException("Une CarteChangement doit avoir une couleur valide");
 		
 		this.couleur = couleur;
+	}
+	public Couleur getCouleur() {
+		return couleur;
 	}
 	
 	/* Methode metier */

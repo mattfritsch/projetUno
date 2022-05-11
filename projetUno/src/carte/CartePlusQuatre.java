@@ -2,10 +2,10 @@ package carte;
 
 import partie.Partie;
 
-public class CartePlus4 extends CarteJoker {
+public class CartePlusQuatre extends CarteJoker {
 	
 	/* Constructeur par defaut */
-	public CartePlus4() {
+	public CartePlusQuatre() {
 		super();
 	}
 	
