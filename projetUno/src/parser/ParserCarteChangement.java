@@ -3,9 +3,9 @@ package parser;
 import carte.Carte.Couleur;
 import carte.CarteChangement;
 
-public class ParserChangement extends Parser{
+public class ParserCarteChangement extends Parser{
 	
-	public ParserChangement(Parser suivant) {
+	public ParserCarteChangement(Parser suivant) {
 		super(suivant);
 	}
 	

@@ -3,8 +3,8 @@ package parser;
 import carte.CarteJoker;
 import carte.Carte.Couleur;
 
-public class ParserJoker extends Parser{
-	public ParserJoker(Parser suivant) {
+public class ParserCarteJoker extends Parser{
+	public ParserCarteJoker(Parser suivant) {
 		super(suivant);
 	}
 	

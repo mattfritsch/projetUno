@@ -3,11 +3,11 @@ package test;
 import exception.FichierException;
 import parser.Parser;
 import parser.ParserCarteSimple;
-import parser.ParserChangement;
-import parser.ParserJoker;
-import parser.ParserPasser;
-import parser.ParserPlusDeux;
-import parser.ParserPlusQuatre;
+import parser.ParserCarteChangement;
+import parser.ParserCarteJoker;
+import parser.ParserCartePasser;
+import parser.ParserCartePlus2;
+import parser.ParserCartePlus4;
 import util.Fichier;
 
 public class testParser {
@@ -22,11 +22,11 @@ public class testParser {
 			Parser cinquiemeParser = null;
 			Parser sixiemeParser = null;
 			
-			sixiemeParser = new ParserJoker(null);
-			cinquiemeParser = new ParserPlusQuatre(sixiemeParser);
-			quatriemeParser = new ParserPlusDeux(cinquiemeParser);
-			troisiemeParser = new ParserChangement(quatriemeParser);
-			deuxiemeParser = new ParserPasser(troisiemeParser);
+			sixiemeParser = new ParserCarteJoker(null);
+			cinquiemeParser = new ParserCartePlus4(sixiemeParser);
+			quatriemeParser = new ParserCartePlus2(cinquiemeParser);
+			troisiemeParser = new ParserCarteChangement(quatriemeParser);
+			deuxiemeParser = new ParserCartePasser(troisiemeParser);
 			premierParser = new ParserCarteSimple(deuxiemeParser);
 			
 			

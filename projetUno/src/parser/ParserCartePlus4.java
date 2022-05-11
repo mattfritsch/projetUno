@@ -2,9 +2,9 @@ package parser;
 
 import carte.CartePlus4;
 
-public class ParserPlusQuatre extends Parser{
+public class ParserCartePlus4 extends Parser{
 	Parser suivant;
-	public ParserPlusQuatre(Parser suivant) {
+	public ParserCartePlus4(Parser suivant) {
 		super(suivant);
 	}
 	
