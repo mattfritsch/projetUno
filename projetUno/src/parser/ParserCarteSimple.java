@@ -12,7 +12,7 @@ public class ParserCarteSimple extends Parser{
 	public void parser(String ligne) throws Exception{
 		String tab[] = ligne.split(";");
 		int numCarte = Integer.parseInt(tab[2]);
-		Couleur couleur = partie.convertStringToCouleur(tab[1]);
+		Couleur couleur = partie.Partie.convertStringToCouleur(tab[1]);
 		CarteChiffre carte = new CarteChiffre(numCarte, couleur);
 		
 		System.out.println(carte);		
