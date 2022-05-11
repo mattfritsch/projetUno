@@ -23,4 +23,10 @@ public class CarteChangement {
 	public void appliquerEffet(Partie laPartie) {
 		// Changement de sens
 	}
+	
+	/* Affichage */
+	@Override
+	public String toString() {
+		return "CarteChangement [couleur= " + couleur + "]";
+	}
 }

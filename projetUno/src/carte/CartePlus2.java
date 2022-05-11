@@ -23,4 +23,10 @@ public class CartePlus2 {
 	public void appliquerEffet(Partie laPartie) {
 		//+2
 	}
+	
+	/* Affichage */
+	@Override
+	public String toString() {
+		return "CartePlus2 [couleur= " + couleur + "]";
+	}
 }

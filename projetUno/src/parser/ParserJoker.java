@@ -13,7 +13,7 @@ public class ParserJoker extends Parser{
 		String tab[] = ligne.split(";");
 		CarteJoker carteJoker = new CarteJoker();
 		
-		System.out.println("Carte changement :[ " +carteJoker + " ]\n");
+		System.out.println(carteJoker);
 	}
 	
 	@Override

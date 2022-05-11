@@ -1,6 +1,5 @@
 package parser;
 
-import carte.Carte;
 import carte.Carte.Couleur;
 import carte.CarteChiffre;
 
@@ -13,10 +12,10 @@ public class ParserCarteSimple extends Parser{
 	public void parser(String ligne) throws Exception{
 		String tab[] = ligne.split(";");
 		int numCarte = Integer.parseInt(tab[2]);
-		Couleur couleur = convertStringToCouleur(tab[1]);
+		Couleur couleur = partie.convertStringToCouleur(tab[1]);
 		CarteChiffre carte = new CarteChiffre(numCarte, couleur);
 		
-		System.out.println("Carte : [ " + carte + " ]\n");		
+		System.out.println(carte);		
 	}
 	
 	@Override

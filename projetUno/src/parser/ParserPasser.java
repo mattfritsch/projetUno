@@ -12,10 +12,10 @@ public class ParserPasser extends Parser {
 	public void parser(String ligne) throws Exception{
 		String tab[] = ligne.split(";");
 		
-		Couleur couleur = convertStringToCouleur(tab[1]);
+		Couleur couleur = partie.convertStringToCouleur(tab[1]);
 		CartePasser cartePasser = new CartePasser(couleur);
 		
-		System.out.println("Carte passer :[ " +cartePasser + " ]\n");
+		System.out.println(cartePasser);
 		
 	}
 	

@@ -12,7 +12,7 @@ public class ParserPlusQuatre extends Parser{
 	public void parser(String ligne) throws Exception{
 		String tab[] = ligne.split(";");
 		CartePlus4 cartePlusQuatre = new CartePlus4();
-		System.out.println("Carte changement :[ " +cartePlusQuatre + " ]\n");
+		System.out.println(cartePlusQuatre);
 		
 	}
 	

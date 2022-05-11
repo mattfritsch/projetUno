@@ -1,24 +1,12 @@
 package parser;
 
-import carte.Carte.Couleur;
 import exception.ParserManquantException;
+import partie.Partie;
 
 public abstract class Parser {
 	private Parser suivant = null;
 	
-	public Couleur convertStringToCouleur(String s) {
-		switch(s) {
-		case "Bleu":
-			return Couleur.BLEU;
-		case "Vert":
-			return Couleur.VERT;
-		case "Rouge":
-			return Couleur.ROUGE;
-		case "Jaune":
-			return Couleur.JAUNE;
-		}
-		return null;
-	}
+	Partie partie = new Partie();
 	
 	public Parser(Parser suivant) {
 		this.suivant = suivant;

@@ -19,6 +19,12 @@ public class CartePasser {
 		this.couleur = couleur;
 	}
 	
+	/* Affichage */
+	@Override
+	public String toString() {
+		return "CartePasser [couleur= " + couleur + "]";
+	}
+	
 	/* Methode metier */
 	public void appliquerEffet(Partie laPartie) {
 		// Passer le tour du joueur suivant

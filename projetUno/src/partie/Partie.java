@@ -59,13 +59,13 @@ public class Partie {
 	
 	/* Methode metier */
 	public Couleur convertStringToCouleur(String s) {
-		if (s.equalsIgnoreCase("bleu"))
+		if (s.equalsIgnoreCase("Bleu"))
 			return Couleur.BLEU;
-		else if (s.equalsIgnoreCase("vert"))
+		else if (s.equalsIgnoreCase("Vert"))
 			return Couleur.VERT;
-		else if (s.equalsIgnoreCase("rouge"))
+		else if (s.equalsIgnoreCase("Rouge"))
 			return Couleur.ROUGE;
-		else if (s.equalsIgnoreCase("jaune"))
+		else if (s.equalsIgnoreCase("Jaune"))
 			return Couleur.JAUNE;
 		else
 			throw new IllegalArgumentException("convertStringToCouleur la couleur est invalide"); // peut etre changer le type de l'exception?
