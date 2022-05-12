@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
 import carte.Carte;
 import carte.Carte.Couleur;
+import carte.CarteChangement;
 import carte.CarteChiffre;
-import carte.CarteJoker;
+import carte.CarteEvenement;
 import exception.CarteException;
 import exception.PartieException;
 import joueur.Joueur;
@@ -20,16 +21,22 @@ public class TestPartie {
 		
 		Joueur aurelien = new Joueur("Aurelien");
 		Joueur nathan = new Joueur("Nathan");
+		Joueur jean = new Joueur("Jean");
+		Joueur matthieu = new Joueur("Matthieu");
 		
 		ArrayList<Joueur> joueurs = new ArrayList<Joueur>();
-		joueurs.add(aurelien);
+		
 		joueurs.add(nathan);
+		joueurs.add(jean);
+		joueurs.add(aurelien);
+		joueurs.add(matthieu);
+		
 		Partie partie = null;
 		Carte carte = null;
-		Carte carte2 = null;
+		CarteChangement carte2 = null;
 		try {
 			carte = new CarteChiffre(6,Couleur.JAUNE);
-			carte2 = new CarteJoker();
+			carte2 = new CarteChangement(Couleur.BLEU);
 		} catch(CarteException e) {
 			e.getMessage();
 		}
@@ -45,6 +52,14 @@ public class TestPartie {
 		
 		partie.ajouterListeDeCarteAuJoueurCourant(cartes);
 		//partie.ajouterCarteAuJoueurCourant(carte);
+		
+		System.out.println(joueurs);
+		System.out.println("\n------------------------------------------\n");
+		
+		carte2.appliquerEffet(partie);
+		
+		System.out.println(joueurs);
+		System.out.println("\n------------------------------------------\n");
 		System.out.println(partie);
 	}
 }

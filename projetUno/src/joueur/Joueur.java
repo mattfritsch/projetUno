@@ -75,6 +75,9 @@ public class Joueur {
 		return "Joueur [nom=" + nom + ", maMain=" + maMain + "]";
 	}
 
+	
+	
+	
 	/* Methode metier */
 	public boolean ajouterCarte(Carte carte) {
 		return maMain.addCarte(carte);

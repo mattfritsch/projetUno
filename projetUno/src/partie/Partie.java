@@ -18,8 +18,9 @@ public class Partie {
 	private static Joueur joueurCourant;
 	private static Couleur couleurCourante;
 	private static int valeurCourante;
-	private static int sens = 0;
 	
+	
+	/* Constrcuteurs */
 	public Partie(ArrayList<Joueur> joueurs) throws PartieException {
 		if (joueurs == null || joueurs.size() < 2)
 			throw new PartieException("Le nombre de joueurs est invalide");
@@ -27,8 +28,20 @@ public class Partie {
 		Partie.joueurCourant = joueurs.get(0);
 	}
 	
+	
+	
+	/* Getters */
 	public ArrayList<Joueur> getJoueurs() {
 		return joueurs;
+	}
+	public int getIndexDuJoueur(Joueur joueur) {
+		return joueurs.indexOf(joueur);
+	}
+	public Joueur getJoueurAt(int index) {
+		return joueurs.get(index);
+	}
+	public int getNbJoueurs() {
+		return joueurs.size();
 	}
 	public Tas getTas() {
 		return tas;
@@ -45,20 +58,22 @@ public class Partie {
 	public static int getValeurCourante() {
 		return valeurCourante;
 	}
-	public static int getSens() {
-		return sens;
-	}
 	
-	
-	@Override
-	public String toString() {
-		String s = "Partie [joueurs=" + joueurs + ", tas=" + tas + ", pioche=" + pioche + "]";
-		s += "\n------------------------------------------\n";
-		s += "Le joueur courant est : " + joueurCourant;
-		return s;
-	}
+
 
 	/* Setters */
+	public boolean addJoueur(Joueur joueur) {
+		return joueurs.add(joueur);
+	}
+	private boolean removeJoueur(Joueur joueur) {
+		return joueurs.remove(joueur);
+	}
+	public Joueur removeJoueurAt(int index) {
+		return joueurs.remove(index);
+	}
+	private Joueur setJoueurAt(int index, Joueur joueur) {
+		return joueurs.set(index, joueur);
+	}
 	private void setJoueurs(ArrayList<Joueur> joueurs) {
 		this.joueurs = joueurs;
 	}
@@ -68,14 +83,23 @@ public class Partie {
 	private void setPioche(Pioche pioche) {
 		this.pioche = pioche;
 	}
-	private void setJoueurCourant(Joueur joueurCourant) {
+	public void setJoueurCourant(Joueur joueurCourant) {
 		Partie.joueurCourant = joueurCourant;
 	}
 	public void setCouleurCourante(Couleur couleurCourante) {
 		Partie.couleurCourante = couleurCourante;
 	}
-	public void setSens(int sens) {
-		Partie.sens = sens;
+	
+	
+	
+	/* Affichage */
+	@Override
+	public String toString() {
+		String s = "Partie [joueurs=" + joueurs + ", tas=" + tas + ", pioche=" + pioche + "]";
+		s += "\n------------------------------------------\n";
+		s += "Le joueur courant est : " + joueurCourant;
+		s += "\n------------------------------------------\n";
+		return s;
 	}
 	
 	/* Methode metier */
@@ -94,13 +118,18 @@ public class Partie {
 			throw new IllegalArgumentException("convertStringToCouleur la couleur est invalide"); // peut etre changer le type de l'exception?
     }
 	
-	/* Retourne le joueur suivant */
+	public void swapJoueurPositionInArrayList(int pos1, int pos2) {
+		setJoueurAt(pos2, setJoueurAt(pos1, getJoueurAt(pos2)));
+	}
+	
 	public Joueur getJoueurSuivant() {
 		if (joueurCourant == joueurs.get(joueurs.size()-1)) {
 			return joueurs.get(0);
 		}
 		return joueurs.get((joueurs.indexOf(Partie.joueurCourant) + 1));
 	}
+	
+
 	
 	/* Retourne une couleur choisi par le joueur */
 	public Couleur demanderCouleur() {
