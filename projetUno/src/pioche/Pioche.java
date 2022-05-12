@@ -13,12 +13,12 @@ public class Pioche {
 
 	}
 
-	public void addCarte(Carte carte) {
-		pioche.add(carte);
+	public boolean addCarte(Carte carte) {
+		return pioche.add(carte);
 	}
 
-	public void removeCarte(int index) {
-		pioche.remove(index);
+	public boolean removeCarte(Carte carte) {
+		return pioche.remove(carte);
 	}
 
 	public int getSize() {
@@ -39,7 +39,7 @@ public class Pioche {
 				for (int i=0; i<nbCartes; i++) {
 					Carte carte = getTop();
 					cartesPiochees.add(carte);
-					removeCarte(getSize() - 1);
+					this.removeCarte(this.getTop());
 				}
 			}
 			else {
