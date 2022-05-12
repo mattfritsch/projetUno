@@ -1,7 +1,11 @@
 package carte;
 
+import java.util.ArrayList;
+
 import exception.CarteException;
+import exception.PiocheException;
 import partie.Partie;
+import pioche.Pioche;
 
 public class CartePlusDeux extends CarteEvenement{
 	/* Champs */
@@ -26,6 +30,13 @@ public class CartePlusDeux extends CarteEvenement{
 	/* Methode metier */
 	public void appliquerEffet(Partie laPartie) {
 		//+2
+		Pioche pioche = laPartie.getPioche();
+		try {
+			laPartie.ajouterListeDeCarteAuJoueurCourant(pioche.piocher(2));
+		} catch (PiocheException e) {
+			e.getMessage();
+		}
+		laPartie.passerLeTour();
 	}
 	
 	/* Affichage */
