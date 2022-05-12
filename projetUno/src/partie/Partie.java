@@ -50,6 +50,14 @@ public class Partie {
 	}
 	
 	
+	@Override
+	public String toString() {
+		String s = "Partie [joueurs=" + joueurs + ", tas=" + tas + ", pioche=" + pioche + "]";
+		s += "\n------------------------------------------\n";
+		s += "Le joueur courant est : " + joueurCourant;
+		return s;
+	}
+
 	/* Setters */
 	private void setJoueurs(ArrayList<Joueur> joueurs) {
 		this.joueurs = joueurs;

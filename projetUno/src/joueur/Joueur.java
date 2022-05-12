@@ -8,7 +8,7 @@ import main.Main;
 public class Joueur {
 	/* Champs */
 	private String nom;
-	private Main maMain;
+	private Main maMain = new Main();
 	
 	
 	
@@ -70,6 +70,11 @@ public class Joueur {
 		this.maMain = maMain;
 	}
 	
+	@Override
+	public String toString() {
+		return "Joueur [nom=" + nom + ", maMain=" + maMain + "]";
+	}
+
 	/* Methode metier */
 	public boolean ajouterCarte(Carte carte) {
 		return maMain.addCarte(carte);

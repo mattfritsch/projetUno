@@ -7,30 +7,23 @@ import exception.MainException;
 import joueur.Joueur;
 
 public class Main {
-	private Joueur joueur;
 	private ArrayList<Carte> main = new ArrayList<Carte>();
 	
 	/* Constructeurs */
-	public Main(Joueur joueur) throws MainException {
-		if (joueur == null)
-			throw new MainException("Le joueur est null");
-		setJoueur(joueur);
+	public Main() {
+		
 	}
 	
-	public Main(Joueur joueur, ArrayList<Carte> main) throws MainException {
-		if (joueur == null)
-			throw new MainException("Le joueur est null");
-		setJoueur(joueur);
-		
+	public Main(ArrayList<Carte> main) throws MainException {
 		if (main == null) 
 			throw new MainException("La main est null");
 		setMain(main);
 	}
 	
 	/* Getters */
-	public Joueur getJoueur() {
+	/*public Joueur getJoueur() {
 		return joueur;
-	}
+	}*/
 	public ArrayList<Carte> getMain() {
 		return main;
 	}
@@ -65,11 +58,16 @@ public class Main {
 	
 	
 	/* Setters */
-	private void setJoueur(Joueur joueur) {
+	/*private void setJoueur(Joueur joueur) {
 		this.joueur = joueur;
-	}
+	}*/
 	private void setMain(ArrayList<Carte> main) {
 		this.main = main;
+	}
+
+	@Override
+	public String toString() {
+		return "" + main ;
 	}
 	
 	
