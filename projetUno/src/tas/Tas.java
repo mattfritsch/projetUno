@@ -10,9 +10,9 @@ import pioche.Pioche;
 /*
  * Je sais pas si les primitives que tu as faites sont vraiment utile
  * -> addCarte, removeCarte, getSize, getTop... 
- * Car tu peux tout faire directement dans la fonction concernée
- * A toi de voir, car ça peut allourdir le code même si ça peut peut-être facilité sa compréhension
- * Même commentaire pour pioche
+ * Car tu peux tout faire directement dans la fonction concernï¿½e
+ * A toi de voir, car ï¿½a peut allourdir le code mï¿½me si ï¿½a peut peut-ï¿½tre facilitï¿½ sa comprï¿½hension
+ * Mï¿½me commentaire pour pioche
  * */
 
 public class Tas {
@@ -23,8 +23,8 @@ public class Tas {
 
 	}
 
-	public void addCarte(Carte carte) {
-		tas.add(carte);
+	public boolean addCarte(Carte carte) {
+		return tas.add(carte);
 	}
 
 	/*
@@ -32,8 +32,8 @@ public class Tas {
 	 * Changer par index ou par carte
 	 * */
 
-	public void removeCarte(int index) {
-		tas.remove(index);
+	public boolean removeCarte(Carte carte) {
+		return tas.remove(carte);
 	}
 
 	public int getSize() {
@@ -48,15 +48,17 @@ public class Tas {
 		}
 	}
 
-	/*public Pioche melangerTas() {
+	public Pioche melangerTas() {
 		Carte derniereCarte = getTop();
-		// removeCarte(derniereCarte); -> fonctionne pas car tu passes une carte en paramètre et removeCarte prend un int
+		this.removeCarte(derniereCarte);
 		Collections.shuffle(tas);
-		//Pioche pioche = (Pioche) tas; -> Tu peux pas cast une arrayList
+		
+		Pioche pioche = new Pioche();
 		for (Carte carte : tas) {
-			//removeCarte(getTop()); -> pareil que pour la ligne 53
+			pioche.addCarte(carte);
+			this.removeCarte(carte); 
 		}
-		//addCarte(derniereCarte) ne fonctionne pas tas.add(derniereCarte);
-		//return pioche;
-	}*/
+		this.addCarte(derniereCarte);
+		return pioche;
+	}
 }
