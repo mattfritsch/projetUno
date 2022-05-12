@@ -130,4 +130,14 @@ public class Partie {
 	public boolean removeListeDeCarteAuJoueurCourant(ArrayList<Carte> cartes) {
 		return joueurCourant.removeListeDeCarte(cartes);
 	}
+	
+	public void passerLeTour() {
+		if (joueurCourant == joueurs.get(joueurs.size()-1)) {
+			setJoueurCourant(joueurs.get(1));
+		}
+		if (joueurCourant == joueurs.get(joueurs.size()-2)) {
+			setJoueurCourant(joueurs.get(0));
+		}
+		setJoueurCourant(joueurs.get((joueurs.indexOf(Partie.joueurCourant) +2 )));
+	}
 }
