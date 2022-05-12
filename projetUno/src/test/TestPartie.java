@@ -32,7 +32,7 @@ public class TestPartie {
 		joueurs.add(matthieu);
 		
 		Partie partie = null;
-		Carte carte = null;
+		CarteChiffre carte = null;
 		CarteChangement carte2 = null;
 		try {
 			carte = new CarteChiffre(6,Couleur.JAUNE);
@@ -57,9 +57,8 @@ public class TestPartie {
 		System.out.println("\n------------------------------------------\n");
 		
 		carte2.appliquerEffet(partie);
+		partie.finirLeTour();
 		
-		System.out.println(joueurs);
-		System.out.println("\n------------------------------------------\n");
 		System.out.println(partie);
 	}
 }

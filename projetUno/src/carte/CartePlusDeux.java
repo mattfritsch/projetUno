@@ -36,7 +36,7 @@ public class CartePlusDeux extends CarteEvenement{
 		} catch (PiocheException e) {
 			e.getMessage();
 		}
-		laPartie.passerLeTour();
+		laPartie.passerLeTourDuJoueurSuivant();
 	}
 	
 	/* Affichage */

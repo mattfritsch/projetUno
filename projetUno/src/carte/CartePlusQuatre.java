@@ -21,7 +21,7 @@ public class CartePlusQuatre extends CarteJoker {
 			e.getMessage();
 		}
 		changerCouleurCourante(laPartie);
-		laPartie.passerLeTour();
+		laPartie.passerLeTourDuJoueurSuivant();
 	}
 
 	/* Affichage */

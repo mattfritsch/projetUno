@@ -18,6 +18,7 @@ public class Partie {
 	private static Joueur joueurCourant;
 	private static Couleur couleurCourante;
 	private static int valeurCourante;
+	private int sens = 0;
 	
 	
 	/* Constrcuteurs */
@@ -58,6 +59,9 @@ public class Partie {
 	public static int getValeurCourante() {
 		return valeurCourante;
 	}
+	public int getSens() {
+		return sens;
+	}
 	
 
 
@@ -89,6 +93,9 @@ public class Partie {
 	public void setCouleurCourante(Couleur couleurCourante) {
 		Partie.couleurCourante = couleurCourante;
 	}
+	public void setSens(int sens) {
+		this.sens = sens;
+	}
 	
 	
 	
@@ -118,15 +125,18 @@ public class Partie {
 			throw new IllegalArgumentException("convertStringToCouleur la couleur est invalide"); // peut etre changer le type de l'exception?
     }
 	
-	public void swapJoueurPositionInArrayList(int pos1, int pos2) {
-		setJoueurAt(pos2, setJoueurAt(pos1, getJoueurAt(pos2)));
-	}
-	
 	public Joueur getJoueurSuivant() {
-		if (joueurCourant == joueurs.get(joueurs.size()-1)) {
-			return joueurs.get(0);
+		if (sens == 0) {
+			if (joueurCourant == joueurs.get(joueurs.size()-1)) {
+				return joueurs.get(0);
+			}
+			return joueurs.get((joueurs.indexOf(Partie.joueurCourant) + 1));
+		} else {
+			if (joueurCourant == joueurs.get(0)) {
+				return joueurs.get(joueurs.size()-1);
+			}
+			return joueurs.get((joueurs.indexOf(Partie.joueurCourant) - 1));
 		}
-		return joueurs.get((joueurs.indexOf(Partie.joueurCourant) + 1));
 	}
 	
 
@@ -160,7 +170,7 @@ public class Partie {
 		return joueurCourant.removeListeDeCarte(cartes);
 	}
 	
-	public void passerLeTour() {
+	public void passerLeTourDuJoueurSuivant() {
 		if (joueurCourant == joueurs.get(joueurs.size()-1)) {
 			setJoueurCourant(joueurs.get(1));
 		}
@@ -168,5 +178,9 @@ public class Partie {
 			setJoueurCourant(joueurs.get(0));
 		}
 		setJoueurCourant(joueurs.get((joueurs.indexOf(Partie.joueurCourant) +2 )));
+	}
+	
+	public void finirLeTour() {
+		setJoueurCourant(getJoueurSuivant());
 	}
 }
