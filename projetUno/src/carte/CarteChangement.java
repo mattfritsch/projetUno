@@ -25,7 +25,15 @@ public class CarteChangement extends CarteEvenement {
 	
 	/* Methode metier */
 	public void appliquerEffet(Partie laPartie) {
-		// Changement de sens
+		changementDeSens(laPartie);
+	}
+	
+	/* Inverser le sens de la partie*/
+	public void changementDeSens(Partie laPartie) {
+		if (Partie.getSens() == 0)
+			laPartie.setSens(1);
+		else
+			laPartie.setSens(0);
 	}
 	
 	/* Affichage */

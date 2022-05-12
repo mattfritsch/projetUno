@@ -11,13 +11,13 @@ public class CartePlusQuatre extends CarteJoker {
 	
 	/* Methode metier */
 	public void appliquerEffet(Partie laPartie) {
-		//+4
+		// +4
 		changerCouleurCourante(laPartie);
 	}
 
 	/* Affichage */
 	@Override
 	public String toString() {
-		return "CartePlus4 []";
+		return "CartePlus4";
 	}
 }
