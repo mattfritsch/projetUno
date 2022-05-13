@@ -7,10 +7,9 @@ import exception.PiocheException;
 
 public class Pioche {
 
-	public ArrayList<Carte> pioche;
+	public static ArrayList<Carte> pioche = new ArrayList<Carte>();
 
 	public Pioche() {
-
 	}
 
 	public boolean addCarte(Carte carte) {

@@ -1,6 +1,7 @@
 package parser;
 
 import carte.CartePlusQuatre;
+import pioche.Pioche;
 
 public class ParserCartePlusQuatre extends Parser{
 	Parser suivant;
@@ -12,7 +13,8 @@ public class ParserCartePlusQuatre extends Parser{
 	public void parser(String ligne) throws Exception{
 		String tab[] = ligne.split(";");
 		CartePlusQuatre cartePlusQuatre = new CartePlusQuatre();
-		System.out.println(cartePlusQuatre);
+		Pioche.pioche.add(cartePlusQuatre);
+		System.out.println(Pioche.pioche);
 		
 	}
 	

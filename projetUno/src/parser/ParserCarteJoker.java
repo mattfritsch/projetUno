@@ -1,7 +1,7 @@
 package parser;
 
 import carte.CarteJoker;
-import carte.Carte.Couleur;
+import pioche.Pioche;
 
 public class ParserCarteJoker extends Parser{
 	public ParserCarteJoker(Parser suivant) {
@@ -12,8 +12,9 @@ public class ParserCarteJoker extends Parser{
 	public void parser(String ligne) throws Exception{
 		String tab[] = ligne.split(";");
 		CarteJoker carteJoker = new CarteJoker();
+		Pioche.pioche.add(carteJoker);
 		
-		System.out.println(carteJoker);
+		System.out.println(Pioche.pioche);
 	}
 	
 	@Override

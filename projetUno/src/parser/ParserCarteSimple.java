@@ -2,6 +2,7 @@ package parser;
 
 import carte.Carte.Couleur;
 import carte.CarteChiffre;
+import pioche.Pioche;
 
 public class ParserCarteSimple extends Parser{
 	public ParserCarteSimple(Parser suivant) {
@@ -15,7 +16,8 @@ public class ParserCarteSimple extends Parser{
 		Couleur couleur = partie.Partie.convertStringToCouleur(tab[1]);
 		CarteChiffre carte = new CarteChiffre(numCarte, couleur);
 		
-		System.out.println(carte);		
+		Pioche.pioche.add(carte);
+		System.out.println(Pioche.pioche);		
 	}
 	
 	@Override
