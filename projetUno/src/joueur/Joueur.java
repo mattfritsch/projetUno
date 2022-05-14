@@ -73,7 +73,7 @@ public class Joueur {
 	
 	@Override
 	public String toString() {
-		return "Joueur [nom=" + nom + ", maMain=" + maMain + "]";
+		return "Joueur [" + nom + ", " + maMain + "\n]";
 	}
 
 	
@@ -112,6 +112,7 @@ public class Joueur {
 		
 		partie.getTas().addCarte(carte);
 		maMain.removeCarte(carte);
+		System.out.println(nom + " joue le " + carte);
 		
 		
 		return true;

@@ -18,7 +18,7 @@ import pioche.Pioche;
 
 public class Tas {
 
-	public ArrayList<Carte> tas;
+	public ArrayList<Carte> tas = new ArrayList<Carte>();
 
 	public Tas() {
 

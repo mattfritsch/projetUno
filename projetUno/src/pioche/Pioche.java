@@ -9,12 +9,20 @@ import exception.PiocheException;
 
 public class Pioche {
 
-	public ArrayList<Carte> pioche = new ArrayList<Carte>();
+	private ArrayList<Carte> pioche = new ArrayList<Carte>();
 
 	public Pioche() {
 		
 	}
 
+	public ArrayList<Carte> getPioche() {
+		return pioche;
+	}
+	
+	public void setPioche(ArrayList<Carte> pioche) {
+		this.pioche = pioche;
+	}
+	
 	public boolean addCarte(Carte carte) {
 		return pioche.add(carte);
 	}
@@ -22,14 +30,18 @@ public class Pioche {
 	public boolean removeCarte(Carte carte) {
 		return pioche.remove(carte);
 	}
+	
+	public Carte removeCarte(int index) {
+		return pioche.remove(index);
+	}
 
 	public int getNbCartes() {
 		return pioche.size();
 	}
 
-	public Carte getTop() throws PiocheException {
+	public Carte getBottom() throws PiocheException {
 		if (pioche.size() > 0) {
-			return pioche.get(getNbCartes() - 1);
+			return pioche.get(0);
 		} else {
 			throw new PiocheException("Pioche vide");
 		}
@@ -39,8 +51,8 @@ public class Pioche {
 		ArrayList<Carte> cartesPiochees = new ArrayList<Carte>();
 		if (nbCartes<=getNbCartes()){
 			for (int i=0; i<nbCartes; i++) {
-				cartesPiochees.add(getTop());
-				removeCarte(getTop());
+				cartesPiochees.add(getBottom());
+				this.removeCarte(getBottom());
 			}
 		}
 		else {

@@ -67,7 +67,13 @@ public class Main {
 
 	@Override
 	public String toString() {
-		return "" + main ;
+		String s = "Main [\n";
+		for (Carte carte : main) {
+			s+="\t\t";
+			s+=carte.toString();
+			s+="\n";
+		}
+		return s + "\t\t]";
 	}
 	
 	

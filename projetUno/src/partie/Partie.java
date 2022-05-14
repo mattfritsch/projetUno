@@ -38,6 +38,7 @@ public class Partie {
 			throw new PartieException("Au moins un des noms est null");
 		this.addJoueur(joueur1);
 		this.addJoueur(joueur2);
+		this.joueurCourant = joueurs.get(0);
 	}
 	
 	/* 3 joueurs */
@@ -47,6 +48,7 @@ public class Partie {
 		this.addJoueur(joueur1);
 		this.addJoueur(joueur2);
 		this.addJoueur(joueur3);
+		this.joueurCourant = joueurs.get(0);
 	}
 	
 	/* 4 joueurs */
@@ -57,6 +59,7 @@ public class Partie {
 		this.addJoueur(joueur2);
 		this.addJoueur(joueur3);
 		this.addJoueur(joueur4);
+		this.joueurCourant = joueurs.get(0);
 	}
 	
 	
@@ -169,7 +172,7 @@ public class Partie {
 		initTas();
 	}
 	
-	public void initJoueurs(int nbCarteParJoueur) throws PartieException {
+	private void initJoueurs(int nbCarteParJoueur) throws PartieException {
 		if (nbCarteParJoueur > (pioche.getNbCartes() * getNbJoueurs()))
 			throw new PartieException("Nombre de cartes insuffisant dans la pioche pour commencer la partie");
 		
@@ -186,7 +189,7 @@ public class Partie {
 		}
 	}
 	
-	public void initTas() {
+	private void initTas() {
 		try {
 			tas.addListeDeCarte(pioche.piocher(1));
 		} catch (PiocheException e) {
