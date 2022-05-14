@@ -259,9 +259,11 @@ public class Partie {
 			setJoueurCourant(joueurs.get(0));
 		}
 		setJoueurCourant(joueurs.get((joueurs.indexOf(this.joueurCourant) +2 )));
+		this.joueurCourant.setAJouer(false);
 	}
 	
 	public void finirLeTour() {
 		setJoueurCourant(getJoueurSuivant());
+		this.joueurCourant.setAJouer(false);
 	}
 }

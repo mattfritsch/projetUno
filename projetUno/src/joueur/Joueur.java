@@ -11,7 +11,7 @@ public class Joueur {
 	/* Champs */
 	private String nom;
 	private Main maMain = new Main();
-	
+	private boolean aJouer = false;
 	
 	
 	/* Constructeurs */
@@ -57,6 +57,9 @@ public class Joueur {
 	public int getNbCarte() {
 		return maMain.getMain().size();
 	}
+	public boolean getAJouer() {
+		return aJouer;
+	}
 	
 	
 	/* Setters */
@@ -70,6 +73,9 @@ public class Joueur {
 		if (maMain == null)
 			throw new JoueurException("La main est null");
 		this.maMain = maMain;
+	}
+	public void setAJouer(boolean aJouer) {
+		this.aJouer = aJouer;
 	}
 	
 	@Override
@@ -102,6 +108,9 @@ public class Joueur {
 	}
 	
 	public void jouerUneCarte(Partie partie, Carte carte) throws JoueurException {
+		if (this.aJouer == true)
+			throw new JoueurException("Le joueur a deja jouer");
+		
 		Expert expert = new ExpertCarteSimple(null);
 		
 		//on test si la carte est bien dans la main
@@ -115,6 +124,7 @@ public class Joueur {
 		} else {
 			try {
 				expert.traiter(partie, carte, this);
+				this.setAJouer(true);
 			} catch (Exception e) {
 				System.err.println("Aucun expert n'existe pour la carte "+carte);
 			}

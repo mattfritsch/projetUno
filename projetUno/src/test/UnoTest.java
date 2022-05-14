@@ -140,6 +140,45 @@ class UnoTest {
 			}
 			System.out.println("[OK] joueUneCarteIllegale");
 		}
+		
+		@Test
+		void poseDeuxCartesLegalesDeSuite() {
+			// Alice	joue	le	« 2	Vert »
+			try {
+				alice.jouerUneCarte(partie, alice.getMaMain().getCarte(0));
+			} catch (JoueurException e) {
+				fail("Alice ne peut pas jouer le 2 Vert");
+			}
+			
+			partie.finirLeTour();
+			
+			// Bob	joue	le	« 2	Bleu »
+			try {
+				bob.jouerUneCarte(partie, bob.getMaMain().getCarte(0));
+			} catch (JoueurException e) {
+				fail("Bob ne peut pas jouer le 2 Bleu");
+			}
+			
+			partie.finirLeTour();
+			
+			try {
+				charles.jouerUneCarte(partie, charles.getMaMain().getCarte(0));
+			} catch (JoueurException e) {
+				fail("Charles ne peut pas jouer le 9 Bleu");
+			}
+			
+			if (charles.getNbCarte() != 2)
+				fail("Charles ne possede pas 2 cartes");
+			
+			try {
+				charles.jouerUneCarte(partie, charles.getMaMain().getCarte(0));
+			} catch (JoueurException e) {
+				if (charles.getNbCarte() != 2)
+					fail("Charles ne possede pas 2 cartes");
+			}
+			
+			partie.finirLeTour();
+		}
 	}
 	
 }
