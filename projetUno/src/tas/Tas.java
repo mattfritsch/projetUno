@@ -2,6 +2,7 @@ package tas;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 
 import carte.Carte;
 import exception.TasException;
@@ -60,5 +61,30 @@ public class Tas {
 		}
 		this.addCarte(derniereCarte);
 		return pioche;
+	}
+	
+	@Override
+	public String toString() {
+		String ch = "Tas [";
+		for (Carte carte : tas) {
+			ch+=carte.toString();
+		}
+		return ch + "]";
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(tas);
+	}
+	
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this==obj) return true;
+		if (obj==null) return false;
+		if (getClass() != obj.getClass()) return false;
+		
+		Tas other = (Tas) obj;
+		return tas == other.tas;
 	}
 }
