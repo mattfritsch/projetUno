@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
 
-import carte.Carte;
+import carte.*;
 import exception.TasException;
+import partie.Partie;
 import pioche.Pioche;
 
 /*
@@ -24,7 +25,7 @@ public class Tas {
 
 	}
 
-	public boolean addCarte(Carte carte) {
+	public boolean addCarte(Partie partie, Carte carte) {
 		return tas.add(carte);
 	}
 	
@@ -53,7 +54,7 @@ public class Tas {
 		}
 	}
 
-	public Pioche melangerTas() {
+	public Pioche melangerTas(Partie partie) {
 		Carte derniereCarte = getTop();
 		this.removeCarte(derniereCarte);
 		Collections.shuffle(tas);
@@ -63,7 +64,7 @@ public class Tas {
 			pioche.addCarte(carte);
 			this.removeCarte(carte); 
 		}
-		this.addCarte(derniereCarte);
+		this.addCarte(partie, derniereCarte);
 		return pioche;
 	}
 	

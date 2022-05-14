@@ -5,6 +5,7 @@ import carte.Carte;
 import exception.JoueurException;
 import main.Main;
 import partie.Partie;
+import expert.*;
 
 public class Joueur {
 	/* Champs */
@@ -100,7 +101,8 @@ public class Joueur {
 		return maMain.removeListeDeCarte(cartes);
 	}
 	
-	public boolean jouerUneCarte(Partie partie, Carte carte) throws JoueurException {
+	public void jouerUneCarte(Partie partie, Carte carte) throws JoueurException {
+		Expert expert = new ExpertCarteSimple(null);
 		
 		//on test si la carte est bien dans la main
 		int size = maMain.getNbCarte();
@@ -108,12 +110,15 @@ public class Joueur {
 		for (int i=0; i<size; i++) {
 			if (maMain.getCarte(i)==carte) isInMain = true;
 		}
-		if (isInMain == false) throw new JoueurException("La carte n'est pas dans la main");
-		
-		partie.getTas().addCarte(carte);
-		maMain.removeCarte(carte);
-		
-		
-		return true;
+		if (isInMain == false) {
+			throw new JoueurException("La carte n'est pas dans la main");
+		} else {
+			try {
+				expert.traiter(partie, carte, this);
+			} catch (Exception e) {
+				System.err.println("Aucun expert n'existe pour la carte "+carte);
+			}
+			maMain.removeCarte(carte);
+		}
 	}
 }

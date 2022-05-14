@@ -128,6 +128,18 @@ class UnoTest {
 				fail("Le joueur courant n'est pas charles");
 			System.out.println("[OK] joueUneDeCouleurDifferenteMaisDeMemeValeur");
 		}
+		
+		@Test
+		void joueUneCarteIllegale() {
+			// Alice	joue	le	« 6 jaune »
+			try {
+				alice.jouerUneCarte(partie, alice.getMaMain().getCarte(1));
+			} catch (JoueurException e) {
+				if (alice.getNbCarte() != 3)
+					fail("Alice ne possede pas 3 cartes");
+			}
+			System.out.println("[OK] joueUneCarteIllegale");
+		}
 	}
 	
 }

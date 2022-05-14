@@ -18,7 +18,9 @@ public class ExpertCarteSimple extends Expert{
 		
 		if (joueur == partie.getJoueurCourant()) {
 			if((c.getValeur() == partie.getValeurCourante()) || (c.getCouleur() == partie.getCouleurCourante())) {
-				return true;
+				partie.setCouleurCourante(c.getCouleur());
+				partie.setValeurCourante(c.getValeur());
+				return partie.getTas().addCarte(partie, carte);
 			}
 		}
 		else {

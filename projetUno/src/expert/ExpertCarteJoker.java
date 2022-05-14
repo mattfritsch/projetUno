@@ -13,7 +13,7 @@ public class ExpertCarteJoker extends Expert{
 	@Override
 	public boolean examiner(Partie partie, Carte carte, Joueur joueur) throws Exception {
 		if(joueur == partie.getJoueurCourant()) {
-			return true;
+			return partie.getTas().addCarte(partie, carte);
 		}
 		return false;
 	}

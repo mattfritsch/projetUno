@@ -123,6 +123,9 @@ public class Partie {
 	public void setCouleurCourante(Couleur couleurCourante) {
 		this.couleurCourante = couleurCourante;
 	}
+	public void setValeurCourante(int valeurCourante) {
+		this.valeurCourante = valeurCourante;
+	}
 	public void setSens(int sens) {
 		this.sens = sens;
 	}
@@ -192,6 +195,9 @@ public class Partie {
 		} catch (PiocheException e) {
 			e.getMessage();
 		}
+		CarteChiffre talon = (CarteChiffre) tas.getTop();
+		setCouleurCourante(talon.getCouleur());
+		setValeurCourante(talon.getValeur());
 	}
 	
 	public void garderLesNPremieresCarteDeLaPioche(int n) {

@@ -18,7 +18,9 @@ public class ExpertCartePlusDeux extends Expert{
 		
 		if(joueur == partie.getJoueurCourant()) {
 			if(c.getCouleur() == partie.getCouleurCourante()) {
-				return true;
+				partie.setCouleurCourante(c.getCouleur());
+				partie.setValeurCourante(-1);
+				return partie.getTas().addCarte(partie, carte);
 			}
 		}
 		else {
