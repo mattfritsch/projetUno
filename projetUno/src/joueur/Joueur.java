@@ -112,7 +112,6 @@ public class Joueur {
 		
 		partie.getTas().addCarte(carte);
 		maMain.removeCarte(carte);
-		System.out.println(nom + " joue le " + carte);
 		
 		
 		return true;

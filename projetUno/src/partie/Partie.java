@@ -108,9 +108,6 @@ public class Partie {
 	public Joueur removeJoueurAt(int index) {
 		return joueurs.remove(index);
 	}
-	private Joueur setJoueurAt(int index, Joueur joueur) {
-		return joueurs.set(index, joueur);
-	}
 	private void setJoueurs(ArrayList<Joueur> joueurs) {
 		this.joueurs = joueurs;
 	}
@@ -194,6 +191,12 @@ public class Partie {
 			tas.addListeDeCarte(pioche.piocher(1));
 		} catch (PiocheException e) {
 			e.getMessage();
+		}
+	}
+	
+	public void garderNCarteDansLaPioche(int n) {
+		for (int i = getPioche().getNbCartes()-1 ; i > n ; i--) {
+			getPioche().removeCarte(i);
 		}
 	}
 	
