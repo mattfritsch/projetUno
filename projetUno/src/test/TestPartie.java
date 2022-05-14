@@ -1,5 +1,7 @@
 package test;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.util.ArrayList;
 
 import carte.Carte;
@@ -55,7 +57,11 @@ public class TestPartie {
 		System.out.println("------------------------------------------");
 		
 		carte2.appliquerEffet(partie);
-		partie.finirLeTour();
+		try {
+			partie.finirLeTour();
+		} catch (PartieException e) {
+			fail("Le joueur n'a pas jouer");
+		}
 		
 		System.out.println(partie);
 	}

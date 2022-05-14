@@ -262,7 +262,9 @@ public class Partie {
 		this.joueurCourant.setAJouer(false);
 	}
 	
-	public void finirLeTour() {
+	public void finirLeTour() throws PartieException{
+		if (this.joueurCourant.getAJouer() == false)
+			throw new PartieException("Le joueur courant n'a pas jouer");
 		setJoueurCourant(getJoueurSuivant());
 		this.joueurCourant.setAJouer(false);
 	}

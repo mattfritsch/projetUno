@@ -7,6 +7,7 @@ import org.junit.jupiter.api.*;
 import exception.CarteException;
 import exception.JoueurException;
 import exception.PartieException;
+import exception.PiocheException;
 import joueur.Joueur;
 import partie.Partie;
 import carte.*;
@@ -75,7 +76,11 @@ class UnoTest {
 				fail("Le tas n'est pas composé de 2 cartes");
 			
 			// Alice	finit	le	tour
-			partie.finirLeTour();
+			try {
+				partie.finirLeTour();
+			} catch (PartieException e) {
+				fail("Le joueur n'a pas jouer");
+			}
 			
 			// Vérifier	que	le	joueur	courant	est	Bob
 			if (partie.getJoueurCourant() != bob)
@@ -94,7 +99,11 @@ class UnoTest {
 			}
 			
 			// Alice	finit	le	tour
-			partie.finirLeTour();
+			try {
+				partie.finirLeTour();
+			} catch (PartieException e) {
+				fail("Le joueur n'a pas jouer");
+			}
 			
 			// DEBUT DU TEST
 			
@@ -122,7 +131,11 @@ class UnoTest {
 			if (partie.getTas().getNbCartes() != 3)
 				fail("Le nombre de cartes du tas n'est pas egal a 3");
 			
-			partie.finirLeTour();
+			try {
+				partie.finirLeTour();
+			} catch (PartieException e) {
+				fail("Le joueur n'a pas jouer");
+			}
 			
 			if (partie.getJoueurCourant() != charles)
 				fail("Le joueur courant n'est pas charles");
@@ -150,7 +163,11 @@ class UnoTest {
 				fail("Alice ne peut pas jouer le 2 Vert");
 			}
 			
-			partie.finirLeTour();
+			try {
+				partie.finirLeTour();
+			} catch (PartieException e) {
+				fail("Le joueur n'a pas jouer");
+			}
 			
 			// Bob	joue	le	« 2	Bleu »
 			try {
@@ -159,7 +176,11 @@ class UnoTest {
 				fail("Bob ne peut pas jouer le 2 Bleu");
 			}
 			
-			partie.finirLeTour();
+			try {
+				partie.finirLeTour();
+			} catch (PartieException e) {
+				fail("Le joueur n'a pas jouer");
+			}
 			
 			try {
 				charles.jouerUneCarte(partie, charles.getMaMain().getCarte(0));
@@ -177,7 +198,59 @@ class UnoTest {
 					fail("Charles ne possede pas 2 cartes");
 			}
 			
-			partie.finirLeTour();
+			System.out.println("[OK] poseDeuxCartesLegalesDeSuite");
+		}
+		
+		@Test
+		void joueSansRienFaire() {
+			// Alice finit son tour
+			try {
+				partie.finirLeTour();
+			} catch (PartieException e) {
+				if (alice.getNbCarte() != 3)
+					fail("Alice ne possede pas 3 cartes");
+			}
+			
+			System.out.println("[OK] joueSansRienFaire");
+		}
+		
+		@Test
+		void punitionCoupIllegalJoueurCourant() {
+			if (partie.getJoueurCourant() != alice)
+				fail("Alice n'est pas le joueur courant");
+			// Alice	joue	le	« 2	Vert »
+			try {
+				alice.jouerUneCarte(partie, alice.getMaMain().getCarte(1));
+			} catch (JoueurException e) {
+				
+				try {
+					alice.ajouterListeDeCarte(partie.getPioche().piocher(2));
+				} catch (PiocheException e1) {
+					fail("Impossible d'ajouter les cartes a Alice");
+				}
+				
+				if (partie.getJoueurCourant() != bob)
+					fail("Le joueur courant n'est pas bob");
+				CarteChiffre sixJaune = (CarteChiffre) alice.getMaMain().getCarte(3);
+				CarteChiffre quatreRouge = (CarteChiffre) alice.getMaMain().getCarte(4);
+				if (alice.getNbCarte() != 5 || !alice.getMaMain().possedeCarte(quatreRouge) || !alice.getMaMain().possedeCarte(sixJaune))
+					fail("Alice ne possede pas 5 cartes dont le 6 Jaune et le 4 rouge");
+				
+				CarteChiffre deuxVert = null;
+				try {
+					deuxVert = new CarteChiffre(2, Couleur.VERT);
+				} catch (CarteException e1) {
+					fail("Impossible de creer la carte 2 Vert");
+				}
+				try {
+					if (partie.getPioche().getBottom().equals(deuxVert))
+						fail("La prochaine carte de la pioche n'est pas le 2 Vert");
+				} catch (PiocheException e1) {
+					fail("Pioche vide");
+				}
+				
+				System.out.println("[OK] punitionCoupIllegalJoueurCourant");
+			}
 		}
 	}
 	
