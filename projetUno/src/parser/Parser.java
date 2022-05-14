@@ -1,6 +1,7 @@
 package parser;
 
 import exception.ParserManquantException;
+import pioche.Pioche;
 
 public abstract class Parser{
 	private Parser suivant = null;
@@ -9,11 +10,11 @@ public abstract class Parser{
 		this.suivant = suivant;
 	}
 	
-	public void traiter(String ligne) throws Exception{
+	public void traiter(String ligne, Pioche pioche) throws Exception{
 		if(saitParser(ligne))
-			parser(ligne);
+			parser(ligne, pioche);
 		else if(aUnSuivant())
-			getSuivant().traiter(ligne);
+			getSuivant().traiter(ligne, pioche);
 		else
 			throw new ParserManquantException();
 	}
@@ -26,7 +27,7 @@ public abstract class Parser{
 		return suivant != null;
 	}
 	
-	public abstract void parser(String ligne) throws Exception;
+	public abstract void parser(String ligne, Pioche pioche) throws Exception;
 	
 	public abstract boolean saitParser(String ligne);
 	

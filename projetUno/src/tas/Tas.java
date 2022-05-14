@@ -27,6 +27,10 @@ public class Tas {
 	public boolean addCarte(Carte carte) {
 		return tas.add(carte);
 	}
+	
+	public boolean addListeDeCarte(ArrayList<Carte> cartes) {
+		return tas.addAll(cartes);
+	}
 
 	/*
 	 * Possiblement a ?
@@ -37,13 +41,13 @@ public class Tas {
 		return tas.remove(carte);
 	}
 
-	public int getSize() {
+	public int getNbCartes() {
 		return tas.size();
 	}
 
 	public Carte getTop() {
-		if (getSize() > 0) {
-			return tas.get(getSize()-1);
+		if (getNbCartes() > 0) {
+			return tas.get(getNbCartes()-1);
 		} else {
 			return null;
 		}
@@ -65,7 +69,7 @@ public class Tas {
 	
 	@Override
 	public String toString() {
-		String ch = "Tas [";
+		String ch = "Tas [\n";
 		for (Carte carte : tas) {
 			ch+=carte.toString();
 		}

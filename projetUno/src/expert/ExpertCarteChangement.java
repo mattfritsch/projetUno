@@ -13,11 +13,11 @@ public class ExpertCarteChangement extends Expert{
 	}
 
 	@Override
-	public boolean examiner(Carte carte, Joueur joueur) throws Exception {
+	public boolean examiner(Partie partie, Carte carte, Joueur joueur) throws Exception {
 		CarteChangement c = (CarteChangement) carte;
 		
-		if(joueur == Partie.getJoueurCourant()) {
-			if(c.getCouleur() == Partie.getCouleurCourante()) {
+		if(joueur == partie.getJoueurCourant()) {
+			if(c.getCouleur() == partie.getCouleurCourante()) {
 				return true;
 			}
 		}

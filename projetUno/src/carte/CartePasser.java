@@ -28,7 +28,7 @@ public class CartePasser extends CarteEvenement{
 	/* Affichage */
 	@Override
 	public String toString() {
-		return "CartePasser [couleur= " + couleur + "]";
+		return "CartePasser [" + couleur + "]";
 	}
 	
 	/* Comparaison */

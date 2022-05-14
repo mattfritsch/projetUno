@@ -10,13 +10,13 @@ public class ParserCarteSimple extends Parser{
 	}
 	
 	@Override
-	public void parser(String ligne) throws Exception{
+	public void parser(String ligne, Pioche pioche) throws Exception{
 		String tab[] = ligne.split(";");
 		int numCarte = Integer.parseInt(tab[2]);
 		Couleur couleur = partie.Partie.convertStringToCouleur(tab[1]);
 		CarteChiffre carte = new CarteChiffre(numCarte, couleur);
 		
-		//Pioche.pioche.add(carte);
+		pioche.addCarte(carte);
 		
 		//System.out.println(Pioche.pioche);		
 	}

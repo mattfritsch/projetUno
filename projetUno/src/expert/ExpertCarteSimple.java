@@ -13,11 +13,11 @@ public class ExpertCarteSimple extends Expert{
 	}
 	
 	@Override
-	public boolean examiner(Carte carte, Joueur joueur) throws Exception{
+	public boolean examiner(Partie partie, Carte carte, Joueur joueur) throws Exception{
 		CarteChiffre c = (CarteChiffre) carte;
 		
-		if (joueur == Partie.getJoueurCourant()) {
-			if((c.getValeur() == Partie.getValeurCourante()) || (c.getCouleur() == Partie.getCouleurCourante())) {
+		if (joueur == partie.getJoueurCourant()) {
+			if((c.getValeur() == partie.getValeurCourante()) || (c.getCouleur() == partie.getCouleurCourante())) {
 				return true;
 			}
 		}

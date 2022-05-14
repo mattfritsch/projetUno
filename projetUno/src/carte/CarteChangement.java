@@ -39,7 +39,7 @@ public class CarteChangement extends CarteEvenement {
 	/* Affichage */
 	@Override
 	public String toString() {
-		return "CarteChangement [couleur= " + couleur + "]";
+		return "CarteChangement [" + couleur + "]";
 	}
 
 	@Override

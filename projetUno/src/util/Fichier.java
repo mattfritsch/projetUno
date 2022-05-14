@@ -14,9 +14,10 @@ import parser.ParserCartePasser;
 import parser.ParserCartePlusDeux;
 import parser.ParserCartePlusQuatre;
 import parser.ParserCarteSimple;
+import pioche.Pioche;
 
 public class Fichier {
-	public static void lire (String nomFichier) throws FichierException {
+	public static void lire (String nomFichier, Pioche pioche) throws FichierException {
 		
 		Parser sixiemeParser = new ParserCarteJoker(null);
 		Parser cinquiemeParser = new ParserCartePlusQuatre(sixiemeParser);
@@ -44,7 +45,7 @@ public class Fichier {
 			while((ligne = reader.readLine()) != null) {
 				if(parser != null) {
 					try {
-						parser.traiter(ligne);
+						parser.traiter(ligne, pioche);
 					}
 					catch(ParserManquantException e) {
 						System.err.println("Aucun parser n'existe pour la ligne "+ligne);

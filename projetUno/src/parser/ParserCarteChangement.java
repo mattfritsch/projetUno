@@ -11,11 +11,11 @@ public class ParserCarteChangement extends Parser{
 	}
 	
 	@Override
-	public void parser(String ligne) throws Exception{
+	public void parser(String ligne, Pioche pioche) throws Exception{
 		String tab[] = ligne.split(";");
 		Couleur couleur = partie.Partie.convertStringToCouleur(tab[1]);
 		CarteChangement carteChangement = new CarteChangement(couleur);
-		//Pioche.pioche.add(carteChangement);
+		pioche.addCarte(carteChangement);
 		
 		//System.out.println(Pioche.pioche);
 	}

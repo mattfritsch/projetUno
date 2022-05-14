@@ -42,6 +42,6 @@ public class CartePlusDeux extends CarteEvenement{
 	/* Affichage */
 	@Override
 	public String toString() {
-		return "CartePlus2 [couleur= " + couleur + "]";
+		return "CartePlus2 [" + couleur + "]";
 	}
 }

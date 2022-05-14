@@ -23,13 +23,13 @@ public class Pioche {
 		return pioche.remove(carte);
 	}
 
-	public int getSize() {
+	public int getNbCartes() {
 		return pioche.size();
 	}
 
 	public Carte getTop() throws PiocheException {
 		if (pioche.size() > 0) {
-			return pioche.get(getSize() - 1);
+			return pioche.get(getNbCartes() - 1);
 		} else {
 			throw new PiocheException("Pioche vide");
 		}
@@ -37,15 +37,14 @@ public class Pioche {
 
 	public ArrayList<Carte> piocher(int nbCartes) throws PiocheException{
 		ArrayList<Carte> cartesPiochees = new ArrayList<Carte>();
-		if (nbCartes<=getSize()){
+		if (nbCartes<=getNbCartes()){
 			for (int i=0; i<nbCartes; i++) {
-				Carte carte = getTop();
-				cartesPiochees.add(carte);
-				this.removeCarte(this.getTop());
+				cartesPiochees.add(getTop());
+				removeCarte(getTop());
 			}
 		}
 		else {
-			throw new PiocheException("TODO");
+			throw new PiocheException("Nombre de cartes insuffisant dans la pioche");
 		}
 			
 		return cartesPiochees;
@@ -53,9 +52,10 @@ public class Pioche {
 	
 	@Override
 	public String toString() {
-		String ch = "Pioche [";
+		String ch = "Pioche [\n";
 		for (Carte carte : pioche) {
 			ch+=carte.toString();
+			ch+="\n";
 		}
 		return ch + "]";
 	}

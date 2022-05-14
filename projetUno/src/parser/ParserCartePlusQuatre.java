@@ -10,10 +10,10 @@ public class ParserCartePlusQuatre extends Parser{
 	}
 	
 	@Override
-	public void parser(String ligne) throws Exception{
+	public void parser(String ligne, Pioche pioche) throws Exception{
 		String tab[] = ligne.split(";");
 		CartePlusQuatre cartePlusQuatre = new CartePlusQuatre();
-		//Pioche.pioche.add(cartePlusQuatre);
+		pioche.addCarte(cartePlusQuatre);
 		
 		//System.out.println(Pioche.pioche);
 		

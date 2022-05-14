@@ -43,7 +43,7 @@ public class CarteChiffre extends Carte {
 	/* Affichage */
 	@Override
 	public String toString() {
-		return "CarteChiffre [numero= " + valeur + ", couleur= " + couleur + "]";
+		return "CarteChiffre [" + valeur + ", " + couleur + "]";
 	}
 	
 	/* Comparaison */

@@ -3,6 +3,7 @@ package expert;
 import carte.Carte;
 import exception.ParserManquantException;
 import joueur.Joueur;
+import partie.Partie;
 
 public abstract class Expert {
 	/*
@@ -23,11 +24,11 @@ public abstract class Expert {
 		this.suivant = suivant;
 	}
 	//on doit vérifier que c'est le joueur courant dans tous les tests
-	public void traiter(Carte carte, Joueur joueur) throws Exception{
+	public void traiter(Partie partie, Carte carte, Joueur joueur) throws Exception{
 		if(saitExaminer(carte))
-			examiner(carte, joueur);
+			examiner(partie, carte, joueur);
 		else if(aUnSuivant())
-			getSuivant().traiter(carte, joueur);
+			getSuivant().traiter(partie, carte, joueur);
 		else
 			throw new ParserManquantException();
 	}
@@ -40,7 +41,7 @@ public abstract class Expert {
 		return suivant != null;
 	}
 	
-	public abstract boolean examiner(Carte carte, Joueur joueur) throws Exception;
+	public abstract boolean examiner(Partie partie, Carte carte, Joueur joueur) throws Exception;
 	
 	public abstract boolean saitExaminer(Carte carte);
 	

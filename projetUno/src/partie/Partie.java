@@ -5,19 +5,22 @@ import java.util.Scanner;
 
 import carte.Carte;
 import carte.Carte.Couleur;
+import exception.FichierException;
 import exception.PartieException;
+import exception.PiocheException;
 import joueur.Joueur;
 import pioche.Pioche;
 import carte.CarteChiffre;
 import tas.Tas;
+import util.Fichier;
 
 public class Partie {
-	private ArrayList<Joueur> joueurs;
+	private ArrayList<Joueur> joueurs = new ArrayList<Joueur>();
 	private Tas tas = new Tas();
-	private static Pioche pioche = new Pioche();
-	private static Joueur joueurCourant;
-	private static Couleur couleurCourante;
-	private static int valeurCourante;
+	private Pioche pioche = new Pioche();
+	private Joueur joueurCourant;
+	private Couleur couleurCourante;
+	private int valeurCourante;
 	private int sens = 0;
 	
 	
@@ -25,8 +28,35 @@ public class Partie {
 	public Partie(ArrayList<Joueur> joueurs) throws PartieException {
 		if (joueurs == null || joueurs.size() < 2)
 			throw new PartieException("Le nombre de joueurs est invalide");
-		this.joueurs = joueurs;
-		Partie.joueurCourant = joueurs.get(0);
+		this.joueurs.addAll(joueurs);
+		this.joueurCourant = joueurs.get(0);
+	}
+	
+	/* 2 joueurs */
+	public Partie(Joueur joueur1, Joueur joueur2) throws PartieException {
+		if (joueur1 == null || joueur2 == null)
+			throw new PartieException("Au moins un des noms est null");
+		this.addJoueur(joueur1);
+		this.addJoueur(joueur2);
+	}
+	
+	/* 3 joueurs */
+	public Partie(Joueur joueur1, Joueur joueur2, Joueur joueur3) throws PartieException {
+		if (joueur1 == null || joueur2 == null || joueur3 == null)
+			throw new PartieException("Au moins un des noms est null");
+		this.addJoueur(joueur1);
+		this.addJoueur(joueur2);
+		this.addJoueur(joueur3);
+	}
+	
+	/* 4 joueurs */
+	public Partie(Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4) throws PartieException {
+		if (joueur1 == null || joueur2 == null || joueur3 == null || joueur4 == null)
+			throw new PartieException("Au moins un des noms est null");
+		this.addJoueur(joueur1);
+		this.addJoueur(joueur2);
+		this.addJoueur(joueur3);
+		this.addJoueur(joueur4);
 	}
 	
 	
@@ -47,16 +77,16 @@ public class Partie {
 	public Tas getTas() {
 		return tas;
 	}
-	public static Pioche getPioche() {
+	public Pioche getPioche() {
 		return pioche;
 	}
-	public static Joueur getJoueurCourant() {
+	public Joueur getJoueurCourant() {
 		return joueurCourant;
 	}
-	public static Couleur getCouleurCourante() {
+	public Couleur getCouleurCourante() {
 		return couleurCourante;
 	}
-	public static int getValeurCourante() {
+	public int getValeurCourante() {
 		return valeurCourante;
 	}
 	public int getSens() {
@@ -88,10 +118,10 @@ public class Partie {
 		this.pioche = pioche;
 	}
 	public void setJoueurCourant(Joueur joueurCourant) {
-		Partie.joueurCourant = joueurCourant;
+		this.joueurCourant = joueurCourant;
 	}
 	public void setCouleurCourante(Couleur couleurCourante) {
-		Partie.couleurCourante = couleurCourante;
+		this.couleurCourante = couleurCourante;
 	}
 	public void setSens(int sens) {
 		this.sens = sens;
@@ -125,17 +155,56 @@ public class Partie {
 			throw new IllegalArgumentException("convertStringToCouleur la couleur est invalide"); // peut etre changer le type de l'exception?
     }
 	
+	public void initPartie(String nomFichier, int nbCarteParJoueur) {
+		try {
+			Fichier.lire(nomFichier, getPioche());
+		} catch (FichierException e) {
+			e.getMessage();
+		}
+		try {
+			initJoueurs(nbCarteParJoueur);
+		} catch (PartieException e) {
+			e.getMessage();
+		}
+		initTas();
+	}
+	
+	public void initJoueurs(int nbCarteParJoueur) throws PartieException {
+		if (nbCarteParJoueur > (pioche.getNbCartes() * getNbJoueurs()))
+			throw new PartieException("Nombre de cartes insuffisant dans la pioche pour commencer la partie");
+		
+		// pour chaque carte on va parcourir tous les joueurs et leur donner 1 carte de la pioche
+		for (int j = 0; j < nbCarteParJoueur; j++) {
+			// pour la j-ieme carte on va parcourir tous les joueurs
+			for (int i = 0 ; i < getNbJoueurs(); i++) {
+				try {
+					getJoueurAt(i).ajouterListeDeCarte(pioche.piocher(1));
+				} catch (PiocheException e) {
+					e.getMessage();
+				}
+			}
+		}
+	}
+	
+	public void initTas() {
+		try {
+			tas.addListeDeCarte(pioche.piocher(1));
+		} catch (PiocheException e) {
+			e.getMessage();
+		}
+	}
+	
 	public Joueur getJoueurSuivant() {
 		if (sens == 0) {
 			if (joueurCourant == joueurs.get(joueurs.size()-1)) {
 				return joueurs.get(0);
 			}
-			return joueurs.get((joueurs.indexOf(Partie.joueurCourant) + 1));
+			return joueurs.get((joueurs.indexOf(this.joueurCourant) + 1));
 		} else {
 			if (joueurCourant == joueurs.get(0)) {
 				return joueurs.get(joueurs.size()-1);
 			}
-			return joueurs.get((joueurs.indexOf(Partie.joueurCourant) - 1));
+			return joueurs.get((joueurs.indexOf(this.joueurCourant) - 1));
 		}
 	}
 	
@@ -177,7 +246,7 @@ public class Partie {
 		if (joueurCourant == joueurs.get(joueurs.size()-2)) {
 			setJoueurCourant(joueurs.get(0));
 		}
-		setJoueurCourant(joueurs.get((joueurs.indexOf(Partie.joueurCourant) +2 )));
+		setJoueurCourant(joueurs.get((joueurs.indexOf(this.joueurCourant) +2 )));
 	}
 	
 	public void finirLeTour() {

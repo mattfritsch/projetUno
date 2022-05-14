@@ -9,10 +9,10 @@ public class ParserCarteJoker extends Parser{
 	}
 	
 	@Override
-	public void parser(String ligne) throws Exception{
+	public void parser(String ligne, Pioche pioche) throws Exception{
 		String tab[] = ligne.split(";");
 		CarteJoker carteJoker = new CarteJoker();
-		//Pioche.pioche.add(carteJoker);
+		pioche.addCarte(carteJoker);
 		
 		//System.out.println(Pioche.pioche);
 	}
