@@ -76,5 +76,17 @@ public class Main {
 		return s + "\t\t]";
 	}
 	
+	/* Methode metier*/
+	
+	public boolean possedeCarte(Carte carte) {
+		boolean trouve = false;
+		int i = 0;
+		while (trouve == false || i < getNbCarte()) {
+			Carte carteEnMain = getMain().get(i);
+			if (carteEnMain.equals(carte))
+				trouve = true;
+		}
+		return trouve;
+	}
 	
 }

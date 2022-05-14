@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.*;
 
+import exception.CarteException;
 import exception.JoueurException;
 import exception.PartieException;
 import joueur.Joueur;
@@ -34,7 +35,7 @@ class UnoTest {
 			}
 			
 			partie.initPartie("../jeux_test/JeuTestCarteSimple.csv", 3);
-			partie.garderNCarteDansLaPioche(5);
+			partie.garderLesNPremieresCarteDeLaPioche(5);
 		}
 		
 		@Test
@@ -44,7 +45,7 @@ class UnoTest {
 				fail("Le joueur courant n'est pas Alice");
 			
 			// Vérifier	que	Alice	possède	bien	3	cartes
-			if (alice.getNbCartes() != 3)
+			if (alice.getNbCarte() != 3)
 				fail("Alice ne possede pas 3 cartes");
 			
 			// Alice	joue	le	« 2	Vert »
@@ -55,7 +56,7 @@ class UnoTest {
 			}
 			
 			// Vérifier	que	Alice	possède	bien	2	cartes
-			if (alice.getNbCartes() != 2)
+			if (alice.getNbCarte() != 2)
 				fail("Alice ne possede pas 2 cartes");
 			
 			// Vérifier	que	les	cartes	d’Alice	sont	le	« 6	jaune »	et	le	« 1	rouge »
@@ -80,6 +81,52 @@ class UnoTest {
 			if (partie.getJoueurCourant() != bob)
 				fail("Le joueur courant n'est pas bob");
 			System.out.println("[OK] joueUneCarteDeLaBonneCouleur");
+		}
+		
+		@Test
+		void joueUneDeCouleurDifferenteMaisDeMemeValeur() {
+			
+			// Alice	joue	le	« 2	Vert »
+			try {
+				alice.jouerUneCarte(partie, alice.getMaMain().getCarte(0));
+			} catch (JoueurException e) {
+				fail("Alice ne peut pas jouer le 2 Vert");
+			}
+			
+			// Alice	finit	le	tour
+			partie.finirLeTour();
+			
+			// DEBUT DU TEST
+			
+			if (bob.getNbCarte() != 3)
+				fail("Bob ne possede pas 3 cartes");
+			
+			try {
+				bob.jouerUneCarte(partie, bob.getMaMain().getCarte(0));
+			} catch (JoueurException e) {
+				fail("Bob ne peut pas jouer le 2 Vert");
+			}
+			
+			if (bob.getNbCarte() != 2)
+				fail("Bob ne possede pas 2 cartes");
+			
+			CarteChiffre quatreJaune = (CarteChiffre) bob.getMaMain().getCarte(0);
+			CarteChiffre neufRouge = (CarteChiffre) bob.getMaMain().getCarte(1);
+			if (quatreJaune.getValeur() != 4 || quatreJaune.getCouleur() != Couleur.JAUNE || neufRouge.getValeur() != 9 || neufRouge.getCouleur() != Couleur.ROUGE)
+				fail("Bob ne possede pas le	« 4	jaune »	et	le	« 9	rouge »");
+			
+			CarteChiffre deuxBleu = (CarteChiffre) partie.getTas().getTop();
+			if (deuxBleu.getValeur() != 2 || deuxBleu.getCouleur() != Couleur.BLEU)
+				fail("La carte au sommet du tas n'est pas le 2 BLEU");
+			
+			if (partie.getTas().getNbCartes() != 3)
+				fail("Le nombre de cartes du tas n'est pas egal a 3");
+			
+			partie.finirLeTour();
+			
+			if (partie.getJoueurCourant() != charles)
+				fail("Le joueur courant n'est pas charles");
+			System.out.println("[OK] joueUneDeCouleurDifferenteMaisDeMemeValeur");
 		}
 	}
 	

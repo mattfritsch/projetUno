@@ -53,7 +53,7 @@ public class Joueur {
 		return maMain;
 	}
 
-	public int getNbCartes() {
+	public int getNbCarte() {
 		return maMain.getMain().size();
 	}
 	

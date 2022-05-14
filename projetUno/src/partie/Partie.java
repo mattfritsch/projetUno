@@ -194,7 +194,7 @@ public class Partie {
 		}
 	}
 	
-	public void garderNCarteDansLaPioche(int n) {
+	public void garderLesNPremieresCarteDeLaPioche(int n) {
 		for (int i = getPioche().getNbCartes()-1 ; i > n ; i--) {
 			getPioche().removeCarte(i);
 		}
