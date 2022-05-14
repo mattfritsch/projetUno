@@ -12,9 +12,9 @@ public class ParserCarteJoker extends Parser{
 	public void parser(String ligne) throws Exception{
 		String tab[] = ligne.split(";");
 		CarteJoker carteJoker = new CarteJoker();
-		Pioche.pioche.add(carteJoker);
+		//Pioche.pioche.add(carteJoker);
 		
-		System.out.println(Pioche.pioche);
+		//System.out.println(Pioche.pioche);
 	}
 	
 	@Override

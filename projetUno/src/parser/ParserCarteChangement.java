@@ -15,9 +15,9 @@ public class ParserCarteChangement extends Parser{
 		String tab[] = ligne.split(";");
 		Couleur couleur = partie.Partie.convertStringToCouleur(tab[1]);
 		CarteChangement carteChangement = new CarteChangement(couleur);
-		Pioche.pioche.add(carteChangement);
+		//Pioche.pioche.add(carteChangement);
 		
-		System.out.println(Pioche.pioche);
+		//System.out.println(Pioche.pioche);
 	}
 	
 	@Override

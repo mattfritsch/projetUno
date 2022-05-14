@@ -16,8 +16,6 @@ import tas.Tas;
 
 public class TestPartie {
 	public static void main(String[] args) {
-		Pioche pioche = new Pioche();
-		Tas tas = new Tas();
 		
 		Joueur aurelien = new Joueur("Aurelien");
 		Joueur nathan = new Joueur("Nathan");
@@ -54,7 +52,7 @@ public class TestPartie {
 		//partie.ajouterCarteAuJoueurCourant(carte);
 		
 		System.out.println(joueurs);
-		System.out.println("\n------------------------------------------\n");
+		System.out.println("------------------------------------------");
 		
 		carte2.appliquerEffet(partie);
 		partie.finirLeTour();

@@ -16,8 +16,9 @@ public class ParserCarteSimple extends Parser{
 		Couleur couleur = partie.Partie.convertStringToCouleur(tab[1]);
 		CarteChiffre carte = new CarteChiffre(numCarte, couleur);
 		
-		Pioche.pioche.add(carte);
-		System.out.println(Pioche.pioche);		
+		//Pioche.pioche.add(carte);
+		
+		//System.out.println(Pioche.pioche);		
 	}
 	
 	@Override

@@ -15,9 +15,9 @@ public class ParserCartePasser extends Parser {
 		
 		Couleur couleur = partie.Partie.convertStringToCouleur(tab[1]);
 		CartePasser cartePasser = new CartePasser(couleur);
-		Pioche.pioche.add(cartePasser);
+		//Pioche.pioche.add(cartePasser);
 		
-		System.out.println(Pioche.pioche);
+		//System.out.println(Pioche.pioche);
 		
 	}
 	

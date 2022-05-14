@@ -14,14 +14,14 @@ import tas.Tas;
 public class Partie {
 	private ArrayList<Joueur> joueurs;
 	private Tas tas = new Tas();
-	private Pioche pioche = new Pioche();
+	private static Pioche pioche = new Pioche();
 	private static Joueur joueurCourant;
 	private static Couleur couleurCourante;
 	private static int valeurCourante;
 	private int sens = 0;
 	
 	
-	/* Constrcuteurs */
+	/* Constructeurs */
 	public Partie(ArrayList<Joueur> joueurs) throws PartieException {
 		if (joueurs == null || joueurs.size() < 2)
 			throw new PartieException("Le nombre de joueurs est invalide");
@@ -47,7 +47,7 @@ public class Partie {
 	public Tas getTas() {
 		return tas;
 	}
-	public Pioche getPioche() {
+	public static Pioche getPioche() {
 		return pioche;
 	}
 	public static Joueur getJoueurCourant() {

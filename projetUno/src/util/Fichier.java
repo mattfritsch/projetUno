@@ -8,9 +8,23 @@ import java.io.IOException;
 import exception.FichierException;
 import exception.ParserManquantException;
 import parser.Parser;
+import parser.ParserCarteChangement;
+import parser.ParserCarteJoker;
+import parser.ParserCartePasser;
+import parser.ParserCartePlusDeux;
+import parser.ParserCartePlusQuatre;
+import parser.ParserCarteSimple;
 
 public class Fichier {
-	public static void lire (String nomFichier, Parser parser) throws FichierException {
+	public static void lire (String nomFichier) throws FichierException {
+		
+		Parser sixiemeParser = new ParserCarteJoker(null);
+		Parser cinquiemeParser = new ParserCartePlusQuatre(sixiemeParser);
+		Parser quatriemeParser = new ParserCartePlusDeux(cinquiemeParser);
+		Parser troisiemeParser = new ParserCarteChangement(quatriemeParser);
+		Parser deuxiemeParser = new ParserCartePasser(troisiemeParser);
+		Parser parser = new ParserCarteSimple(deuxiemeParser);
+		
 		if(nomFichier == null) {
 			throw new FichierException("Le nom du fichier ne peut pas être null");
 		}

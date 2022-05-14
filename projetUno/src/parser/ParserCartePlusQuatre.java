@@ -13,8 +13,9 @@ public class ParserCartePlusQuatre extends Parser{
 	public void parser(String ligne) throws Exception{
 		String tab[] = ligne.split(";");
 		CartePlusQuatre cartePlusQuatre = new CartePlusQuatre();
-		Pioche.pioche.add(cartePlusQuatre);
-		System.out.println(Pioche.pioche);
+		//Pioche.pioche.add(cartePlusQuatre);
+		
+		//System.out.println(Pioche.pioche);
 		
 	}
 	
