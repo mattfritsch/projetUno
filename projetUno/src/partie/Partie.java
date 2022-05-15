@@ -19,6 +19,7 @@ public class Partie {
 	private Tas tas = new Tas();
 	private Pioche pioche = new Pioche();
 	private Joueur joueurCourant;
+	private Joueur vientDeJouer;
 	private Couleur couleurCourante;
 	private int valeurCourante;
 	private int sens = 0;
@@ -86,6 +87,9 @@ public class Partie {
 	public Joueur getJoueurCourant() {
 		return joueurCourant;
 	}
+	public Joueur getVientDeJouer() {
+		return vientDeJouer;
+	}
 	public Couleur getCouleurCourante() {
 		return couleurCourante;
 	}
@@ -119,6 +123,9 @@ public class Partie {
 	}
 	public void setJoueurCourant(Joueur joueurCourant) {
 		this.joueurCourant = joueurCourant;
+	}
+	public void setVientDeJouer(Joueur vientDeJouer) {
+		this.vientDeJouer = vientDeJouer;
 	}
 	public void setCouleurCourante(Couleur couleurCourante) {
 		this.couleurCourante = couleurCourante;

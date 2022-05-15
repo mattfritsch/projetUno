@@ -215,6 +215,35 @@ class UnoTest {
 		}
 		
 		@Test
+		void jouePuisPioche() {
+			//Alice joue le "2 vert" -> coup est légal
+			//Alice pioche
+			try {
+				alice.jouerUneCarte(partie, alice.getMaMain().getCarte(0));
+				if(partie.getJoueurCourant() == partie.getVientDeJouer()) //en attendant de changer piocher
+					alice.ajouterListeDeCarte(partie.getPioche().piocher(1));
+			} catch (PiocheException e) {
+				fail("Le joueur ne pas piocher");
+			} catch (JoueurException e) {
+				if(alice.getNbCarte() != 2) {
+					fail("Alice ne possède pas 2 cartes");
+				}
+			}
+			
+			CarteChiffre sixJaune;
+			sixJaune = (CarteChiffre) partie.getPioche().getTop();
+			try {
+				if(!partie.getPioche().getBottom().equals(sixJaune)) {
+					fail("La carte de la pioche n'est pas le 6 jaune");
+				}
+			} catch (PiocheException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("[OK] jouePuisPioche");
+		}
+		
+		@Test
 		void punitionCoupIllegalJoueurCourant() {
 			if (partie.getJoueurCourant() != alice)
 				fail("Alice n'est pas le joueur courant");
@@ -252,6 +281,9 @@ class UnoTest {
 				System.out.println("[OK] punitionCoupIllegalJoueurCourant");
 			}
 		}
+		//@Test
+		
+		 
 	}
 	
 }

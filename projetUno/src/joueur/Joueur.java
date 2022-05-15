@@ -130,5 +130,6 @@ public class Joueur {
 			}
 			maMain.removeCarte(carte);
 		}
+		partie.setVientDeJouer(partie.getJoueurCourant());
 	}
 }

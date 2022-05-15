@@ -6,6 +6,7 @@ import java.util.Objects;
 import carte.Carte;
 import carte.CarteChangement;
 import exception.PiocheException;
+import partie.Partie;
 
 public class Pioche {
 
@@ -46,14 +47,22 @@ public class Pioche {
 			throw new PiocheException("Pioche vide");
 		}
 	}
+	
+	public Carte getTop() {
+		if (getNbCartes() > 0) {
+			return pioche.get(getNbCartes()-1);
+		} else {
+			return null;
+		}
+	}
 
 	public ArrayList<Carte> piocher(int nbCartes) throws PiocheException{
 		ArrayList<Carte> cartesPiochees = new ArrayList<Carte>();
 		if (nbCartes<=getNbCartes()){
-			for (int i=0; i<nbCartes; i++) {
-				cartesPiochees.add(getBottom());
-				this.removeCarte(getBottom());
-			}
+				for (int i=0; i<nbCartes; i++) {
+					cartesPiochees.add(getBottom());
+					this.removeCarte(getBottom());
+				}
 		}
 		else {
 			throw new PiocheException("Nombre de cartes insuffisant dans la pioche");
