@@ -220,7 +220,7 @@ class UnoTest {
 			//Alice pioche
 			try {
 				alice.jouerUneCarte(partie, alice.getMaMain().getCarte(0));
-				if(partie.getJoueurCourant() == partie.getVientDeJouer()) //en attendant de changer piocher
+				if(partie.getJoueurCourant() != partie.getVientDeJouer()) //en attendant de changer piocher
 					alice.ajouterListeDeCarte(partie.getPioche().piocher(1));
 			} catch (PiocheException e) {
 				fail("Le joueur ne pas piocher");
@@ -231,15 +231,15 @@ class UnoTest {
 			}
 			
 			CarteChiffre sixJaune;
-			sixJaune = (CarteChiffre) partie.getPioche().getTop();
 			try {
+				sixJaune = (CarteChiffre) partie.getPioche().getBottom();
 				if(!partie.getPioche().getBottom().equals(sixJaune)) {
 					fail("La carte de la pioche n'est pas le 6 jaune");
 				}
-			} catch (PiocheException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} catch (PiocheException e1) {
+				fail("La carte de la pioche n'est pas le 6 jaune");
 			}
+			
 			System.out.println("[OK] jouePuisPioche");
 		}
 		
@@ -281,9 +281,20 @@ class UnoTest {
 				System.out.println("[OK] punitionCoupIllegalJoueurCourant");
 			}
 		}
-		//@Test
+		/*@Test
+		void punitionBobPasJoueurCourant() {
+			if(!partie.getJoueurCourant().equals(alice)) {
+				fail("Le joueur courant n'est pas alice");
+			}
+				try {
+					if(partie.getJoueurCourant().equals(bob))
+					bob.ajouterListeDeCarte(partie.getPioche().piocher(1));
+				} catch (PiocheException e) {
+					fail("Le joueur ne peut pas piocher");
+				}
+			}
+		}*/
 		
-		 
 	}
-	
-}
+	}
+

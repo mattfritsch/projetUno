@@ -59,10 +59,12 @@ public class Pioche {
 	public ArrayList<Carte> piocher(int nbCartes) throws PiocheException{
 		ArrayList<Carte> cartesPiochees = new ArrayList<Carte>();
 		if (nbCartes<=getNbCartes()){
+			 {
 				for (int i=0; i<nbCartes; i++) {
 					cartesPiochees.add(getBottom());
 					this.removeCarte(getBottom());
 				}
+			}
 		}
 		else {
 			throw new PiocheException("Nombre de cartes insuffisant dans la pioche");
