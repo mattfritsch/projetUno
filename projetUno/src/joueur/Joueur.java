@@ -12,6 +12,7 @@ public class Joueur {
 	private String nom;
 	private Main maMain = new Main();
 	private boolean aJouer = false;
+	private boolean aDitUno = false;
 	
 	
 	/* Constructeurs */
@@ -60,6 +61,9 @@ public class Joueur {
 	public boolean getAJouer() {
 		return aJouer;
 	}
+	public boolean getADitUno() {
+		return aDitUno;
+	}
 	
 	
 	/* Setters */
@@ -76,6 +80,9 @@ public class Joueur {
 	}
 	public void setAJouer(boolean aJouer) {
 		this.aJouer = aJouer;
+	}
+	public void setADitUno(boolean aDitUno) {
+		this.aDitUno = aDitUno;
 	}
 	
 	@Override
@@ -131,5 +138,11 @@ public class Joueur {
 			maMain.removeCarte(carte);
 		}
 		partie.setVientDeJouer(partie.getJoueurCourant());
+	}
+	public boolean ditUno(Partie partie, Joueur joueur) throws JoueurException {
+		if(partie.getJoueurCourant().equals(joueur)) {
+			throw new JoueurException("Le joueur n'a pas jouer");
+		}
+		return joueur.aDitUno = true;
 	}
 }
