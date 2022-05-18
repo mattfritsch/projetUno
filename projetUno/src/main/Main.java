@@ -85,6 +85,7 @@ public class Main {
 			Carte carteEnMain = getMain().get(i);
 			if (carteEnMain.equals(carte))
 				trouve = true;
+			i++;
 		}
 		return trouve;
 	}

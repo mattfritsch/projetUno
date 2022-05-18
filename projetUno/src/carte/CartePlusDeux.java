@@ -31,11 +31,11 @@ public class CartePlusDeux extends CarteEvenement{
 	public void appliquerEffet(Partie laPartie) {
 		//+2
 		Pioche pioche = laPartie.getPioche();
-		try {
-			laPartie.ajouterListeDeCarteAuJoueurCourant(pioche.piocher(2));
+		/*try {
+			laPartie.ajouterListeDeCarteAuJoueurCourant(pioche.piocher(laPartie,2));
 		} catch (PiocheException e) {
 			e.getMessage();
-		}
+		}*/
 		laPartie.passerLeTourDuJoueurSuivant();
 	}
 	

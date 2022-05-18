@@ -19,6 +19,7 @@ public class Partie {
 	private Tas tas = new Tas();
 	private Pioche pioche = new Pioche();
 	private Joueur joueurCourant;
+	private Joueur joueurSuivant;
 	private Joueur vientDeJouer;
 	private Couleur couleurCourante;
 	private int valeurCourante;
@@ -31,6 +32,7 @@ public class Partie {
 			throw new PartieException("Le nombre de joueurs est invalide");
 		this.joueurs.addAll(joueurs);
 		this.joueurCourant = joueurs.get(0);
+		calculerJoueurSuivant(0);
 	}
 	
 	/* 2 joueurs */
@@ -40,6 +42,7 @@ public class Partie {
 		this.addJoueur(joueur1);
 		this.addJoueur(joueur2);
 		this.joueurCourant = joueurs.get(0);
+		calculerJoueurSuivant(0);
 	}
 	
 	/* 3 joueurs */
@@ -50,6 +53,7 @@ public class Partie {
 		this.addJoueur(joueur2);
 		this.addJoueur(joueur3);
 		this.joueurCourant = joueurs.get(0);
+		calculerJoueurSuivant(0);
 	}
 	
 	/* 4 joueurs */
@@ -61,6 +65,7 @@ public class Partie {
 		this.addJoueur(joueur3);
 		this.addJoueur(joueur4);
 		this.joueurCourant = joueurs.get(0);
+		calculerJoueurSuivant(0);
 	}
 	
 	
@@ -86,6 +91,9 @@ public class Partie {
 	}
 	public Joueur getJoueurCourant() {
 		return joueurCourant;
+	}
+	public Joueur getJoueurSuivant() {
+		return joueurSuivant;
 	}
 	public Joueur getVientDeJouer() {
 		return vientDeJouer;
@@ -135,6 +143,9 @@ public class Partie {
 	}
 	public void setSens(int sens) {
 		this.sens = sens;
+	}
+	public void setJoueurSuivant(Joueur joueurSuivant) {
+		this.joueurSuivant = joueurSuivant;
 	}
 	
 	
@@ -188,7 +199,7 @@ public class Partie {
 			// pour la j-ieme carte on va parcourir tous les joueurs
 			for (int i = 0 ; i < getNbJoueurs(); i++) {
 				try {
-					getJoueurAt(i).ajouterListeDeCarte(pioche.piocher(1));
+					getJoueurAt(i).ajouterListeDeCarte(pioche.piocher(this,null,1));
 				} catch (PiocheException e) {
 					e.getMessage();
 				}
@@ -198,10 +209,11 @@ public class Partie {
 	
 	private void initTas() {
 		try {
-			tas.addListeDeCarte(pioche.piocher(1));
+			tas.addListeDeCarte(pioche.piocher(this,null,1));
 		} catch (PiocheException e) {
 			e.getMessage();
 		}
+		
 		CarteChiffre talon = (CarteChiffre) tas.getTop();
 		setCouleurCourante(talon.getCouleur());
 		setValeurCourante(talon.getValeur());
@@ -213,18 +225,41 @@ public class Partie {
 		}
 	}
 	
-	public Joueur getJoueurSuivant() {
-		if (sens == 0) {
-			if (joueurCourant == joueurs.get(joueurs.size()-1)) {
-				return joueurs.get(0);
+	public void calculerJoueurSuivant(int passerLeTour) {
+		if (passerLeTour == 0) {
+			if (getSens() == 0) {//sens horaire
+				if (joueurCourant == joueurs.get(joueurs.size()-1)) { // dernier de la liste donc on retourne le premier joueur de la liste
+					setJoueurSuivant(joueurs.get(0));
+				} else {// cas general
+					setJoueurSuivant(joueurs.get((joueurs.indexOf(this.joueurCourant) + 1)));
+				}
+			} else {// sens anti horaire
+				if (joueurCourant == joueurs.get(0)) {// premier de la liste liste donc on retourne le dernier joueur de la liste
+					setJoueurSuivant(joueurs.get(joueurs.size()-1));
+				} else {
+					setJoueurSuivant(joueurs.get((joueurs.indexOf(this.joueurCourant) - 1)));
+				}
 			}
-			return joueurs.get((joueurs.indexOf(this.joueurCourant) + 1));
-		} else {
-			if (joueurCourant == joueurs.get(0)) {
-				return joueurs.get(joueurs.size()-1);
+		} else {// on passe le tour d'un joueur
+			if (getSens() == 0) {//sens horaire
+				if (joueurCourant == joueurs.get(joueurs.size()-1)) {// dernier de la liste donc on retourne le deuxieme joueur de la liste
+					setJoueurSuivant(joueurs.get(1));
+				} else if (joueurCourant == joueurs.get(joueurs.size()-2)) {// avant dernier de la liste donc on retourne le premier joueur de la liste
+					setJoueurSuivant(joueurs.get(0));
+				} else { // cas general
+					setJoueurSuivant(joueurs.get((joueurs.indexOf(this.joueurCourant) + 2)));
+				}
+			} else {// sens anti horaire
+				if (joueurCourant == joueurs.get(0)) {// premier de la liste liste donc on retourne l'avant dernier joueur de la liste
+					setJoueurSuivant(joueurs.get(joueurs.size()-2));
+				} else if (joueurCourant == joueurs.get(1)) {// deuxieme de la liste liste donc on retourne le dernier joueur de la liste
+					setJoueurSuivant(joueurs.get(joueurs.size()-1));
+				} else {// cas general
+					setJoueurSuivant(joueurs.get((joueurs.indexOf(this.joueurCourant) - 2)));
+				}
 			}
-			return joueurs.get((joueurs.indexOf(this.joueurCourant) - 1));
 		}
+		
 	}
 	
 
@@ -259,20 +294,15 @@ public class Partie {
 	}
 	
 	public void passerLeTourDuJoueurSuivant() {
-		if (joueurCourant == joueurs.get(joueurs.size()-1)) {
-			setJoueurCourant(joueurs.get(1));
-		}
-		if (joueurCourant == joueurs.get(joueurs.size()-2)) {
-			setJoueurCourant(joueurs.get(0));
-		}
-		setJoueurCourant(joueurs.get((joueurs.indexOf(this.joueurCourant) +2 )));
-		this.joueurCourant.setAJouer(false);
+		calculerJoueurSuivant(1);
 	}
 	
 	public void finirLeTour() throws PartieException{
-		if (this.joueurCourant.getAJouer() == false)
+		if (getJoueurCourant().getAJouer() == false)
 			throw new PartieException("Le joueur courant n'a pas jouer");
+		if (getJoueurCourant().getNbCarte() == 1 && getJoueurCourant().getADitUno() == false)
+			throw new PartieException("Le joueur courant n'a pas dit UNO alors qu'il a jouer son avant derniere carte");
 		setJoueurCourant(getJoueurSuivant());
-		this.joueurCourant.setAJouer(false);
+		getJoueurCourant().setAJouer(false);
 	}
 }

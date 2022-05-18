@@ -20,7 +20,7 @@ public class ExpertCarteChangement extends Expert{
 			if(c.getCouleur() == partie.getCouleurCourante()) {
 				partie.setCouleurCourante(c.getCouleur());
 				partie.setValeurCourante(-1);
-				return partie.getTas().addCarte(partie, carte);
+				return partie.getTas().addCarte(carte);
 			}
 		}
 		else {

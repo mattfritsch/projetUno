@@ -1,9 +1,21 @@
 package joueur;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.util.ArrayList;
 import carte.Carte;
+import exception.ExpertException;
 import exception.JoueurException;
+import exception.PartieException;
+import exception.PiocheException;
 import main.Main;
+import parser.Parser;
+import parser.ParserCarteChangement;
+import parser.ParserCarteJoker;
+import parser.ParserCartePasser;
+import parser.ParserCartePlusDeux;
+import parser.ParserCartePlusQuatre;
+import parser.ParserCarteSimple;
 import partie.Partie;
 import expert.*;
 
@@ -114,35 +126,54 @@ public class Joueur {
 		return maMain.removeListeDeCarte(cartes);
 	}
 	
+	public void punir(Partie partie, int nbCarte) {
+		try {
+			ajouterListeDeCarte(partie.getPioche().piocher(partie,null,nbCarte));
+		} catch (PiocheException e1) {
+			fail("Impossible d'ajouter les cartes a "+ this.getNom());
+		}
+		if (partie.getJoueurCourant() == this) {
+			try {
+				partie.finirLeTour();
+			} catch (PartieException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	public void jouerUneCarte(Partie partie, Carte carte) throws JoueurException {
 		if (this.aJouer == true)
 			throw new JoueurException("Le joueur a deja jouer");
 		
-		Expert expert = new ExpertCarteSimple(null);
+		Expert sixiemeExpert = new ExpertCarteJoker(null);
+		Expert cinquiemeExpert = new ExpertCartePlusQuatre(sixiemeExpert);
+		Expert quatriemeExpert = new ExpertCartePlusDeux(cinquiemeExpert);
+		Expert troisiemeExpert = new ExpertCarteChangement(quatriemeExpert);
+		Expert deuxiemeExpert = new ExpertCartePasser(troisiemeExpert);
+		Expert expert = new ExpertCarteSimple(deuxiemeExpert);
 		
 		//on test si la carte est bien dans la main
-		int size = maMain.getNbCarte();
-		boolean isInMain =false;
-		for (int i=0; i<size; i++) {
-			if (maMain.getCarte(i)==carte) isInMain = true;
-		}
-		if (isInMain == false) {
+		if (this.getMaMain().possedeCarte(carte) == false) {
 			throw new JoueurException("La carte n'est pas dans la main");
 		} else {
 			try {
-				expert.traiter(partie, carte, this);
 				this.setAJouer(true);
-			} catch (Exception e) {
+				expert.traiter(partie, carte, this);
+			} catch (ExpertException e) {
+				throw new JoueurException(e.getMessage());
+			} catch (Exception e1) {
 				System.err.println("Aucun expert n'existe pour la carte "+carte);
 			}
-			maMain.removeCarte(carte);
+			this.removeCarte(carte);
 		}
-		partie.setVientDeJouer(partie.getJoueurCourant());
+		partie.setVientDeJouer(this);
 	}
-	public boolean ditUno(Partie partie, Joueur joueur) throws JoueurException {
-		if(partie.getJoueurCourant().equals(joueur)) {
-			throw new JoueurException("Le joueur n'a pas jouer");
+	public void ditUno(Partie partie, Joueur joueur) throws JoueurException {
+		if(partie.getJoueurCourant().equals(joueur) && joueur.getNbCarte() == 1 && joueur.getAJouer() == true) {
+			joueur.setADitUno(true);
 		}
-		return joueur.aDitUno = true;
+		else {
+			throw new JoueurException("Le joueur ne peut pas dire UNO");
+		}
 	}
 }

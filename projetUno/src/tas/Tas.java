@@ -25,7 +25,7 @@ public class Tas {
 
 	}
 
-	public boolean addCarte(Partie partie, Carte carte) {
+	public boolean addCarte(Carte carte) {
 		return tas.add(carte);
 	}
 	
@@ -64,7 +64,7 @@ public class Tas {
 			pioche.addCarte(carte);
 			this.removeCarte(carte); 
 		}
-		this.addCarte(partie, derniereCarte);
+		this.addCarte(derniereCarte);
 		return pioche;
 	}
 	

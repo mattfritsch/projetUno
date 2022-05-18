@@ -15,11 +15,11 @@ public class CartePlusQuatre extends CarteJoker {
 	public void appliquerEffet(Partie laPartie) {
 		// +4
 		Pioche pioche = laPartie.getPioche();
-		try {
-			laPartie.ajouterListeDeCarteAuJoueurCourant(pioche.piocher(4));
+		/*try {
+			laPartie.ajouterListeDeCarteAuJoueurCourant(pioche.piocher(laPartie,4));
 		} catch(PiocheException e) {
 			e.getMessage();
-		}
+		}*/
 		changerCouleurCourante(laPartie);
 		laPartie.passerLeTourDuJoueurSuivant();
 	}

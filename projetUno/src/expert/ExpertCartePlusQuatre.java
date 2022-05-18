@@ -15,7 +15,7 @@ public class ExpertCartePlusQuatre extends Expert{
 	@Override
 	public boolean examiner(Partie partie, Carte carte, Joueur joueur) throws Exception {
 		if(joueur == partie.getJoueurCourant()) {
-			return partie.getTas().addCarte(partie, carte);
+			return partie.getTas().addCarte(carte);
 		}
 		else {
 			throw new ExpertException("examiner : ExpertCartePlusQuatre");
