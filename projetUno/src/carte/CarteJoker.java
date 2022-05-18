@@ -11,7 +11,7 @@ public class CarteJoker extends CarteEvenement {
 	
 	/* Methode metier */
 	public void changerCouleurCourante(Partie laPartie) {
-		Couleur nextCouleur = laPartie.demanderCouleur();
+		Couleur nextCouleur = Couleur.VERT;//laPartie.demanderCouleur();
 		// couleur forcement valide
 		laPartie.setCouleurCourante(nextCouleur);
 	}

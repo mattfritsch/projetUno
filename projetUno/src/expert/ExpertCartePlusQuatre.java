@@ -13,8 +13,12 @@ public class ExpertCartePlusQuatre extends Expert{
 	}
 
 	@Override
-	public boolean examiner(Partie partie, Carte carte, Joueur joueur) throws Exception {
+	public boolean examiner(Partie partie, Carte carte, Joueur joueur) throws ExpertException {
+		CartePlusQuatre c = (CartePlusQuatre) carte;
+		
 		if(joueur == partie.getJoueurCourant()) {
+			partie.setValeurCourante(-1);
+			c.appliquerEffet(partie);
 			return partie.getTas().addCarte(carte);
 		}
 		else {

@@ -176,4 +176,18 @@ public class Joueur {
 			throw new JoueurException("Le joueur ne peut pas dire UNO");
 		}
 	}
+	
+	public void encaisserCumul(Partie partie) {
+		if (!this.getMaMain().possedeTypeDeCarte(partie.getTas().getTop())) {
+			this.setAJouer(true);
+			partie.setVientDeJouer(this);
+			punir(partie,partie.getCumulCompteur());
+			try {
+				partie.finirLeTour();
+			} catch (PartieException e) {
+				e.getMessage();
+			}
+		}
+		
+	}
 }

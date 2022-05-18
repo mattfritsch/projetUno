@@ -1,6 +1,8 @@
 package expert;
 
 import carte.Carte;
+import carte.CarteJoker;
+import exception.ExpertException;
 import joueur.Joueur;
 import partie.Partie;
 
@@ -11,11 +13,17 @@ public class ExpertCarteJoker extends Expert{
 	}
 
 	@Override
-	public boolean examiner(Partie partie, Carte carte, Joueur joueur) throws Exception {
+	public boolean examiner(Partie partie, Carte carte, Joueur joueur) throws ExpertException {
+		CarteJoker c = (CarteJoker) carte;
+		
 		if(joueur == partie.getJoueurCourant()) {
+			partie.setValeurCourante(-1);
+			c.appliquerEffet(partie);
 			return partie.getTas().addCarte(carte);
 		}
-		return false;
+		else {
+			throw new ExpertException("examiner : ExpertCarteJoker");
+		}
 	}
 
 	@Override

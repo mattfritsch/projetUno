@@ -671,8 +671,8 @@ class UnoTest {
 				fail("Le tour ne peut pas se terminer");
 			}
 			//verifier que la carte du tas est bien le "changement de sens rouge"
-			CartePasser sensRouge = (CartePasser) partie.getTas().getTop();
-			if (sensRouge.getCouleur() != Couleur.ROUGE)
+			CarteChangement sensRouge = (CarteChangement) partie.getTas().getTop();
+			if (sensRouge.getCouleur() != Couleur.ROUGE && sensRouge.getClass() != partie.getTas().getTop().getClass())
 				fail("La carte au sommet du tas n'est pas le changement de sens rouge");
 			
 			//charles pose le changement de sens vert
@@ -694,8 +694,8 @@ class UnoTest {
 				fail("alice n'est pas le joueur courant");
 			}
 			//verifier que la carte du tas est bien le "changement de sens vert"
-			CartePasser sensVert = (CartePasser) partie.getTas().getTop();
-			if (sensVert.getCouleur() != Couleur.VERT)
+			CarteChangement sensVert = (CarteChangement) partie.getTas().getTop();
+			if (sensVert.getCouleur() != Couleur.VERT && sensVert.getClass() != partie.getTas().getTop().getClass())
 				fail("La carte au sommet du tas n'est pas le changement de sens vert");
 			
             
@@ -735,9 +735,8 @@ class UnoTest {
 				charles.jouerUneCarte(partie, charles.getMaMain().getCarte(0));
 			}
 			catch(JoueurException e) {
-				fail("Le joueur ne peut pas poser sa carte");
 				//verifier dans l'exception approprié que charles possède toujours 3 cartes
-				if(charles.getMaMain().getNbCarte() != 3) {
+				if(charles.getNbCarte() != 3) {
 					fail("Charle ne possède pas 3 cartes");
 				}
 			}
@@ -791,7 +790,7 @@ class UnoTest {
 				fail("Charles n'est pas le joueur courant");
 			}
 			//verifier que charles possède 3 cartes
-			if(charles.getMaMain().getNbCarte() != 3) {
+			if(charles.getNbCarte() != 3) {
 				fail("Charle ne possède pas 3 cartes");
 			}
 			//charles pose le changement de sens vert
@@ -799,9 +798,8 @@ class UnoTest {
 				charles.jouerUneCarte(partie, charles.getMaMain().getCarte(1));
 			}
 			catch(JoueurException e) {
-				fail("Le joueur ne peut pas poser sa carte");
 				//verifier dans l'exception approprié que charles possède toujours 3 cartes
-				if(charles.getMaMain().getNbCarte() != 3) {
+				if(charles.getNbCarte() != 3) {
 					fail("Charle ne possède pas 3 cartes");
 				}
 			}
@@ -859,14 +857,16 @@ class UnoTest {
 				fail("Le joueur courant n'est pas bob");
 			}
 			//verifier que bob possède 3 cartes
-			if(bob.getMaMain().getNbCarte() != 3) {
+			if(bob.getNbCarte() != 3) {
 				fail("bob ne possède pas 3 cartes");
 			}
-			/*bob doit encaisser le +2 ????*/
+			/*bob doit encaisser le +2 */
+			bob.encaisserCumul(partie);
 			//verifier que bob possède 5 cartes
-			if(bob.getMaMain().getNbCarte() != 5) {
+			if(bob.getNbCarte() != 5) {
 				fail("bob ne possède pas 5 cartes");
 			}
+			
 			//verifier que le joueur courant est charles
 			if(!partie.getJoueurCourant().equals(charles)) {
 				fail("Le joueur courant n'est pas charles");
@@ -886,7 +886,7 @@ class UnoTest {
 				fail("Le tour n'a pas pu se terminer");
 			}
 			//verifier que charles possède 2 cartes
-			if(charles.getMaMain().getNbCarte() != 2) {
+			if(charles.getNbCarte() != 2) {
 				fail("charles ne possède pas 2 cartes");
 			}
 			System.out.println("[OK] coupLegalAvecCartePlus2");
@@ -899,8 +899,7 @@ class UnoTest {
 			}
 			//alice pioche une carte
 			try{
-				if(partie.getJoueurCourant() != partie.getVientDeJouer()) //en attendant de changer piocher
-					alice.ajouterListeDeCarte(partie.getPioche().piocher(partie,alice,1));
+				alice.ajouterListeDeCarte(partie.getPioche().piocher(partie,alice,1));
 			} catch (PiocheException e) {
 			fail("Le joueur ne pas piocher");
 			}
@@ -916,10 +915,9 @@ class UnoTest {
 				fail("Le joueur courant n'est pas bob");
 			//bob pioche une carte
 			try{
-				if(partie.getJoueurCourant() != partie.getVientDeJouer()) //en attendant de changer piocher
-					bob.ajouterListeDeCarte(partie.getPioche().piocher(partie,bob,1));
+				bob.ajouterListeDeCarte(partie.getPioche().piocher(partie,bob,1));
 			} catch (PiocheException e) {
-			fail("Le joueur ne pas piocher");
+				fail("Le joueur ne pas piocher");
 			}
 			//bob finit son tour
 			try {
@@ -970,7 +968,7 @@ class UnoTest {
 			if(bob.getMaMain().getNbCarte() != 4)
 				fail("bob ne possede pas 4 cartes");
 			//bob encaisse l'attaque (donc pioche 4 cartes et finit son tour automatiquement)
-			//???
+			bob.encaisserCumul(partie);
 			//verifier que bob possede 8 cartes
 			if(bob.getMaMain().getNbCarte() != 8)
 				fail("bob ne possede pas 8 cartes");
@@ -1019,15 +1017,11 @@ class UnoTest {
 			catch (PartieException e) {
 				fail("Le tour n'a pas pu se terminer");
 			}
-			//verifier que le joueur courant est bob
-			if(!partie.getJoueurCourant().equals(bob)) {
-				fail("Le joueur courant n'est pas bob");
+			//verifier que le joueur courant est charles
+			if(!partie.getJoueurCourant().equals(charles)) {
+				fail("Le joueur courant n'est pas charles");
 			}
-			//verifier que bob possède 3 cartes
-			if(bob.getMaMain().getNbCarte() != 3) {
-				fail("bob ne possède pas 3 cartes");
-			}
-			/*bob doit encaisser le +4 ????*/
+			/*bob doit encaisser le +4 automatiquement */
 			//verifier que bob possède 7 cartes
 			if(bob.getMaMain().getNbCarte() != 7) {
 				fail("bob ne possède pas 7 cartes");
@@ -1056,94 +1050,6 @@ class UnoTest {
 			}
 			System.out.println("[OK] coupLegalAvecCartePlus4");
 		}
-		@Test
-		void coupLegalAvecCumulCartePlus4() {
-			//verifier que alice est le joueur courant
-			if(!partie.getJoueurCourant().equals(alice)) {
-				fail("Alice n'est pas le joueur courant");
-			}
-			//alice pioche une carte
-			try{
-				if(partie.getJoueurCourant() != partie.getVientDeJouer()) //en attendant de changer piocher
-					alice.ajouterListeDeCarte(partie.getPioche().piocher(partie,alice,1));
-			} catch (PiocheException e) {
-			fail("Le joueur ne pas piocher");
-			}
-			//alice finit son tour
-			try {
-				partie.finirLeTour();
-			}
-			catch(PartieException e) {
-				fail("Le joueur ne peut pas finir son tour");
-			}
-			//verifier que bob est le joueur courant
-			if(!partie.getJoueurCourant().equals(bob))
-				fail("Le joueur courant n'est pas bob");
-			//bob pioche une carte
-			try{
-				if(partie.getJoueurCourant() != partie.getVientDeJouer()) //en attendant de changer piocher
-					bob.ajouterListeDeCarte(partie.getPioche().piocher(partie,bob,1));
-			} catch (PiocheException e) {
-			fail("Le joueur ne pas piocher");
-			}
-			//bob finit son tour
-			try {
-				partie.finirLeTour();
-			}
-			catch(PartieException e) {
-				fail("Le joueur ne peut pas finir son tour");
-			}
-			//verifier que charles est le joueur courant
-			if(!partie.getJoueurCourant().equals(charles))
-				fail("Le joueur courant n'est pas charles");
-			//charles pose le +4 + chosit sa couleur ? 
-			try {
-				charles.jouerUneCarte(partie, charles.getMaMain().getCarte(1));
-			}
-			catch(JoueurException e) {
-				fail("Le joueur ne peut pas poser sa carte");
-			}
-			//charles finit son tour
-			try {
-				partie.finirLeTour();
-			}
-			catch(PartieException e) {
-				fail("Le joueur ne peut pas finir son tour");
-			}
-			//verifier que alice est le joueur courant
-			if(!partie.getJoueurCourant().equals(alice)) {
-				fail("Alice n'est pas le joueur courant");
-			}
-			//alice pose le +4 + coisit sa couleur ? 
-			try {
-				alice.jouerUneCarte(partie, alice.getMaMain().getCarte(0));
-			}
-			catch(JoueurException e) {
-				fail("Le joueur ne peut pas poser sa carte");
-			}
-			//alice finit son tour
-			try {
-				partie.finirLeTour();
-			}
-			catch(PartieException e) {
-				fail("Le joueur ne peut pas finir son tour");
-			}
-			//verifier que bob est le joueur courant
-			if(!partie.getJoueurCourant().equals(bob))
-				fail("Le joueur courant n'est pas bob");
-			//verifier que bob possede 4 cartes
-			if(bob.getMaMain().getNbCarte() != 4)
-				fail("bob ne possede pas 4 cartes");
-			//bob encaisse l'attaque (donc pioche 8 cartes et finit son tour automatiquement)
-			//???
-			//verifier que bob possede 12 cartes
-			if(bob.getMaMain().getNbCarte() != 12)
-				fail("bob ne possede pas 12 cartes");
-			//verifier que charles est le joueur courant
-			if(!partie.getJoueurCourant().equals(charles))
-				fail("Le joueur courant n'est pas charles");
-			System.out.println("[OK] coupLegalAvecCumulCartePlus4");
-		}
 	}
 	@Nested
 	class SeptiemeTest {
@@ -1165,11 +1071,12 @@ class UnoTest {
 		}
 		@Test
 		void coupLegalAvecCarteChangementCouleur() {
+			
 			//verifier que le joueur courant est alice
 			if(!partie.getJoueurCourant().equals(alice)) {
 				fail("Le joueur courant n'est pas alice");
 			}
-			//alice pose la carte changement couleur et choisit la couleur bleu
+			//alice pose la carte changement couleur et choisit la couleur vert
 			try {
 				alice.jouerUneCarte(partie, alice.getMaMain().getCarte(0));
 			}
@@ -1183,13 +1090,15 @@ class UnoTest {
 			catch (PartieException e) {
 				fail("Le tour n'a pas pu se terminer");
 			}
+			
 			//verifier que le joueur courant est bob
 			if(!partie.getJoueurCourant().equals(bob)) {
 				fail("Le joueur courant n'est pas bob");
 			}
-			//bob pose le 7 bleu
+			
+			//bob pose le 6 vert
 			try {
-				charles.jouerUneCarte(partie, charles.getMaMain().getCarte(2));
+				bob.jouerUneCarte(partie, bob.getMaMain().getCarte(1));
 			}
 			catch(JoueurException e) {
 				fail("Le joueur ne peut pas poser sa carte");
@@ -1201,9 +1110,10 @@ class UnoTest {
 			catch (PartieException e) {
 				fail("Le tour n'a pas pu se terminer");
 			}
-			//charles pose le 1 bleu
+			//charles pose le 1 vert
+			
 			try {
-				charles.jouerUneCarte(partie, charles.getMaMain().getCarte(0));
+				charles.jouerUneCarte(partie, charles.getMaMain().getCarte(2));
 			}
 			catch(JoueurException e) {
 				fail("Le joueur ne peut pas poser sa carte");

@@ -61,17 +61,20 @@ public class Pioche {
 		ArrayList<Carte> cartesPiochees = new ArrayList<Carte>();
 		if ((partie.getJoueurCourant() == joueur) || (joueur == null)) {
 			if (nbCartes<=getNbCartes()){
-				 {
-					for (int i=0; i<nbCartes; i++) {
-						cartesPiochees.add(getBottom());
-						this.removeCarte(getBottom());
-					}
+				for (int i=0; i<nbCartes; i++) {
+					cartesPiochees.add(getBottom());
+					this.removeCarte(getBottom());
 				}
+				if (partie.getJoueurCourant() == joueur) {
+					joueur.setAJouer(true);
+					partie.setVientDeJouer(joueur);
+				}
+				partie.calculerJoueurSuivant(0);
 			}
 			else {
 				throw new PiocheException("Nombre de cartes insuffisant dans la pioche");
 			}
-				
+			
 			return cartesPiochees;
 		}
 		if(partie.getJoueurCourant() == partie.getVientDeJouer()) {

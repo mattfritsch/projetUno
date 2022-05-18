@@ -81,9 +81,22 @@ public class Main {
 	public boolean possedeCarte(Carte carte) {
 		boolean trouve = false;
 		int i = 0;
-		while (trouve == false || i < getNbCarte()) {
+		while (trouve == false && i < getNbCarte()) {
 			Carte carteEnMain = getMain().get(i);
 			if (carteEnMain.equals(carte))
+				trouve = true;
+			i++;
+		}
+		return trouve;
+	}
+	
+	public boolean possedeTypeDeCarte(Carte carte) {
+		boolean trouve = false;
+		int i = 0;
+		while (trouve == false && i < getNbCarte()) {
+			Carte carteEnMain = getMain().get(i);
+			
+			if (carteEnMain.getClass() == carte.getClass())
 				trouve = true;
 			i++;
 		}
