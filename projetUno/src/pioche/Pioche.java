@@ -9,38 +9,78 @@ import exception.PiocheException;
 import joueur.Joueur;
 import partie.Partie;
 
+/**
+ * 
+ * @author Aurelien FAGIOLI - Matthieu FRITSCH - Nathan GUSATTO
+ */
+
 public class Pioche {
 
 	private ArrayList<Carte> pioche = new ArrayList<Carte>();
 
+	/**
+	 * Creation d'une pioche
+	 */
 	public Pioche() {
 		
 	}
 
+	/**
+	 * Retourne la liste de carte
+	 * @return ArrayList
+	 */
 	public ArrayList<Carte> getPioche() {
 		return pioche;
 	}
 	
+	/**
+	 * Redefini la liste de carte
+	 * @param pioche ArrayList
+	 */
 	public void setPioche(ArrayList<Carte> pioche) {
 		this.pioche = pioche;
 	}
 	
+	/**
+	 * Ajoute une carte dans la pioche
+	 * @param carte Carte
+	 * @return boolean
+	 */
 	public boolean addCarte(Carte carte) {
 		return pioche.add(carte);
 	}
 
+	/**
+	 * Retire une carte dans la pioche
+	 * @param carte Carte
+	 * @return boolean
+	 */
 	public boolean removeCarte(Carte carte) {
 		return pioche.remove(carte);
 	}
 	
+	/**
+	 * Retire une carte a l'index de la pioche
+	 * @param index int
+	 * @return Carte
+	 */
 	public Carte removeCarte(int index) {
 		return pioche.remove(index);
 	}
 
+	/**
+	 * Retourne le nombre de carte dans la pioche
+	 * @return int
+	 */
 	public int getNbCartes() {
 		return pioche.size();
 	}
 
+	/**
+	 * Retourne la prochaine carte qui va etre piocher
+	 * @return Carte 
+	 * @throws PiocheException PiocheException
+	 */
 	public Carte getBottom() throws PiocheException {
 		if (pioche.size() > 0) {
 			return pioche.get(0);
@@ -48,15 +88,15 @@ public class Pioche {
 			throw new PiocheException("Pioche vide");
 		}
 	}
-	
-	public Carte getTop() {
-		if (getNbCartes() > 0) {
-			return pioche.get(getNbCartes()-1);
-		} else {
-			return null;
-		}
-	}
 
+	/**
+	 * Methode pour piocher un nombre de carte dans une partie
+	 * @param partie Partie
+	 * @param joueur Joueur peut etre null 
+	 * @param nbCartes int
+	 * @return ArrayList 
+	 * @throws PiocheException PiocheException
+	 */
 	public ArrayList<Carte> piocher(Partie partie, Joueur joueur, int nbCartes) throws PiocheException{
 		ArrayList<Carte> cartesPiochees = new ArrayList<Carte>();
 		if ((partie.getJoueurCourant() == joueur) || (joueur == null)) {

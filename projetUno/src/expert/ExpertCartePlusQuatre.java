@@ -6,8 +6,16 @@ import exception.ExpertException;
 import joueur.Joueur;
 import partie.Partie;
 
-public class ExpertCartePlusQuatre extends Expert{
+/**
+ * 
+ * @author Aurelien FAGIOLI - Matthieu FRITSCH - Nathan GUSATTO
+ */
 
+public class ExpertCartePlusQuatre extends Expert{
+	/**
+	 * Creation d'un ExpertCartePlusQuatre
+	 * @param suivant Expert
+	 */
 	public ExpertCartePlusQuatre(Expert suivant) {
 		super(suivant);
 	}

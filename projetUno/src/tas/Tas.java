@@ -9,43 +9,61 @@ import exception.TasException;
 import partie.Partie;
 import pioche.Pioche;
 
-/*
- * Je sais pas si les primitives que tu as faites sont vraiment utile
- * -> addCarte, removeCarte, getSize, getTop... 
- * Car tu peux tout faire directement dans la fonction concern�e
- * A toi de voir, car �a peut allourdir le code m�me si �a peut peut-�tre facilit� sa compr�hension
- * M�me commentaire pour pioche
- * */
+/**
+ * 
+ * @author Aurelien FAGIOLI - Matthieu FRITSCH - Nathan GUSATTO
+ */
 
 public class Tas {
 
-	public ArrayList<Carte> tas = new ArrayList<Carte>();
+	private ArrayList<Carte> tas = new ArrayList<Carte>();
 
+	/**
+	 * Creation d'un tas
+	 */
 	public Tas() {
 
 	}
 
+	/**
+	 * Ajoute une carte dans un tas
+	 * @param carte Carte
+	 * @return boolean
+	 */
 	public boolean addCarte(Carte carte) {
 		return tas.add(carte);
 	}
 	
+	/**
+	 * Ajoute une liste de carte dans un tas
+	 * @param cartes ArrayList
+	 * @return boolean
+	 */
 	public boolean addListeDeCarte(ArrayList<Carte> cartes) {
 		return tas.addAll(cartes);
 	}
 
-	/*
-	 * Possiblement a ?
-	 * Changer par index ou par carte
-	 * */
-
+	/**
+	 * Retire une carte du tas
+	 * @param carte  Carte
+	 * @return boolean
+	 */
 	public boolean removeCarte(Carte carte) {
 		return tas.remove(carte);
 	}
 
+	/**
+	 * Retourne le nombre de cartes dans le tas
+	 * @return int
+	 */
 	public int getNbCartes() {
 		return tas.size();
 	}
 
+	/**
+	 * Retourne la carte qui est face montree dans le jeu
+	 * @return Carte
+	 */
 	public Carte getTop() {
 		if (getNbCartes() > 0) {
 			return tas.get(getNbCartes()-1);
@@ -54,6 +72,11 @@ public class Tas {
 		}
 	}
 
+	/**
+	 * Methode qui melange le tas
+	 * @param partie Partie
+	 * @return Pioche
+	 */
 	public Pioche melangerTas(Partie partie) {
 		Carte derniereCarte = getTop();
 		this.removeCarte(derniereCarte);

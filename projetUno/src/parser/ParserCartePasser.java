@@ -4,7 +4,17 @@ import carte.Carte.Couleur;
 import pioche.Pioche;
 import carte.CartePasser;
 
+/**
+ * 
+ * @author Aurelien FAGIOLI - Matthieu FRITSCH - Nathan GUSATTO
+ */
+
+
 public class ParserCartePasser extends Parser {
+	/**
+	 * Creation d'un parser ParserCartePasser
+	 * @param suivant Parser
+	 */
 	public ParserCartePasser(Parser suivant) {
 		super(suivant);
 	}

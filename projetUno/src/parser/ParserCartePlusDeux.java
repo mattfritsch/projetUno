@@ -5,7 +5,17 @@ import partie.Partie;
 import pioche.Pioche;
 import carte.Carte.Couleur;
 
+/**
+ * 
+ * @author Aurelien FAGIOLI - Matthieu FRITSCH - Nathan GUSATTO
+ */
+
+
 public class ParserCartePlusDeux extends Parser{
+	/**
+	 * Creation d'un parser ParserCartePlusDeux
+	 * @param suivant Parser
+	 */
 	public ParserCartePlusDeux(Parser suivant) {
 		super(suivant);
 	}

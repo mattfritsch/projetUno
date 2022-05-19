@@ -4,7 +4,17 @@ import carte.Carte.Couleur;
 import carte.CarteChiffre;
 import pioche.Pioche;
 
+/**
+ * 
+ * @author Aurelien FAGIOLI - Matthieu FRITSCH - Nathan GUSATTO
+ */
+
+
 public class ParserCarteSimple extends Parser{
+	/**
+	 * Creation d'un ParserCarteSimple
+	 * @param suivant Parser
+	 */
 	public ParserCarteSimple(Parser suivant) {
 		super(suivant);
 	}
@@ -16,9 +26,7 @@ public class ParserCarteSimple extends Parser{
 		Couleur couleur = partie.Partie.convertStringToCouleur(tab[1]);
 		CarteChiffre carte = new CarteChiffre(numCarte, couleur);
 		
-		pioche.addCarte(carte);
-		
-		//System.out.println(Pioche.pioche);		
+		pioche.addCarte(carte);		
 	}
 	
 	@Override

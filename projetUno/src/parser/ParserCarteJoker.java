@@ -3,7 +3,17 @@ package parser;
 import carte.CarteJoker;
 import pioche.Pioche;
 
+/**
+ * 
+ * @author Aurelien FAGIOLI - Matthieu FRITSCH - Nathan GUSATTO
+ */
+
+
 public class ParserCarteJoker extends Parser{
+	/**
+	 * Creation d'un parser ParserCarteJoker
+	 * @param suivant Parser
+	 */
 	public ParserCarteJoker(Parser suivant) {
 		super(suivant);
 	}

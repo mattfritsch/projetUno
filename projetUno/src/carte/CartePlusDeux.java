@@ -3,11 +3,22 @@ package carte;
 import exception.CarteException;
 import partie.Partie;
 
+/**
+ * 
+ * @author Aurelien FAGIOLI - Matthieu FRITSCH - Nathan GUSATTO
+ */
+
 public class CartePlusDeux extends CarteEvenement{
 	/* Champs */
 	private Couleur couleur;
 	
 	/* Constructeur */
+	
+	/**
+	 * Creation d'une CartePlusDeux
+	 * @param couleur Couleur
+	 * @throws CarteException CarteException
+	 */
 	public CartePlusDeux(Couleur couleur) throws CarteException {
 		super();
 		
@@ -19,6 +30,11 @@ public class CartePlusDeux extends CarteEvenement{
 	}
 	
 	/* Getters */
+	
+	/**
+	 * Retourne la couleur de la carte
+	 * @return Couleur
+	 */
 	public Couleur getCouleur() {
 		return couleur;
 	}

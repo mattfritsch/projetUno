@@ -1,15 +1,25 @@
 package carte;
 
 import java.util.Objects;
-
 import exception.CarteException;
 import partie.Partie;
+
+/**
+ * 
+ * @author Aurelien FAGIOLI - Matthieu FRITSCH - Nathan GUSATTO
+ */
 
 public class CarteChangement extends CarteEvenement {
 	/* Champs */
 	private Couleur couleur;
 	
 	/* Constructeur */
+	
+	/**
+	 * Creation d'une CarteChangement
+	 * @param couleur Couleur
+	 * @throws CarteException CarteException
+	 */
 	public CarteChangement(Couleur couleur) throws CarteException {
 		super();
 		
@@ -19,16 +29,29 @@ public class CarteChangement extends CarteEvenement {
 		
 		this.couleur = couleur;
 	}
+	
+	/* Getters */
+	
+	/**
+	 * Retourne la couleur de la carte
+	 * @return Couleur
+	 */
 	public Couleur getCouleur() {
 		return couleur;
 	}
 	
 	/* Methode metier */
+	
 	public void appliquerEffet(Partie laPartie) {
 		changementDeSens(laPartie);
 	}
 	
 	/* Inverser le sens de la partie*/
+	
+	/**
+	 * Methode qui inverse le sens d'une partie
+	 * @param laPartie Partie
+	 */
 	public void changementDeSens(Partie laPartie) {
 		if (laPartie.getSens() == 0)
 			laPartie.setSens(1);

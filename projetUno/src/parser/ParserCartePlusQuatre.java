@@ -3,8 +3,17 @@ package parser;
 import carte.CartePlusQuatre;
 import pioche.Pioche;
 
+/**
+ * 
+ * @author Aurelien FAGIOLI - Matthieu FRITSCH - Nathan GUSATTO
+ */
+
+
 public class ParserCartePlusQuatre extends Parser{
-	Parser suivant;
+	/**
+	 * Creation d'un parser ParserCartePlusQuatre
+	 * @param suivant Parser
+	 */
 	public ParserCartePlusQuatre(Parser suivant) {
 		super(suivant);
 	}
@@ -14,8 +23,6 @@ public class ParserCartePlusQuatre extends Parser{
 		String tab[] = ligne.split(";");
 		CartePlusQuatre cartePlusQuatre = new CartePlusQuatre();
 		pioche.addCarte(cartePlusQuatre);
-		
-		//System.out.println(Pioche.pioche);
 		
 	}
 	

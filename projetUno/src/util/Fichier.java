@@ -16,7 +16,18 @@ import parser.ParserCartePlusQuatre;
 import parser.ParserCarteSimple;
 import pioche.Pioche;
 
+/**
+ * 
+ * @author Aurelien FAGIOLI - Matthieu FRITSCH - Nathan GUSATTO
+ */
+
 public class Fichier {
+	/**
+	 * Methode qui lit un fichier et ajoute les cartes dans la pioche
+	 * @param nomFichier String
+	 * @param pioche Pioche
+	 * @throws FichierException FichierException
+	 */
 	public static void lire (String nomFichier, Pioche pioche) throws FichierException {
 		
 		Parser sixiemeParser = new ParserCarteJoker(null);

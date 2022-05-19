@@ -9,15 +9,13 @@ import exception.JoueurException;
 import exception.PartieException;
 import exception.PiocheException;
 import main.Main;
-import parser.Parser;
-import parser.ParserCarteChangement;
-import parser.ParserCarteJoker;
-import parser.ParserCartePasser;
-import parser.ParserCartePlusDeux;
-import parser.ParserCartePlusQuatre;
-import parser.ParserCarteSimple;
 import partie.Partie;
 import expert.*;
+
+/**
+ * 
+ * @author Aurelien FAGIOLI - Matthieu FRITSCH - Nathan GUSATTO
+ */
 
 public class Joueur {
 	/* Champs */
@@ -29,7 +27,12 @@ public class Joueur {
 	
 	/* Constructeurs */
 	
-	// Nom et main connu
+	/**
+	 * Creation d'un joueur avec le nom et sa main
+	 * @param nom String
+	 * @param maMain Main
+	 * @throws JoueurException JoueurException
+	 */
 	public Joueur(String nom, Main maMain) throws JoueurException {
 		super();
 		try {
@@ -45,54 +48,96 @@ public class Joueur {
 		}
 	}
 
-	// Nom connu
+	/**
+	 * Creation d'un joueur avec le nom
+	 * @param nom String
+	 */
 	public Joueur(String nom) {
 		super();
 		this.nom = nom;
 	}
 
-	// Par defaut
-	public Joueur() {
-		
-	}
-
 	
 	
 	/* Getters */
+	
+	/**
+	 * Retourne le nom du joueur
+	 * @return String
+	 */
 	public String getNom() {
 		return nom;
 	}
 
+	/**
+	 * Retourne la main du joueur
+	 * @return Main
+	 */
 	public Main getMaMain() {
 		return maMain;
 	}
 
+	/**
+	 * Retourne le nombre de carte de la main du joueur
+	 * @return int
+	 */
 	public int getNbCarte() {
 		return maMain.getMain().size();
 	}
+	
+	/**
+	 * Retourne si le joueur a jouer 
+	 * @return boolean
+	 */
 	public boolean getAJouer() {
 		return aJouer;
 	}
+	
+	/**
+	 * Retourne si le joueur a dit UNO
+	 * @return boolean
+	 */
 	public boolean getADitUno() {
 		return aDitUno;
 	}
 	
 	
 	/* Setters */
+	
+	/**
+	 * Redefini le nom du joueur
+	 * @param nom String
+	 * @throws JoueurException JoueurException
+	 */
 	private void setNom(String nom) throws JoueurException {
 		if (nom == null || nom.trim().equals(""))
 			throw new JoueurException("Le nom du joueur est invalide");
 		this.nom = nom;
 	}
 
+	/**
+	 * Redefini la main du joueur
+	 * @param maMain Main
+	 * @throws JoueurException JoueurException
+	 */
 	private void setMain(Main maMain) throws JoueurException {
 		if (maMain == null)
 			throw new JoueurException("La main est null");
 		this.maMain = maMain;
 	}
+	
+	/**
+	 * Redefini si le joueur a jouer
+	 * @param aJouer boolean
+	 */
 	public void setAJouer(boolean aJouer) {
 		this.aJouer = aJouer;
 	}
+	
+	/**
+	 * Redefini si le joueur a dit UNO
+	 * @param aDitUno boolean
+	 */
 	public void setADitUno(boolean aDitUno) {
 		this.aDitUno = aDitUno;
 	}
@@ -106,26 +151,57 @@ public class Joueur {
 	
 	
 	/* Methode metier */
+	
+	/**
+	 * Ajoute une carte dans la main du joueur
+	 * @param carte Carte
+	 * @return boolean
+	 */
 	public boolean ajouterCarte(Carte carte) {
 		return maMain.addCarte(carte);
 	}
 	
+	/**
+	 * Ajoute une liste de carte dans la main du joueur
+	 * @param cartes ArrayList
+	 * @return boolean
+	 */
 	public boolean ajouterListeDeCarte(ArrayList<Carte> cartes) {
 		return maMain.addListeDeCarte(cartes);
 	}
 	
+	/**
+	 * Retire une carte de la main du joueur
+	 * @param carte Carte
+	 * @return boolean
+	 */
 	public boolean removeCarte(Carte carte) {
 		return maMain.removeCarte(carte);
 	}
 	
+	/**
+	 * Retire la carte a l'index de la main du joueur
+	 * @param index int
+	 * @return Carte
+	 */
 	public Carte removeCarteAt(int index) {
 		return maMain.removeCarteAt(index);
 	}
 	
+	/**
+	 * Retire une liste de carte de la main du joueur
+	 * @param cartes ArrayList
+	 * @return boolean
+	 */
 	public boolean removeListeDeCarte(ArrayList<Carte> cartes) {
 		return maMain.removeListeDeCarte(cartes);
 	}
 	
+	/**
+	 * Methode pour punir un joueur et le faire piocher un nombre de carte
+	 * @param partie Partie
+	 * @param nbCarte int
+	 */
 	public void punir(Partie partie, int nbCarte) {
 		try {
 			ajouterListeDeCarte(partie.getPioche().piocher(partie,null,nbCarte));
@@ -141,6 +217,12 @@ public class Joueur {
 		}
 	}
 	
+	/**
+	 * Methode pour qu'un joueur joue une carte dans une partie
+	 * @param partie Partie
+	 * @param carte Carte
+	 * @throws JoueurException JoueurException
+	 */
 	public void jouerUneCarte(Partie partie, Carte carte) throws JoueurException {
 		if (this.aJouer == true)
 			throw new JoueurException("Le joueur a deja jouer");
@@ -168,6 +250,13 @@ public class Joueur {
 		}
 		partie.setVientDeJouer(this);
 	}
+	
+	/**
+	 * Methode qui permet a un joueur de dire UNO dans une partie
+	 * @param partie Partie
+	 * @param joueur Joueur
+	 * @throws JoueurException JoueurException
+	 */
 	public void ditUno(Partie partie, Joueur joueur) throws JoueurException {
 		if(partie.getJoueurCourant().equals(joueur) && joueur.getNbCarte() == 1 && joueur.getAJouer() == true) {
 			joueur.setADitUno(true);
@@ -177,6 +266,10 @@ public class Joueur {
 		}
 	}
 	
+	/**
+	 * Methode qui permet a un joueur d'encaisser le cumul de carte dans une partie
+	 * @param partie Partie
+	 */
 	public void encaisserCumul(Partie partie) {
 		if (!this.getMaMain().possedeTypeDeCarte(partie.getTas().getTop())) {
 			this.setAJouer(true);

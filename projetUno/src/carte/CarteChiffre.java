@@ -4,6 +4,11 @@ import java.util.Objects;
 
 import exception.CarteException;
 
+/**
+ * 
+ * @author Aurelien FAGIOLI - Matthieu FRITSCH - Nathan GUSATTO
+ */
+
 public class CarteChiffre extends Carte {
 	/* Champs */
 	private int valeur;
@@ -12,6 +17,13 @@ public class CarteChiffre extends Carte {
 	
 	
 	/* Constructeurs */
+	
+	/**
+	 * Creation d'une CarteChiffre
+	 * @param valeur int
+	 * @param couleur Couleur
+	 * @throws CarteException CarteException
+	 */
 	public CarteChiffre(int valeur, Couleur couleur) throws CarteException {
 		super();
 		
@@ -30,10 +42,19 @@ public class CarteChiffre extends Carte {
 	
 	
 	/* Getters */
+	
+	/**
+	 * Retourne la valeur de la carte
+	 * @return int
+	 */
 	public int getValeur() {
 		return valeur;
 	}
 	
+	/**
+	 * Retourne la couleur de la carte
+	 * @return Couleur
+	 */
 	public Couleur getCouleur() {
 		return couleur;
 	}

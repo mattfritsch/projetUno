@@ -4,8 +4,17 @@ import carte.Carte.Couleur;
 import carte.CarteChangement;
 import pioche.Pioche;
 
+/**
+ * 
+ * @author Aurelien FAGIOLI - Matthieu FRITSCH - Nathan GUSATTO
+ */
+
 public class ParserCarteChangement extends Parser{
 	
+	/**
+	 * Creation d'un parser ParserCarteChangement
+	 * @param suivant Parser
+	 */
 	public ParserCarteChangement(Parser suivant) {
 		super(suivant);
 	}
@@ -16,8 +25,6 @@ public class ParserCarteChangement extends Parser{
 		Couleur couleur = partie.Partie.convertStringToCouleur(tab[1]);
 		CarteChangement carteChangement = new CarteChangement(couleur);
 		pioche.addCarte(carteChangement);
-		
-		//System.out.println(Pioche.pioche);
 	}
 	
 	@Override

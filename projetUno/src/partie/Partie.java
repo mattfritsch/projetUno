@@ -14,6 +14,10 @@ import carte.CarteChiffre;
 import tas.Tas;
 import util.Fichier;
 
+/**
+ * 
+ * @author Aurelien FAGIOLI - Matthieu FRITSCH - Nathan GUSATTO
+ */
 public class Partie {
 	private ArrayList<Joueur> joueurs = new ArrayList<Joueur>();
 	private Tas tas = new Tas();
@@ -28,6 +32,12 @@ public class Partie {
 	
 	
 	/* Constructeurs */
+	
+	/**
+	 * Creation d'une partie avec une liste de joueurs
+	 * @param joueurs ArrayList
+	 * @throws PartieException PartieException
+	 */
 	public Partie(ArrayList<Joueur> joueurs) throws PartieException {
 		if (joueurs == null || joueurs.size() < 2)
 			throw new PartieException("Le nombre de joueurs est invalide");
@@ -36,7 +46,12 @@ public class Partie {
 		calculerJoueurSuivant(0);
 	}
 	
-	/* 2 joueurs */
+	/**
+	 * Creation d'une partie avec une deux joueurs
+	 * @param joueur1 Joueur
+	 * @param joueur2 Joueur
+	 * @throws PartieException PartieException
+	 */
 	public Partie(Joueur joueur1, Joueur joueur2) throws PartieException {
 		if (joueur1 == null || joueur2 == null)
 			throw new PartieException("Au moins un des noms est null");
@@ -46,7 +61,13 @@ public class Partie {
 		calculerJoueurSuivant(0);
 	}
 	
-	/* 3 joueurs */
+	/**
+	 * Creation d'une partie avec trois joueurs
+	 * @param joueur1 Joueur
+	 * @param joueur2 Joueur
+	 * @param joueur3 Joueur
+	 * @throws PartieException PartieException
+	 */
 	public Partie(Joueur joueur1, Joueur joueur2, Joueur joueur3) throws PartieException {
 		if (joueur1 == null || joueur2 == null || joueur3 == null)
 			throw new PartieException("Au moins un des noms est null");
@@ -57,7 +78,14 @@ public class Partie {
 		calculerJoueurSuivant(0);
 	}
 	
-	/* 4 joueurs */
+	/**
+	 * Creation d'une partie avec quatre joueurs
+	 * @param joueur1 Joueur
+	 * @param joueur2 Joueur
+	 * @param joueur3 Joueur
+	 * @param joueur4 Joueur
+	 * @throws PartieException PartieException
+	 */
 	public Partie(Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4) throws PartieException {
 		if (joueur1 == null || joueur2 == null || joueur3 == null || joueur4 == null)
 			throw new PartieException("Au moins un des noms est null");
@@ -72,42 +100,108 @@ public class Partie {
 	
 	
 	/* Getters */
+	/**
+	 * Retourne la liste de joueurs
+	 * @return ArrayList
+	 */
 	public ArrayList<Joueur> getJoueurs() {
 		return joueurs;
 	}
+	
+	/**
+	 * Retourne l'index du joueur dans la liste de joueurs
+	 * @param joueur Joueur 
+	 * @return int
+	 */
 	public int getIndexDuJoueur(Joueur joueur) {
 		return joueurs.indexOf(joueur);
 	}
+	
+	/**
+	 * Retourne le joueur a l'index de la liste de joueurs
+	 * @param index int
+	 * @return Joueur
+	 */
 	public Joueur getJoueurAt(int index) {
 		return joueurs.get(index);
 	}
+	
+	/**
+	 * Retourne le nombre de joueurs dans la partie
+	 * @return int
+	 */
 	public int getNbJoueurs() {
 		return joueurs.size();
 	}
+	
+	/**
+	 * Retourne le tas de la partie
+	 * @return Tas
+	 */
 	public Tas getTas() {
 		return tas;
 	}
+	
+	/**
+	 * Retourne la pioche de la partie
+	 * @return Pioche
+	 */
 	public Pioche getPioche() {
 		return pioche;
 	}
+	
+	/**
+	 * Retourne le joueur courant
+	 * @return Joueur
+	 */
 	public Joueur getJoueurCourant() {
 		return joueurCourant;
 	}
+	
+	/**
+	 * Retourne le joueur suivant
+	 * @return Joueur
+	 */
 	public Joueur getJoueurSuivant() {
 		return joueurSuivant;
 	}
+	
+	/**
+	 * Retourne le joueur qui vient de jouer
+	 * @return Joueur
+	 */
 	public Joueur getVientDeJouer() {
 		return vientDeJouer;
 	}
+	
+	/**
+	 * Retourne la couleur actuelle de la carte sur le tas
+	 * @return Couleur
+	 */
 	public Couleur getCouleurCourante() {
 		return couleurCourante;
 	}
+	
+	/**
+	 * Retourne la valeur actuelle de la carte sur le tas
+	 * @return int
+	 */
 	public int getValeurCourante() {
 		return valeurCourante;
 	}
+	
+	/**
+	 * Retourne le sens de la partie
+	 * @return int
+	 */
 	public int getSens() {
 		return sens;
 	}
+	
+	/**
+	 * Retourne le cumul de cartes de la partie
+	 * @return int
+	 */
 	public int getCumulCompteur() {
 		return cumulCompteur;
 	}
@@ -115,42 +209,94 @@ public class Partie {
 
 
 	/* Setters */
+	
+	/**
+	 * Ajoute un joueur dans la partie
+	 * @param joueur Joueur
+	 * @return boolean
+	 */
 	public boolean addJoueur(Joueur joueur) {
 		return joueurs.add(joueur);
 	}
+	
+	/**
+	 * Enleve un joueur de la partie
+	 * @param joueur Joueur
+	 * @return boolean
+	 */
 	private boolean removeJoueur(Joueur joueur) {
 		return joueurs.remove(joueur);
 	}
+	
+	/**
+	 * Enleve le joueur a l'index de la partie
+	 * @param index int
+	 * @return Joueur
+	 */
 	public Joueur removeJoueurAt(int index) {
 		return joueurs.remove(index);
 	}
+	
+	/**
+	 * Change la liste de joueurs par une autre liste de joueurs
+	 * @param joueurs ArrayList<Joueur>
+	 */
 	private void setJoueurs(ArrayList<Joueur> joueurs) {
 		this.joueurs = joueurs;
 	}
-	private void setTas(Tas tas) {
-		this.tas = tas;
-	}
-	private void setPioche(Pioche pioche) {
-		this.pioche = pioche;
-	}
+	
+	/**
+	 * Redefini le joueur courant de la partie
+	 * @param joueurCourant Joueur
+	 */
 	public void setJoueurCourant(Joueur joueurCourant) {
 		this.joueurCourant = joueurCourant;
 	}
+	
+	/**
+	 * Redefini le joueur qui vient de jouer 
+	 * @param vientDeJouer Joueur
+	 */
 	public void setVientDeJouer(Joueur vientDeJouer) {
 		this.vientDeJouer = vientDeJouer;
 	}
+	
+	/**
+	 * Redefini la couleur courante
+	 * @param couleurCourante Couleur
+	 */
 	public void setCouleurCourante(Couleur couleurCourante) {
 		this.couleurCourante = couleurCourante;
 	}
+	
+	/**
+	 * Redefini la valeur courante
+	 * @param valeurCourante int
+	 */
 	public void setValeurCourante(int valeurCourante) {
 		this.valeurCourante = valeurCourante;
 	}
+	
+	/**
+	 * Redefini le sens
+	 * @param sens int
+	 */
 	public void setSens(int sens) {
 		this.sens = sens;
 	}
+	
+	/**
+	 * Redefini le joueur suivant
+	 * @param joueurSuivant Joueur
+	 */
 	public void setJoueurSuivant(Joueur joueurSuivant) {
 		this.joueurSuivant = joueurSuivant;
 	}
+	
+	/**
+	 * Redefini le cumul
+	 * @param cumulCompteur int
+	 */
 	public void setCumulCompteur(int cumulCompteur) {
 		this.cumulCompteur = cumulCompteur;
 	}
@@ -169,7 +315,11 @@ public class Partie {
 	
 	/* Methode metier */
 	
-	/* Converti un String en Couleur */
+	/**
+	 * Converti un string en couleur
+	 * @param s String
+	 * @return Couleur
+	 */
 	public static Couleur convertStringToCouleur(String s) {
 		if (s.equalsIgnoreCase("Bleu"))
 			return Couleur.BLEU;
@@ -183,6 +333,11 @@ public class Partie {
 			throw new IllegalArgumentException("convertStringToCouleur la couleur est invalide"); // peut etre changer le type de l'exception?
     }
 	
+	/**
+	 * Initialise une partie
+	 * @param nomFichier String
+	 * @param nbCarteParJoueur int
+	 */
 	public void initPartie(String nomFichier, int nbCarteParJoueur) {
 		try {
 			Fichier.lire(nomFichier, getPioche());
@@ -197,6 +352,11 @@ public class Partie {
 		initTas();
 	}
 	
+	/**
+	 * Initalise les joueurs
+	 * @param nbCarteParJoueur int
+	 * @throws PartieException PartieException
+	 */
 	private void initJoueurs(int nbCarteParJoueur) throws PartieException {
 		if (nbCarteParJoueur > (pioche.getNbCartes() * getNbJoueurs()))
 			throw new PartieException("Nombre de cartes insuffisant dans la pioche pour commencer la partie");
@@ -214,6 +374,9 @@ public class Partie {
 		}
 	}
 	
+	/**
+	 * Initialise le tas
+	 */
 	private void initTas() {
 		try {
 			tas.addListeDeCarte(pioche.piocher(this,null,1));
@@ -226,43 +389,51 @@ public class Partie {
 		setValeurCourante(talon.getValeur());
 	}
 	
+	/**
+	 * Garde un nombre de carte dans la pioche
+	 * @param n int
+	 */
 	public void garderLesNPremieresCarteDeLaPioche(int n) {
 		for (int i = getPioche().getNbCartes()-1 ; i > n ; i--) {
 			getPioche().removeCarte(i);
 		}
 	}
 	
+	/**
+	 * Calcule et redefini le joueur suivant
+	 * @param passerLeTour int 
+	 */
 	public void calculerJoueurSuivant(int passerLeTour) {
 		if (passerLeTour == 0) {
 			if (getSens() == 0) {//sens horaire
 				if (joueurCourant == joueurs.get(joueurs.size()-1)) { // dernier de la liste donc on retourne le premier joueur de la liste
-					this.joueurSuivant = joueurs.get(0);
+					setJoueurSuivant(joueurs.get(0));
 				} else {// cas general
-					this.joueurSuivant = joueurs.get((joueurs.indexOf(this.joueurCourant) + 1));
+					setJoueurSuivant(joueurs.get((joueurs.indexOf(this.joueurCourant) + 1)));
 				}
 			} else {// sens anti horaire
 				if (joueurCourant == joueurs.get(0)) {// premier de la liste liste donc on retourne le dernier joueur de la liste
-					this.joueurSuivant = joueurs.get(joueurs.size()-1);
+					setJoueurSuivant(joueurs.get(joueurs.size()-1));
 				} else {
-					this.joueurSuivant = joueurs.get((joueurs.indexOf(this.joueurCourant) - 1));
+					setJoueurSuivant(joueurs.get((joueurs.indexOf(this.joueurCourant) - 1)));
 				}
 			}
 		} else {// on passe le tour d'un joueur
 			if (getSens() == 0) {//sens horaire
 				if (joueurCourant == joueurs.get(joueurs.size()-1)) {// dernier de la liste donc on retourne le deuxieme joueur de la liste
-					this.joueurSuivant = joueurs.get(1);
+					setJoueurSuivant(joueurs.get(1));
 				} else if (joueurCourant == joueurs.get(joueurs.size()-2)) {// avant dernier de la liste donc on retourne le premier joueur de la liste
-					this.joueurSuivant = joueurs.get(0);
+					setJoueurSuivant(joueurs.get(0));
 				} else { // cas general
-					this.joueurSuivant = joueurs.get((joueurs.indexOf(this.joueurCourant) + 2));
+					setJoueurSuivant(joueurs.get((joueurs.indexOf(this.joueurCourant) + 2)));
 				}
 			} else {// sens anti horaire
 				if (joueurCourant == joueurs.get(0)) {// premier de la liste liste donc on retourne l'avant dernier joueur de la liste
-					this.joueurSuivant = joueurs.get(joueurs.size()-2);
+					setJoueurSuivant(joueurs.get(joueurs.size()-2));
 				} else if (joueurCourant == joueurs.get(1)) {// deuxieme de la liste liste donc on retourne le dernier joueur de la liste
-					this.joueurSuivant =  joueurs.get(joueurs.size()-1);
+					setJoueurSuivant(joueurs.get(joueurs.size()-1));
 				} else {// cas general
-					this.joueurSuivant =  joueurs.get((joueurs.indexOf(this.joueurCourant) - 2));
+					setJoueurSuivant(joueurs.get((joueurs.indexOf(this.joueurCourant) - 2)));
 				}
 			}
 		}
@@ -271,7 +442,10 @@ public class Partie {
 	
 
 	
-	/* Retourne une couleur choisi par le joueur */
+	/**
+	 * Retourne une couleur choisi par le joueur
+	 * @return Couleur
+	 */
 	public Couleur demanderCouleur() {
 		Scanner sc= new Scanner(System.in);
 		System.out.println("Entrer une couleur parmi : Vert | Jaune | Bleu | Rouge");
@@ -280,30 +454,62 @@ public class Partie {
 		return convertStringToCouleur(couleur);
 	}
 	
+	/**
+	 * Ajoute une carte au joueur courant
+	 * @param carte Carte
+	 * @return boolean
+	 */
 	public boolean ajouterCarteAuJoueurCourant(Carte carte) {
 		return joueurCourant.ajouterCarte(carte);
 	}
 	
+	/**
+	 * Ajoute une liste de carte au joueur courant
+	 * @param cartes ArrayList
+	 * @return boolean
+	 */
 	public boolean ajouterListeDeCarteAuJoueurCourant(ArrayList<Carte> cartes) {
 		return joueurCourant.ajouterListeDeCarte(cartes);
 	}
 	
+	/**
+	 * Retire une carte au joueur courant
+	 * @param carte Carte
+	 * @return boolean
+	 */
 	public boolean removeCarteAuJoueurCourant(Carte carte) {
 		return joueurCourant.removeCarte(carte);
 	}
 	
+	/**
+	 * Retire la carte a d'index de la main du joueur courant
+	 * @param index int
+	 * @return Carte
+	 */
 	public Carte removeCarteAuJoueurCourantAt(int index) {
 		return joueurCourant.removeCarteAt(index);
 	}
 	
+	/**
+	 * Retire la liste de carte de la main du joueur courant
+	 * @param cartes ArrayList
+	 * @return boolean
+	 */
 	public boolean removeListeDeCarteAuJoueurCourant(ArrayList<Carte> cartes) {
 		return joueurCourant.removeListeDeCarte(cartes);
 	}
 	
+	/**
+	 * Passe le tour du joueur suivant
+	 */
 	public void passerLeTourDuJoueurSuivant() {
 		calculerJoueurSuivant(1);
 	}
 	
+	/**
+	 * Fini le tour du joueur courant
+	 * @throws PartieException PartieException
+	 */
 	public void finirLeTour() throws PartieException{
 		if (this.getJoueurCourant().getAJouer() == false) {
 			throw new PartieException("Le joueur courant n'a pas jouer");

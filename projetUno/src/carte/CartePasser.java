@@ -5,11 +5,22 @@ import java.util.Objects;
 import exception.CarteException;
 import partie.Partie;
 
+/**
+ * 
+ * @author Aurelien FAGIOLI - Matthieu FRITSCH - Nathan GUSATTO
+ */
+
 public class CartePasser extends CarteEvenement{
 	/* Champs */
 	private Couleur couleur;
 	
 	/* Constructeur */
+	
+	/**
+	 * Creation d'une CartePasser
+	 * @param couleur Couleur
+	 * @throws CarteException CarteException
+	 */
 	public CartePasser(Couleur couleur) throws CarteException {
 		super();
 		
@@ -21,6 +32,11 @@ public class CartePasser extends CarteEvenement{
 	}
 	
 	/* Getters */
+	
+	/**
+	 * Retourne la couleur de la carte
+	 * @return Couleur
+	 */
 	public Couleur getCouleur() {
 		return couleur;
 	}
