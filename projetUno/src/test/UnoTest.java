@@ -37,6 +37,7 @@ class UnoTest {
 			
 			partie.initPartie("../jeux_test/JeuTestCarteSimple.csv", 3);
 			partie.garderLesNPremieresCarteDeLaPioche(5);
+			System.out.println("\n--------------------- Premier Test ---------------------\n");
 		}
 		
 		@Test
@@ -121,11 +122,11 @@ class UnoTest {
 			
 			CarteChiffre quatreJaune = (CarteChiffre) bob.getMaMain().getCarte(0);
 			CarteChiffre neufRouge = (CarteChiffre) bob.getMaMain().getCarte(1);
-			if (quatreJaune.getValeur() != 4 || quatreJaune.getCouleur() != Couleur.JAUNE || neufRouge.getValeur() != 9 || neufRouge.getCouleur() != Couleur.ROUGE)
+			if (quatreJaune.getValeur() != 4 && quatreJaune.getCouleur() != Couleur.JAUNE || neufRouge.getValeur() != 9 && neufRouge.getCouleur() != Couleur.ROUGE)
 				fail("Bob ne possede pas le	« 4	jaune »	et	le	« 9	rouge »");
 			
 			CarteChiffre deuxBleu = (CarteChiffre) partie.getTas().getTop();
-			if (deuxBleu.getValeur() != 2 || deuxBleu.getCouleur() != Couleur.BLEU)
+			if (deuxBleu.getValeur() != 2 && deuxBleu.getCouleur() != Couleur.BLEU)
 				fail("La carte au sommet du tas n'est pas le 2 BLEU");
 			
 			if (partie.getTas().getNbCartes() != 3)
@@ -150,6 +151,12 @@ class UnoTest {
 			} catch (JoueurException e) {
 				if (alice.getNbCarte() != 3)
 					fail("Alice ne possede pas 3 cartes");
+				else {
+					//dont le 6 jaune
+					CarteChiffre sixJaune = (CarteChiffre) alice.getMaMain().getCarte(1);
+					if (!alice.getMaMain().possedeCarte(sixJaune))
+						fail("Alice n'a pas la carte 6 jaune");
+				}
 			}
 			System.out.println("[OK] joueUneCarteIllegale");
 		}
@@ -196,6 +203,12 @@ class UnoTest {
 			} catch (JoueurException e) {
 				if (charles.getNbCarte() != 2)
 					fail("Charles ne possede pas 2 cartes");
+				else {
+					//dont le 7 bleu
+					CarteChiffre septBleu = (CarteChiffre) charles.getMaMain().getCarte(1);
+					if (!charles.getMaMain().possedeCarte(septBleu))
+						fail("Charles n'a pas la carte 7 bleu");
+				}
 			}
 			
 			System.out.println("[OK] poseDeuxCartesLegalesDeSuite");
@@ -296,7 +309,7 @@ class UnoTest {
 				CarteChiffre quatreRouge = (CarteChiffre) bob.getMaMain().getCarte(4);
 				
 				if (bob.getNbCarte() != 5 || !bob.getMaMain().possedeCarte(sixJaune) || !bob.getMaMain().possedeCarte(quatreRouge)) {
-					System.out.println("salut");
+					fail("bob ne possede pas 5 carte dont le 6 jaune et le 4 rouge ");
 				}
 				
 				CarteChiffre deuxVert = null;
@@ -336,6 +349,7 @@ class UnoTest {
 			
 			partie.initPartie("../jeux_test/JeuTestCarteSimplePourTestUno.csv", 2);
 			partie.garderLesNPremieresCarteDeLaPioche(5);
+			System.out.println("\n--------------------- Deuixème Test ---------------------\n");
 		}
 		@Test
 		void ditUnoAuBonMoment() {
@@ -394,7 +408,7 @@ class UnoTest {
               //verifier que la derniere carte du tas est le 8 vert
                 CarteChiffre deuxVert = (CarteChiffre) partie.getTas().getTop();
                 if (deuxVert.getValeur() != 2 || deuxVert.getCouleur() != Couleur.VERT)
-                    fail("La carte au sommet du tas n'est pas le 0 VERT");
+                    fail("La carte au sommet du tas n'est pas le 2 VERT");
                 if(!partie.getJoueurCourant().equals(bob)){
                     fail("Le joueur courant n'est pas bob");
                 }
@@ -446,6 +460,8 @@ class UnoTest {
 			
 			partie.initPartie("../jeux_test/JeuTestCartePasser.csv", 3);
 			partie.garderLesNPremieresCarteDeLaPioche(5);
+			
+			System.out.println("\n--------------------- Troisième Test ---------------------\n");
 		}
 		@Test
 		void coupLegauxPasseTonTour() {
@@ -472,7 +488,7 @@ class UnoTest {
 				fail("Charles n'est pas le joueur courant");
 			//verifier que la carte du tas est bien le "passe ton tour rouge"
 			CartePasser passerRouge = (CartePasser) partie.getTas().getTop();
-			if (passerRouge.getCouleur() != Couleur.ROUGE)
+			if (passerRouge.getCouleur() != Couleur.ROUGE || partie.getValeurCourante() != -1)
 				fail("La carte au sommet du tas n'est pas le passe ton tour rouge");
 			
 			//charles pose le passe ton tour vert
@@ -649,6 +665,7 @@ class UnoTest {
 			
 			partie.initPartie("../jeux_test/JeuTestCarteChangementSens.csv", 3);
 			partie.garderLesNPremieresCarteDeLaPioche(5);
+			System.out.println("\n--------------------- Quatrième Test ---------------------\n");
 		}
 		@Test
 		void coupLegauxChangementSens() {
@@ -831,6 +848,7 @@ class UnoTest {
 			
 			partie.initPartie("../jeux_test/JeuTestCartePlus2.csv", 3);
 			partie.garderLesNPremieresCarteDeLaPioche(5);
+			System.out.println("\n--------------------- Cinquième Test ---------------------\n");
 		}
 		@Test
 		void coupLegalAvecCartePlus2() {
@@ -996,6 +1014,8 @@ class UnoTest {
 			
 			partie.initPartie("../jeux_test/JeuTestCartePlus4.csv", 3);
 			partie.garderLesNPremieresCarteDeLaPioche(10);
+			
+			System.out.println("\n--------------------- Sixième Test ---------------------\n");
 		}
 		@Test
 		void coupLegalAvecCartePlus4() {
@@ -1068,6 +1088,8 @@ class UnoTest {
 			
 			partie.initPartie("../jeux_test/JeuTestCarteChangementCouleur.csv", 3);
 			partie.garderLesNPremieresCarteDeLaPioche(5);
+			
+			System.out.println("\n--------------------- Septième Test ---------------------\n");
 		}
 		@Test
 		void coupLegalAvecCarteChangementCouleur() {
