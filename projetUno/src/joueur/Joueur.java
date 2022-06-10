@@ -202,9 +202,9 @@ public class Joueur {
 	 * @param partie Partie
 	 * @param nbCarte int
 	 */
-	public void punir(int nbCarte) {
+	public void punir(Partie partie, int nbCarte) {
 		try {
-			ajouterListeDeCarte(Partie.getPioche().piocher(null,nbCarte));
+			ajouterListeDeCarte(partie.getPioche().piocher(partie,null,nbCarte));
 		} catch (PiocheException e1) {
 			fail("Impossible d'ajouter les cartes a "+ this.getNom());
 		}
@@ -240,7 +240,7 @@ public class Joueur {
 		} else {
 			try {
 				this.setAJouer(true);
-				expert.traiter(carte, this);
+				expert.traiter(partie, carte, this);
 			} catch (ExpertException e) {
 				throw new JoueurException(e.getMessage());
 			} catch (Exception e1) {
@@ -248,7 +248,7 @@ public class Joueur {
 			}
 			this.removeCarte(carte);
 		}
-		Partie.setVientDeJouer(this);
+		partie.setVientDeJouer(this);
 	}
 	
 	/**
@@ -273,8 +273,8 @@ public class Joueur {
 	public void encaisserCumul(Partie partie) {
 		if (!this.getMaMain().possedeTypeDeCarte(partie.getTas().getTop())) {
 			this.setAJouer(true);
-			Partie.setVientDeJouer(this);
-			punir(Partie.getCumulCompteur());
+			partie.setVientDeJouer(this);
+			punir(partie,partie.getCumulCompteur());
 			try {
 				this.finirLeTour();
 			} catch (JoueurException e) {

@@ -21,14 +21,14 @@ public class ExpertCarteSimple extends Expert{
 	}
 	
 	@Override
-	public boolean examiner(Carte carte, Joueur joueur) throws ExpertException {
+	public boolean examiner(Partie partie, Carte carte, Joueur joueur) throws ExpertException {
 		CarteChiffre c = (CarteChiffre) carte;
 		
 		if (joueur == Partie.getJoueurCourant()) {
-			if((c.getValeur() == Partie.getValeurCourante()) || (c.getCouleur() == Partie.getCouleurCourante())) {
-				Partie.setCarteCourante(c);
-				Partie.calculerJoueurSuivant(0);
-				return Partie.getTas().addCarte(carte);
+			if((c.getValeur() == partie.getValeurCourante()) || (c.getCouleur() == partie.getCouleurCourante())) {
+				partie.setCarteCourante(c);
+				partie.calculerJoueurSuivant(0);
+				return partie.getTas().addCarte(carte);
 			}
 			else {
 				throw new ExpertException("Coup illegal");

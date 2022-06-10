@@ -56,7 +56,7 @@ public class TestPartie {
 		System.out.println(joueurs);
 		System.out.println("------------------------------------------");
 		
-		carte2.appliquerEffet();
+		carte2.appliquerEffet(partie);
 		/*try {
 			partie.finirLeTour();
 		} catch (PartieException e) {

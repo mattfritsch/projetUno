@@ -27,8 +27,8 @@ public class CartePlusDeux extends CarteEvenement{
 	}
 
 	/* Methode metier */
-	public void appliquerEffet() {
-		Partie.setCumulCompteur(Partie.getCumulCompteur() + 2);
+	public void appliquerEffet(Partie laPartie) {
+		laPartie.setCumulCompteur(laPartie.getCumulCompteur() + 2);
 	}
 	
 	/* Affichage */

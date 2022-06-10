@@ -20,6 +20,6 @@ public abstract class CarteEvenement extends Carte {
 	 * Methode qui permet d'appliquer un effet sur une partie
 	 * @param laPartie Partie
 	 */
-	public abstract void appliquerEffet();
+	public abstract void appliquerEffet(Partie laPartie);
 	
 }

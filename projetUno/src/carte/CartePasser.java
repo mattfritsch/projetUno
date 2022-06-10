@@ -53,7 +53,7 @@ public class CartePasser extends CarteEvenement{
 	}
 
 	/* Methode metier */
-	public void appliquerEffet() {
-		Partie.passerLeTourDuJoueurSuivant();
+	public void appliquerEffet(Partie laPartie) {
+		laPartie.passerLeTourDuJoueurSuivant();
 	}
 }

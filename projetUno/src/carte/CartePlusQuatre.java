@@ -22,11 +22,11 @@ public class CartePlusQuatre extends CarteJoker {
 	}
 	
 	/* Methode metier */
-	public void appliquerEffet() {
-		changerCouleurCourante();
-		Partie.calculerJoueurSuivant(0);
-		Partie.getJoueurSuivant().punir(4);
-		Partie.calculerJoueurSuivant(1);
+	public void appliquerEffet(Partie laPartie) {
+		changerCouleurCourante(laPartie);
+		laPartie.calculerJoueurSuivant(0);
+		Partie.getJoueurSuivant().punir(laPartie,4);
+		laPartie.calculerJoueurSuivant(1);
 		
 	}
 

@@ -40,11 +40,11 @@ public abstract class Expert {
 	 * @param joueur Joueur
 	 * @throws Exception Exception
 	 */
-	public void traiter(Carte carte, Joueur joueur) throws Exception{
+	public void traiter(Partie partie, Carte carte, Joueur joueur) throws Exception{
 		if(saitExaminer(carte))
-			examiner(carte, joueur);
+			examiner(partie,carte, joueur);
 		else if(aUnSuivant())
-			getSuivant().traiter(carte, joueur);
+			getSuivant().traiter(partie,carte, joueur);
 		else
 			throw new ParserManquantException();
 	}
@@ -73,7 +73,7 @@ public abstract class Expert {
 	 * @return boolean
 	 * @throws Exception Exception
 	 */
-	public abstract boolean examiner(Carte carte, Joueur joueur) throws Exception;
+	public abstract boolean examiner(Partie partie, Carte carte, Joueur joueur) throws Exception;
 	
 	/**
 	 * Retourne si un expert sait examiner une situation

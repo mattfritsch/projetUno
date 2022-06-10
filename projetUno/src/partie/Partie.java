@@ -19,19 +19,16 @@ import util.Fichier;
  * @author Aurelien FAGIOLI - Matthieu FRITSCH - Nathan GUSATTO
  */
 public class Partie {
-	private static ArrayList<Joueur> joueurs = new ArrayList<Joueur>();
-	private static Tas tas = new Tas();
-	private static Pioche pioche = new Pioche();
+	private ArrayList<Joueur> joueurs = new ArrayList<Joueur>();
+	private Tas tas = new Tas();
+	private Pioche pioche = new Pioche();
 	private static Joueur joueurCourant;
 	private static Joueur joueurSuivant;
-	private static Carte carteCourante;
-	private static Joueur vientDeJouer;
-	private static int sens = 0;
-	private static int cumulCompteur;
+	private Carte carteCourante;
+	private Joueur vientDeJouer;
+	private int sens = 0;
+	private int cumulCompteur;
 	
-	public Partie() {
-		
-	}
 	/* Constructeurs */
 	
 	/**
@@ -139,7 +136,7 @@ public class Partie {
 	 * Retourne le tas de la partie
 	 * @return Tas
 	 */
-	public static Tas getTas() {
+	public Tas getTas() {
 		return tas;
 	}
 	
@@ -147,7 +144,7 @@ public class Partie {
 	 * Retourne la pioche de la partie
 	 * @return Pioche
 	 */
-	public static Pioche getPioche() {
+	public Pioche getPioche() {
 		return pioche;
 	}
 	
@@ -171,7 +168,7 @@ public class Partie {
 	 * Retourne le joueur qui vient de jouer
 	 * @return Joueur
 	 */
-	public static Joueur getVientDeJouer() {
+	public Joueur getVientDeJouer() {
 		return vientDeJouer;
 	}
 	
@@ -179,7 +176,7 @@ public class Partie {
 	 * Retourne la couleur actuelle de la carte sur le tas
 	 * @return Couleur
 	 */
-	public static Couleur getCouleurCourante() {
+	public Couleur getCouleurCourante() {
 		return carteCourante.couleur;
 	}
 	
@@ -187,7 +184,7 @@ public class Partie {
 	 * Retourne la valeur actuelle de la carte sur le tas
 	 * @return int
 	 */
-	public static int getValeurCourante() {
+	public int getValeurCourante() {
 		return carteCourante.valeur;
 	}
 	
@@ -195,7 +192,7 @@ public class Partie {
 	 * Retourne le sens de la partie
 	 * @return int
 	 */
-	public static int getSens() {
+	public int getSens() {
 		return sens;
 	}
 	
@@ -203,7 +200,7 @@ public class Partie {
 	 * Retourne le cumul de cartes de la partie
 	 * @return int
 	 */
-	public static int getCumulCompteur() {
+	public int getCumulCompteur() {
 		return cumulCompteur;
 	}
 	
@@ -266,32 +263,32 @@ public class Partie {
 	 * Redefini la carte courante de la partie
 	 * @param joueurCourant Joueur
 	 */
-	public static void setCarteCourante(Carte carteCourante) {
-		Partie.carteCourante = carteCourante;
+	public void setCarteCourante(Carte carteCourante) {
+		this.carteCourante = carteCourante;
 	}
 	
 	/**
 	 * Redefini le joueur qui vient de jouer 
 	 * @param vientDeJouer Joueur
 	 */
-	public static void setVientDeJouer(Joueur vientDeJouer) {
-		Partie.vientDeJouer = vientDeJouer;
+	public void setVientDeJouer(Joueur vientDeJouer) {
+		this.vientDeJouer = vientDeJouer;
 	}
 	
 	/**
 	 * Redefini le sens
 	 * @param sens int
 	 */
-	public static void setSens(int sens) {
-		Partie.sens = sens;
+	public void setSens(int sens) {
+		this.sens = sens;
 	}
 	
 	/**
 	 * Redefini le cumul
 	 * @param cumulCompteur int
 	 */
-	public static void setCumulCompteur(int cumulCompteur) {
-		Partie.cumulCompteur = cumulCompteur;
+	public void setCumulCompteur(int cumulCompteur) {
+		this.cumulCompteur = cumulCompteur;
 	}
 	
 	
@@ -359,7 +356,7 @@ public class Partie {
 			// pour la j-ieme carte on va parcourir tous les joueurs
 			for (int i = 0 ; i < getNbJoueurs(); i++) {
 				try {
-					getJoueurAt(i).ajouterListeDeCarte(pioche.piocher(null,1));
+					getJoueurAt(i).ajouterListeDeCarte(pioche.piocher(this,null,1));
 				} catch (PiocheException e) {
 					e.getMessage();
 				}
@@ -372,7 +369,7 @@ public class Partie {
 	 */
 	private void initTas() {
 		try {
-			tas.addListeDeCarte(pioche.piocher(null,1));
+			tas.addListeDeCarte(pioche.piocher(this,null,1));
 		} catch (PiocheException e) {
 			e.getMessage();
 		}
@@ -397,7 +394,7 @@ public class Partie {
 	 * Calcule et redefini le joueur suivant
 	 * @param passerLeTour int 
 	 */
-	public static void calculerJoueurSuivant(int passerLeTour) {
+	public void calculerJoueurSuivant(int passerLeTour) {
 		if (passerLeTour == 0) {
 			if (getSens() == 0) {//sens horaire
 				if (joueurCourant == joueurs.get(joueurs.size()-1)) { // dernier de la liste donc on retourne le premier joueur de la liste
@@ -496,7 +493,7 @@ public class Partie {
 	/**
 	 * Passe le tour du joueur suivant
 	 */
-	public static void passerLeTourDuJoueurSuivant() {
+	public void passerLeTourDuJoueurSuivant() {
 		calculerJoueurSuivant(1);
 	}
 	

@@ -29,8 +29,8 @@ public class CarteChangement extends CarteEvenement {
 	
 	/* Methode metier */
 	
-	public void appliquerEffet() {
-		changementDeSens();
+	public void appliquerEffet(Partie laPartie) {
+		changementDeSens(laPartie);
 	}
 	
 	/* Inverser le sens de la partie*/
@@ -39,11 +39,11 @@ public class CarteChangement extends CarteEvenement {
 	 * Methode qui inverse le sens d'une partie
 	 * @param laPartie Partie
 	 */
-	public void changementDeSens() {
-		if (Partie.getSens() == 0)
-			Partie.setSens(1);
+	public void changementDeSens(Partie laPartie) {
+		if (laPartie.getSens() == 0)
+			laPartie.setSens(1);
 		else
-			Partie.setSens(0);
+			laPartie.setSens(0);
 	}
 	
 	/* Affichage */

@@ -3,7 +3,6 @@ package test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.After;
-import org.junit.Before;
 import org.junit.jupiter.api.*;
 
 import exception.CarteException;
@@ -43,14 +42,6 @@ class UnoTest {
 			System.out.println("\n--------------------- Premier Test ---------------------\n");
 		}
 		
-		@AfterEach
-		void cleanup() {
-			partie = null;
-			alice = null;
-			bob = null;
-			charles = null;
-		}
-		
 		@Test
 		void joueUneCarteDeLaBonneCouleur() {
 			// Verifier	que	le	joueur	courant	est	bien	Alice
@@ -79,12 +70,12 @@ class UnoTest {
 				fail("Alice ne possede pas le	« 6	jaune »	et	le	« 1	rouge »");
 			
 			// Vérifier	que	la	carte	au	sommet	du	tas	est	le	« 2	Vert »
-			CarteChiffre deuxVert = (CarteChiffre) Partie.getTas().getTop();
+			CarteChiffre deuxVert = (CarteChiffre) partie.getTas().getTop();
 			if (deuxVert.getValeur() != 2 || deuxVert.getCouleur() != Couleur.VERT)
 				fail("La carte au sommet du	tas	n'est pas le « 2 Vert »");
 			
 			// Vérifier	que	le	nombre	de	cartes	du	tas	est	2
-			if (Partie.getTas().getNbCartes() != 2 )
+			if (partie.getTas().getNbCartes() != 2 )
 				fail("Le tas n'est pas composé de 2 cartes");
 			
 			// Alice	finit	le	tour
@@ -136,11 +127,11 @@ class UnoTest {
 			if (quatreJaune.getValeur() != 4 && quatreJaune.getCouleur() != Couleur.JAUNE || neufRouge.getValeur() != 9 && neufRouge.getCouleur() != Couleur.ROUGE)
 				fail("Bob ne possede pas le	« 4	jaune »	et	le	« 9	rouge »");
 			
-			CarteChiffre deuxBleu = (CarteChiffre) Partie.getTas().getTop();
+			CarteChiffre deuxBleu = (CarteChiffre) partie.getTas().getTop();
 			if (deuxBleu.getValeur() != 2 && deuxBleu.getCouleur() != Couleur.BLEU)
 				fail("La carte au sommet du tas n'est pas le 2 BLEU");
 			
-			if (Partie.getTas().getNbCartes() != 3)
+			if (partie.getTas().getNbCartes() != 3)
 				fail("Le nombre de cartes du tas n'est pas egal a 3");
 			
 			try {
@@ -244,7 +235,7 @@ class UnoTest {
 			//Alice pioche
 			try {
 				alice.jouerUneCarte(partie, alice.getMaMain().getCarte(0));
-				alice.ajouterListeDeCarte(Partie.getPioche().piocher(alice,1));
+				alice.ajouterListeDeCarte(partie.getPioche().piocher(partie,alice,1));
 			} catch (PiocheException e) {
 				if(alice.getNbCarte() != 2) {
 					fail("Alice ne possède pas 2 cartes");
@@ -256,8 +247,8 @@ class UnoTest {
 			
 			CarteChiffre sixJaune;
 			try {
-				sixJaune = (CarteChiffre) Partie.getPioche().getBottom();
-				if(!Partie.getPioche().getBottom().equals(sixJaune)) {
+				sixJaune = (CarteChiffre) partie.getPioche().getBottom();
+				if(!partie.getPioche().getBottom().equals(sixJaune)) {
 					fail("La carte de la pioche n'est pas le 6 jaune");
 				}
 			} catch (PiocheException e1) {
@@ -276,7 +267,7 @@ class UnoTest {
 				alice.jouerUneCarte(partie, alice.getMaMain().getCarte(1));
 			} catch (JoueurException e) {
 				
-				alice.punir(2);
+				alice.punir(partie,2);
 				
 				if (Partie.getJoueurCourant() != bob)
 					fail("Le joueur courant n'est pas bob");
@@ -292,7 +283,7 @@ class UnoTest {
 					fail("Impossible de creer la carte 2 Vert");
 				}
 				try {
-					if (!Partie.getPioche().getBottom().equals(deuxVert))
+					if (!partie.getPioche().getBottom().equals(deuxVert))
 						fail("La prochaine carte de la pioche n'est pas le 2 Vert");
 				} catch (PiocheException e1) {
 					fail("Pioche vide");
@@ -308,10 +299,10 @@ class UnoTest {
 				fail("Le joueur courant n'est pas alice");
 			}
 			try {
-				bob.ajouterListeDeCarte(Partie.getPioche().piocher(bob, 1));
+				bob.ajouterListeDeCarte(partie.getPioche().piocher(partie,bob, 1));
 			} catch (PiocheException e) {
 				
-				bob.punir(2);
+				bob.punir(partie,2);
 				
 				if (!Partie.getJoueurCourant().equals(alice))
 					fail("le joueur courant n'est pas alice");
@@ -332,7 +323,7 @@ class UnoTest {
 				
 				
 				try {
-					if (!Partie.getPioche().getBottom().equals(deuxVert))
+					if (!partie.getPioche().getBottom().equals(deuxVert))
 						fail("La prochaine carte de la pioche n'est pas le 2 Vert");
 				} catch (PiocheException e1) {
 					fail("Pioche vide");
@@ -393,7 +384,7 @@ class UnoTest {
 				fail("Le nombre de carte d'alice n'est pas égale à 1");
 			}
 			//verifier que la derniere carte du tas est le 2 vert
-			CarteChiffre deuxVert = (CarteChiffre) Partie.getTas().getTop();
+			CarteChiffre deuxVert = (CarteChiffre) partie.getTas().getTop();
 			if (deuxVert.getValeur() != 2 || deuxVert.getCouleur() != Couleur.VERT)
 				fail("La carte au sommet du tas n'est pas le 2 VERT");
 			//verifier que le joueur courant est bob
@@ -413,11 +404,11 @@ class UnoTest {
             try {
                 alice.finirLeTour();
             } catch (JoueurException e) {
-                alice.punir(3);
+                alice.punir(partie,3);
                 if(alice.getMaMain().getNbCarte() != 4)
                     fail("Le joueur n'a pas 4 cartes");
               //verifier que la derniere carte du tas est le 8 vert
-                CarteChiffre deuxVert = (CarteChiffre) Partie.getTas().getTop();
+                CarteChiffre deuxVert = (CarteChiffre) partie.getTas().getTop();
                 if (deuxVert.getValeur() != 2 || deuxVert.getCouleur() != Couleur.VERT)
                     fail("La carte au sommet du tas n'est pas le 2 VERT");
                 if(!Partie.getJoueurCourant().equals(bob)){
@@ -438,7 +429,7 @@ class UnoTest {
 				bob.ditUno(bob);
 			} catch (JoueurException e) {
 				//punir bob
-				bob.punir(2);
+				bob.punir(partie,2);
 				//verifier que bob a maintenant 4 cartes
 				if(bob.getNbCarte() != 4)
 					fail("Bob a un nombre de carte différent de 4");
@@ -446,7 +437,7 @@ class UnoTest {
 				if(!Partie.getJoueurCourant().equals(alice))
 					fail("Alice n'est pas le joueur courant");
 				//verifier que la carte au sommet du tas est le 8 vert
-				 CarteChiffre huitVert = (CarteChiffre) Partie.getTas().getTop();
+				 CarteChiffre huitVert = (CarteChiffre) partie.getTas().getTop();
 	             if (huitVert.getValeur() != 8 || huitVert.getCouleur() != Couleur.VERT)
 	                 fail("La carte au sommet du tas n'est pas le 8 VERT");
 			}
@@ -498,8 +489,8 @@ class UnoTest {
 			if (!Partie.getJoueurCourant().equals(charles))
 				fail("Charles n'est pas le joueur courant");
 			//verifier que la carte du tas est bien le "passe ton tour rouge"
-			CartePasser passerRouge = (CartePasser) Partie.getTas().getTop();
-			if (passerRouge.getCouleur() != Couleur.ROUGE || Partie.getValeurCourante() != -1)
+			CartePasser passerRouge = (CartePasser) partie.getTas().getTop();
+			if (passerRouge.getCouleur() != Couleur.ROUGE || partie.getValeurCourante() != -1)
 				fail("La carte au sommet du tas n'est pas le passe ton tour rouge");
 			
 			//charles pose le passe ton tour vert
@@ -521,8 +512,8 @@ class UnoTest {
 				fail("Bob n'est pas le joueur courant");
 			}
 			//verifier que la carte du tas est bien le "passe ton tour vert"
-			CartePasser passerVert = (CartePasser) Partie.getTas().getTop();
-			if (passerVert.getCouleur() != Couleur.VERT || passerVert.getClass() != Partie.getTas().getTop().getClass())
+			CartePasser passerVert = (CartePasser) partie.getTas().getTop();
+			if (passerVert.getCouleur() != Couleur.VERT || passerVert.getClass() != partie.getTas().getTop().getClass())
 				fail("La carte au sommet du tas n'est pas le passe ton tour vert");
 			
 			//bob pose le 6 vert
@@ -544,7 +535,7 @@ class UnoTest {
 				fail("Bob n'est pas le joueur courant");
 			}
 			//verifier que la carte au sommet du tas est le 6 vert
-			 CarteChiffre sixVert = (CarteChiffre) Partie.getTas().getTop();
+			 CarteChiffre sixVert = (CarteChiffre) partie.getTas().getTop();
             if (sixVert.getValeur() != 6 || sixVert.getCouleur() != Couleur.VERT)
                 fail("La carte au sommet du tas n'est pas le 6 VERT");
             
@@ -699,8 +690,8 @@ class UnoTest {
 				fail("Le tour ne peut pas se terminer");
 			}
 			//verifier que la carte du tas est bien le "changement de sens rouge"
-			CarteChangement sensRouge = (CarteChangement) Partie.getTas().getTop();
-			if (sensRouge.getCouleur() != Couleur.ROUGE && sensRouge.getClass() != Partie.getTas().getTop().getClass())
+			CarteChangement sensRouge = (CarteChangement) partie.getTas().getTop();
+			if (sensRouge.getCouleur() != Couleur.ROUGE && sensRouge.getClass() != partie.getTas().getTop().getClass())
 				fail("La carte au sommet du tas n'est pas le changement de sens rouge");
 			
 			//charles pose le changement de sens vert
@@ -722,8 +713,8 @@ class UnoTest {
 				fail("alice n'est pas le joueur courant");
 			}
 			//verifier que la carte du tas est bien le "changement de sens vert"
-			CarteChangement sensVert = (CarteChangement) Partie.getTas().getTop();
-			if (sensVert.getCouleur() != Couleur.VERT && sensVert.getClass() != Partie.getTas().getTop().getClass())
+			CarteChangement sensVert = (CarteChangement) partie.getTas().getTop();
+			if (sensVert.getCouleur() != Couleur.VERT && sensVert.getClass() != partie.getTas().getTop().getClass())
 				fail("La carte au sommet du tas n'est pas le changement de sens vert");
 			
             
@@ -928,7 +919,7 @@ class UnoTest {
 			}
 			//alice pioche une carte
 			try{
-				alice.ajouterListeDeCarte(Partie.getPioche().piocher(alice,1));
+				alice.ajouterListeDeCarte(partie.getPioche().piocher(partie,alice,1));
 			} catch (PiocheException e) {
 			fail("Le joueur ne pas piocher");
 			}
@@ -944,7 +935,7 @@ class UnoTest {
 				fail("Le joueur courant n'est pas bob");
 			//bob pioche une carte
 			try{
-				bob.ajouterListeDeCarte(partie.getPioche().piocher(bob,1));
+				bob.ajouterListeDeCarte(partie.getPioche().piocher(partie,bob,1));
 			} catch (PiocheException e) {
 				fail("Le joueur ne pas piocher");
 			}
