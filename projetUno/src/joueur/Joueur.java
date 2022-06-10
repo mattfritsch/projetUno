@@ -202,16 +202,16 @@ public class Joueur {
 	 * @param partie Partie
 	 * @param nbCarte int
 	 */
-	public void punir(Partie partie, int nbCarte) {
+	public void punir(int nbCarte) {
 		try {
-			ajouterListeDeCarte(partie.getPioche().piocher(partie,null,nbCarte));
+			ajouterListeDeCarte(Partie.getPioche().piocher(null,nbCarte));
 		} catch (PiocheException e1) {
 			fail("Impossible d'ajouter les cartes a "+ this.getNom());
 		}
-		if (partie.getJoueurCourant() == this) {
+		if (Partie.getJoueurCourant() == this) {
 			try {
-				partie.finirLeTour();
-			} catch (PartieException e) {
+				this.finirLeTour();
+			} catch (JoueurException e) {
 				e.printStackTrace();
 			}
 		}
@@ -240,7 +240,7 @@ public class Joueur {
 		} else {
 			try {
 				this.setAJouer(true);
-				expert.traiter(partie, carte, this);
+				expert.traiter(carte, this);
 			} catch (ExpertException e) {
 				throw new JoueurException(e.getMessage());
 			} catch (Exception e1) {
@@ -248,7 +248,7 @@ public class Joueur {
 			}
 			this.removeCarte(carte);
 		}
-		partie.setVientDeJouer(this);
+		Partie.setVientDeJouer(this);
 	}
 	
 	/**
@@ -257,8 +257,8 @@ public class Joueur {
 	 * @param joueur Joueur
 	 * @throws JoueurException JoueurException
 	 */
-	public void ditUno(Partie partie, Joueur joueur) throws JoueurException {
-		if(partie.getJoueurCourant().equals(joueur) && joueur.getNbCarte() == 1 && joueur.getAJouer() == true) {
+	public void ditUno(Joueur joueur) throws JoueurException {
+		if(Partie.getJoueurCourant().equals(joueur) && joueur.getNbCarte() == 1 && joueur.getAJouer() == true) {
 			joueur.setADitUno(true);
 		}
 		else {
@@ -273,14 +273,31 @@ public class Joueur {
 	public void encaisserCumul(Partie partie) {
 		if (!this.getMaMain().possedeTypeDeCarte(partie.getTas().getTop())) {
 			this.setAJouer(true);
-			partie.setVientDeJouer(this);
-			punir(partie,partie.getCumulCompteur());
+			Partie.setVientDeJouer(this);
+			punir(Partie.getCumulCompteur());
 			try {
-				partie.finirLeTour();
-			} catch (PartieException e) {
+				this.finirLeTour();
+			} catch (JoueurException e) {
 				e.getMessage();
 			}
 		}
 		
+	}
+	
+	/**
+	 * Fini le tour du joueur
+	 * @throws JoueurException JoueurException
+	 */
+	public void finirLeTour() throws JoueurException {
+		if (this != Partie.getJoueurCourant())
+			throw new JoueurException("Le joueur n'est pas le joueur courant");
+		if (Partie.getJoueurCourant().getAJouer() == false) {
+			throw new JoueurException("Le joueur courant n'a pas jouer");
+		} else if (Partie.getJoueurCourant().getNbCarte() == 1 && Partie.getJoueurCourant().getADitUno() == false) {
+			throw new JoueurException("Le joueur courant n'a pas dit UNO alors qu'il a jouer son avant derniere carte");	
+		} else {
+			Partie.setJoueurCourant(Partie.getJoueurSuivant());
+			Partie.getJoueurCourant().setAJouer(false);
+		}
 	}
 }

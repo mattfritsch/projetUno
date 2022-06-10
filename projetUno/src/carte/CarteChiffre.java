@@ -9,13 +9,7 @@ import exception.CarteException;
  * @author Aurelien FAGIOLI - Matthieu FRITSCH - Nathan GUSATTO
  */
 
-public class CarteChiffre extends Carte {
-	/* Champs */
-	private int valeur;
-	private Couleur couleur;
-	
-	
-	
+public class CarteChiffre extends Carte {	
 	/* Constructeurs */
 	
 	/**
@@ -39,25 +33,6 @@ public class CarteChiffre extends Carte {
 		this.couleur = couleur;
 	}
 	
-	
-	
-	/* Getters */
-	
-	/**
-	 * Retourne la valeur de la carte
-	 * @return int
-	 */
-	public int getValeur() {
-		return valeur;
-	}
-	
-	/**
-	 * Retourne la couleur de la carte
-	 * @return Couleur
-	 */
-	public Couleur getCouleur() {
-		return couleur;
-	}
 	
 	
 	

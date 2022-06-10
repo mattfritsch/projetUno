@@ -56,12 +56,12 @@ public class TestPartie {
 		System.out.println(joueurs);
 		System.out.println("------------------------------------------");
 		
-		carte2.appliquerEffet(partie);
-		try {
+		carte2.appliquerEffet();
+		/*try {
 			partie.finirLeTour();
 		} catch (PartieException e) {
 			fail("Le joueur n'a pas jouer");
-		}
+		}*/
 		
 		System.out.println(partie);
 	}

@@ -16,6 +16,8 @@ public class CarteJoker extends CarteEvenement {
 	 */
 	public CarteJoker() {
 		super();
+		this.valeur = -1;
+		this.couleur = null;
 	}
 	
 	/* Methode metier */
@@ -24,14 +26,15 @@ public class CarteJoker extends CarteEvenement {
 	 * Methode qui change la couleur courante d'une partie
 	 * @param laPartie Partie
 	 */
-	public void changerCouleurCourante(Partie laPartie) {
-		Couleur nextCouleur = Couleur.VERT;//laPartie.demanderCouleur();
+	public void changerCouleurCourante() {
+		/*Couleur nextCouleur = Couleur.VERT;//laPartie.demanderCouleur();
 		// couleur forcement valide
-		laPartie.setCouleurCourante(nextCouleur);
+		laPartie.setCouleurCourante(nextCouleur);*/
+		this.couleur = Couleur.VERT;
 	}
 	
-	public void appliquerEffet(Partie laPartie) {
-		changerCouleurCourante(laPartie);
+	public void appliquerEffet() {
+		changerCouleurCourante();
 	}
 
 	/* Affichage */

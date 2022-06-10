@@ -19,18 +19,19 @@ import util.Fichier;
  * @author Aurelien FAGIOLI - Matthieu FRITSCH - Nathan GUSATTO
  */
 public class Partie {
-	private ArrayList<Joueur> joueurs = new ArrayList<Joueur>();
-	private Tas tas = new Tas();
-	private Pioche pioche = new Pioche();
-	private Joueur joueurCourant;
-	private Joueur joueurSuivant;
-	private Joueur vientDeJouer;
-	private Couleur couleurCourante;
-	private int valeurCourante;
-	private int sens = 0;
-	private int cumulCompteur;
+	private static ArrayList<Joueur> joueurs = new ArrayList<Joueur>();
+	private static Tas tas = new Tas();
+	private static Pioche pioche = new Pioche();
+	private static Joueur joueurCourant;
+	private static Joueur joueurSuivant;
+	private static Carte carteCourante;
+	private static Joueur vientDeJouer;
+	private static int sens = 0;
+	private static int cumulCompteur;
 	
-	
+	public Partie() {
+		
+	}
 	/* Constructeurs */
 	
 	/**
@@ -42,7 +43,7 @@ public class Partie {
 		if (joueurs == null || joueurs.size() < 2)
 			throw new PartieException("Le nombre de joueurs est invalide");
 		this.joueurs.addAll(joueurs);
-		this.joueurCourant = joueurs.get(0);
+		Partie.joueurCourant = joueurs.get(0);
 		calculerJoueurSuivant(0);
 	}
 	
@@ -57,7 +58,7 @@ public class Partie {
 			throw new PartieException("Au moins un des noms est null");
 		this.addJoueur(joueur1);
 		this.addJoueur(joueur2);
-		this.joueurCourant = joueurs.get(0);
+		Partie.joueurCourant = joueurs.get(0);
 		calculerJoueurSuivant(0);
 	}
 	
@@ -74,7 +75,7 @@ public class Partie {
 		this.addJoueur(joueur1);
 		this.addJoueur(joueur2);
 		this.addJoueur(joueur3);
-		this.joueurCourant = joueurs.get(0);
+		Partie.joueurCourant = joueurs.get(0);
 		calculerJoueurSuivant(0);
 	}
 	
@@ -93,7 +94,7 @@ public class Partie {
 		this.addJoueur(joueur2);
 		this.addJoueur(joueur3);
 		this.addJoueur(joueur4);
-		this.joueurCourant = joueurs.get(0);
+		Partie.joueurCourant = joueurs.get(0);
 		calculerJoueurSuivant(0);
 	}
 	
@@ -138,7 +139,7 @@ public class Partie {
 	 * Retourne le tas de la partie
 	 * @return Tas
 	 */
-	public Tas getTas() {
+	public static Tas getTas() {
 		return tas;
 	}
 	
@@ -146,7 +147,7 @@ public class Partie {
 	 * Retourne la pioche de la partie
 	 * @return Pioche
 	 */
-	public Pioche getPioche() {
+	public static Pioche getPioche() {
 		return pioche;
 	}
 	
@@ -154,7 +155,7 @@ public class Partie {
 	 * Retourne le joueur courant
 	 * @return Joueur
 	 */
-	public Joueur getJoueurCourant() {
+	public static Joueur getJoueurCourant() {
 		return joueurCourant;
 	}
 	
@@ -162,7 +163,7 @@ public class Partie {
 	 * Retourne le joueur suivant
 	 * @return Joueur
 	 */
-	public Joueur getJoueurSuivant() {
+	public static Joueur getJoueurSuivant() {
 		return joueurSuivant;
 	}
 	
@@ -170,7 +171,7 @@ public class Partie {
 	 * Retourne le joueur qui vient de jouer
 	 * @return Joueur
 	 */
-	public Joueur getVientDeJouer() {
+	public static Joueur getVientDeJouer() {
 		return vientDeJouer;
 	}
 	
@@ -178,23 +179,23 @@ public class Partie {
 	 * Retourne la couleur actuelle de la carte sur le tas
 	 * @return Couleur
 	 */
-	public Couleur getCouleurCourante() {
-		return couleurCourante;
+	public static Couleur getCouleurCourante() {
+		return carteCourante.couleur;
 	}
 	
 	/**
 	 * Retourne la valeur actuelle de la carte sur le tas
 	 * @return int
 	 */
-	public int getValeurCourante() {
-		return valeurCourante;
+	public static int getValeurCourante() {
+		return carteCourante.valeur;
 	}
 	
 	/**
 	 * Retourne le sens de la partie
 	 * @return int
 	 */
-	public int getSens() {
+	public static int getSens() {
 		return sens;
 	}
 	
@@ -202,7 +203,7 @@ public class Partie {
 	 * Retourne le cumul de cartes de la partie
 	 * @return int
 	 */
-	public int getCumulCompteur() {
+	public static int getCumulCompteur() {
 		return cumulCompteur;
 	}
 	
@@ -249,56 +250,48 @@ public class Partie {
 	 * Redefini le joueur courant de la partie
 	 * @param joueurCourant Joueur
 	 */
-	public void setJoueurCourant(Joueur joueurCourant) {
-		this.joueurCourant = joueurCourant;
-	}
-	
-	/**
-	 * Redefini le joueur qui vient de jouer 
-	 * @param vientDeJouer Joueur
-	 */
-	public void setVientDeJouer(Joueur vientDeJouer) {
-		this.vientDeJouer = vientDeJouer;
-	}
-	
-	/**
-	 * Redefini la couleur courante
-	 * @param couleurCourante Couleur
-	 */
-	public void setCouleurCourante(Couleur couleurCourante) {
-		this.couleurCourante = couleurCourante;
-	}
-	
-	/**
-	 * Redefini la valeur courante
-	 * @param valeurCourante int
-	 */
-	public void setValeurCourante(int valeurCourante) {
-		this.valeurCourante = valeurCourante;
-	}
-	
-	/**
-	 * Redefini le sens
-	 * @param sens int
-	 */
-	public void setSens(int sens) {
-		this.sens = sens;
+	public static void setJoueurCourant(Joueur joueurCourant) {
+		Partie.joueurCourant = joueurCourant;
 	}
 	
 	/**
 	 * Redefini le joueur suivant
 	 * @param joueurSuivant Joueur
 	 */
-	public void setJoueurSuivant(Joueur joueurSuivant) {
-		this.joueurSuivant = joueurSuivant;
+	public static void setJoueurSuivant(Joueur joueurSuivant) {
+		Partie.joueurSuivant = joueurSuivant;
+	}
+	
+	/**
+	 * Redefini la carte courante de la partie
+	 * @param joueurCourant Joueur
+	 */
+	public static void setCarteCourante(Carte carteCourante) {
+		Partie.carteCourante = carteCourante;
+	}
+	
+	/**
+	 * Redefini le joueur qui vient de jouer 
+	 * @param vientDeJouer Joueur
+	 */
+	public static void setVientDeJouer(Joueur vientDeJouer) {
+		Partie.vientDeJouer = vientDeJouer;
+	}
+	
+	/**
+	 * Redefini le sens
+	 * @param sens int
+	 */
+	public static void setSens(int sens) {
+		Partie.sens = sens;
 	}
 	
 	/**
 	 * Redefini le cumul
 	 * @param cumulCompteur int
 	 */
-	public void setCumulCompteur(int cumulCompteur) {
-		this.cumulCompteur = cumulCompteur;
+	public static void setCumulCompteur(int cumulCompteur) {
+		Partie.cumulCompteur = cumulCompteur;
 	}
 	
 	
@@ -366,7 +359,7 @@ public class Partie {
 			// pour la j-ieme carte on va parcourir tous les joueurs
 			for (int i = 0 ; i < getNbJoueurs(); i++) {
 				try {
-					getJoueurAt(i).ajouterListeDeCarte(pioche.piocher(this,null,1));
+					getJoueurAt(i).ajouterListeDeCarte(pioche.piocher(null,1));
 				} catch (PiocheException e) {
 					e.getMessage();
 				}
@@ -379,14 +372,15 @@ public class Partie {
 	 */
 	private void initTas() {
 		try {
-			tas.addListeDeCarte(pioche.piocher(this,null,1));
+			tas.addListeDeCarte(pioche.piocher(null,1));
 		} catch (PiocheException e) {
 			e.getMessage();
 		}
 		
 		CarteChiffre talon = (CarteChiffre) tas.getTop();
-		setCouleurCourante(talon.getCouleur());
-		setValeurCourante(talon.getValeur());
+		/*setCouleurCourante(talon.getCouleur());
+		setValeurCourante(talon.getValeur());*/
+		setCarteCourante(talon);
 	}
 	
 	/**
@@ -403,19 +397,19 @@ public class Partie {
 	 * Calcule et redefini le joueur suivant
 	 * @param passerLeTour int 
 	 */
-	public void calculerJoueurSuivant(int passerLeTour) {
+	public static void calculerJoueurSuivant(int passerLeTour) {
 		if (passerLeTour == 0) {
 			if (getSens() == 0) {//sens horaire
 				if (joueurCourant == joueurs.get(joueurs.size()-1)) { // dernier de la liste donc on retourne le premier joueur de la liste
 					setJoueurSuivant(joueurs.get(0));
 				} else {// cas general
-					setJoueurSuivant(joueurs.get((joueurs.indexOf(this.joueurCourant) + 1)));
+					setJoueurSuivant(joueurs.get((joueurs.indexOf(Partie.joueurCourant) + 1)));
 				}
 			} else {// sens anti horaire
 				if (joueurCourant == joueurs.get(0)) {// premier de la liste liste donc on retourne le dernier joueur de la liste
 					setJoueurSuivant(joueurs.get(joueurs.size()-1));
 				} else {
-					setJoueurSuivant(joueurs.get((joueurs.indexOf(this.joueurCourant) - 1)));
+					setJoueurSuivant(joueurs.get((joueurs.indexOf(Partie.joueurCourant) - 1)));
 				}
 			}
 		} else {// on passe le tour d'un joueur
@@ -425,7 +419,7 @@ public class Partie {
 				} else if (joueurCourant == joueurs.get(joueurs.size()-2)) {// avant dernier de la liste donc on retourne le premier joueur de la liste
 					setJoueurSuivant(joueurs.get(0));
 				} else { // cas general
-					setJoueurSuivant(joueurs.get((joueurs.indexOf(this.joueurCourant) + 2)));
+					setJoueurSuivant(joueurs.get((joueurs.indexOf(Partie.joueurCourant) + 2)));
 				}
 			} else {// sens anti horaire
 				if (joueurCourant == joueurs.get(0)) {// premier de la liste liste donc on retourne l'avant dernier joueur de la liste
@@ -433,7 +427,7 @@ public class Partie {
 				} else if (joueurCourant == joueurs.get(1)) {// deuxieme de la liste liste donc on retourne le dernier joueur de la liste
 					setJoueurSuivant(joueurs.get(joueurs.size()-1));
 				} else {// cas general
-					setJoueurSuivant(joueurs.get((joueurs.indexOf(this.joueurCourant) - 2)));
+					setJoueurSuivant(joueurs.get((joueurs.indexOf(Partie.joueurCourant) - 2)));
 				}
 			}
 		}
@@ -502,23 +496,8 @@ public class Partie {
 	/**
 	 * Passe le tour du joueur suivant
 	 */
-	public void passerLeTourDuJoueurSuivant() {
+	public static void passerLeTourDuJoueurSuivant() {
 		calculerJoueurSuivant(1);
 	}
 	
-	/**
-	 * Fini le tour du joueur courant
-	 * @throws PartieException PartieException
-	 */
-	public void finirLeTour() throws PartieException{
-		if (this.getJoueurCourant().getAJouer() == false) {
-			throw new PartieException("Le joueur courant n'a pas jouer");
-		} else if (this.getJoueurCourant().getNbCarte() == 1 && this.getJoueurCourant().getADitUno() == false) {
-			throw new PartieException("Le joueur courant n'a pas dit UNO alors qu'il a jouer son avant derniere carte");	
-		} else {
-			
-			this.setJoueurCourant(this.getJoueurSuivant());
-			this.getJoueurCourant().setAJouer(false);
-		}
-	}
 }

@@ -97,19 +97,19 @@ public class Pioche {
 	 * @return ArrayList 
 	 * @throws PiocheException PiocheException
 	 */
-	public ArrayList<Carte> piocher(Partie partie, Joueur joueur, int nbCartes) throws PiocheException{
+	public ArrayList<Carte> piocher(Joueur joueur, int nbCartes) throws PiocheException{
 		ArrayList<Carte> cartesPiochees = new ArrayList<Carte>();
-		if ((partie.getJoueurCourant() == joueur) || (joueur == null)) {
+		if ((Partie.getJoueurCourant() == joueur) || (joueur == null)) {
 			if (nbCartes<=getNbCartes()){
 				for (int i=0; i<nbCartes; i++) {
 					cartesPiochees.add(getBottom());
 					this.removeCarte(getBottom());
 				}
-				if (partie.getJoueurCourant() == joueur) {
+				if (Partie.getJoueurCourant() == joueur) {
 					joueur.setAJouer(true);
-					partie.setVientDeJouer(joueur);
+					Partie.setVientDeJouer(joueur);
 				}
-				partie.calculerJoueurSuivant(0);
+				Partie.calculerJoueurSuivant(0);
 			}
 			else {
 				throw new PiocheException("Nombre de cartes insuffisant dans la pioche");
@@ -117,10 +117,10 @@ public class Pioche {
 			
 			return cartesPiochees;
 		}
-		if(partie.getJoueurCourant() == partie.getVientDeJouer()) {
+		if(Partie.getJoueurCourant() == Partie.getVientDeJouer()) {
 			throw new PiocheException("Le joueur courant a deja jouer, il n'est pas possible de piocher");
 		}
-		if(partie.getJoueurCourant() != joueur) {
+		if(Partie.getJoueurCourant() != joueur) {
 			throw new PiocheException("Le joueur pioche alors que ce n'est pas son tour");
 		}
 		return cartesPiochees;

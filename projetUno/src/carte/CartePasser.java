@@ -10,10 +10,7 @@ import partie.Partie;
  * @author Aurelien FAGIOLI - Matthieu FRITSCH - Nathan GUSATTO
  */
 
-public class CartePasser extends CarteEvenement{
-	/* Champs */
-	private Couleur couleur;
-	
+public class CartePasser extends CarteEvenement{	
 	/* Constructeur */
 	
 	/**
@@ -23,22 +20,12 @@ public class CartePasser extends CarteEvenement{
 	 */
 	public CartePasser(Couleur couleur) throws CarteException {
 		super();
-		
+		this.valeur = -1;
 		// Classe immuable donc pas de setter
 		if (couleur == null)
 			throw new CarteException("Une CartePasser doit avoir une couleur valide");
 		
 		this.couleur = couleur;
-	}
-	
-	/* Getters */
-	
-	/**
-	 * Retourne la couleur de la carte
-	 * @return Couleur
-	 */
-	public Couleur getCouleur() {
-		return couleur;
 	}
 
 	/* Affichage */
@@ -66,7 +53,7 @@ public class CartePasser extends CarteEvenement{
 	}
 
 	/* Methode metier */
-	public void appliquerEffet(Partie laPartie) {
-		laPartie.passerLeTourDuJoueurSuivant();
+	public void appliquerEffet() {
+		Partie.passerLeTourDuJoueurSuivant();
 	}
 }

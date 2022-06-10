@@ -17,14 +17,16 @@ public class CartePlusQuatre extends CarteJoker {
 	 */
 	public CartePlusQuatre() {
 		super();
+		this.valeur = -1;
+		this.couleur = null;
 	}
 	
 	/* Methode metier */
-	public void appliquerEffet(Partie laPartie) {
-		changerCouleurCourante(laPartie);
-		laPartie.calculerJoueurSuivant(0);
-		laPartie.getJoueurSuivant().punir(laPartie, 4);
-		laPartie.calculerJoueurSuivant(1);
+	public void appliquerEffet() {
+		changerCouleurCourante();
+		Partie.calculerJoueurSuivant(0);
+		Partie.getJoueurSuivant().punir(4);
+		Partie.calculerJoueurSuivant(1);
 		
 	}
 

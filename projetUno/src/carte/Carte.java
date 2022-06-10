@@ -7,6 +7,8 @@ package carte;
 
 public abstract class Carte {
 	/* Champs et constantes */
+	public int valeur;
+	public Couleur couleur;
 	
 	/**
 	 * 
@@ -37,6 +39,24 @@ public abstract class Carte {
 	 */
 	public Carte() {
 		
+	}
+	
+	/* Getters */
+	
+	/**
+	 * Retourne la valeur de la carte
+	 * @return int
+	 */
+	public int getValeur() {
+		return valeur;
+	}
+	
+	/**
+	 * Retourne la couleur de la carte
+	 * @return Couleur
+	 */
+	public Couleur getCouleur() {
+		return couleur;
 	}
 	
 }

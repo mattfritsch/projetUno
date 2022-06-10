@@ -10,9 +10,6 @@ import partie.Partie;
  */
 
 public class CarteChangement extends CarteEvenement {
-	/* Champs */
-	private Couleur couleur;
-	
 	/* Constructeur */
 	
 	/**
@@ -30,20 +27,10 @@ public class CarteChangement extends CarteEvenement {
 		this.couleur = couleur;
 	}
 	
-	/* Getters */
-	
-	/**
-	 * Retourne la couleur de la carte
-	 * @return Couleur
-	 */
-	public Couleur getCouleur() {
-		return couleur;
-	}
-	
 	/* Methode metier */
 	
-	public void appliquerEffet(Partie laPartie) {
-		changementDeSens(laPartie);
+	public void appliquerEffet() {
+		changementDeSens();
 	}
 	
 	/* Inverser le sens de la partie*/
@@ -52,11 +39,11 @@ public class CarteChangement extends CarteEvenement {
 	 * Methode qui inverse le sens d'une partie
 	 * @param laPartie Partie
 	 */
-	public void changementDeSens(Partie laPartie) {
-		if (laPartie.getSens() == 0)
-			laPartie.setSens(1);
+	public void changementDeSens() {
+		if (Partie.getSens() == 0)
+			Partie.setSens(1);
 		else
-			laPartie.setSens(0);
+			Partie.setSens(0);
 	}
 	
 	/* Affichage */
